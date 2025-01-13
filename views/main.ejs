@@ -4,9 +4,10 @@
 <head>
   <base href="/" />
   <title>Omni Assist AI</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto:medium" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans:medium" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
   <!-- WebComponents polyfill. Needed for rendering web components in older browsers. -->
   <script src="https://www.gstatic.com/external_hosted/document_register_element/document-register-element.js"></script>
@@ -17,144 +18,86 @@
 </head>
 
 <body>
-  <div class="header-bar">
-    <h2>
-      Omni Assist AI
-    </h2>
-    <div class="status-container"></div>
-  </div>
-  <div class="app-container">
-    <div class="transcript-container"></div>
-    <div class="ui-modules-wrapper">
-      <div class="ui-modules-container"> </div>
+  <header class="header">
+    <div>
+      <img src="../public/assets/logo.svg" alt="Omni Assist AI" height="34px" />
     </div>
-  </div>
+    <div>
+      <!-- <div class="status-container"></div> -->
+      <div class="transcript-container"></div>
+      <div class="sentiment-container"></div>
+      <div class="toggle-btn-container">
+        <button id="summary-toggler" type="button" class="toggle-btn">
+          <img src="../public/assets/buttons/summary.svg" alt="Summary" />
+        </button>
+        <button id="faq-toggler" type="button" class="toggle-btn">
+          <img src="../public/assets/buttons/faq.svg" alt="Faq" />
+        </button>
+        <button id="knowledge-assist-toggler" type="button" class="toggle-btn">
+          <img src="../public/assets/buttons/gen-ai.svg" alt="Gen AI Knowledge Assist" />
+        </button>
+        <button id="smart-reply-toggler" type="button" class="toggle-btn">
+          <img src="../public/assets/buttons/smart-reply.svg" alt="Smart Reply" />
+        </button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <section id="summary" class="summary">
+      <div class="title-container">
+        <h4 class="title">Generate Summary</h4>
+        <button type="button" class="close-btn">
+          <img src="../public/assets/close.svg" alt="close" />
+        </button>
+      </div>
+    </section>
+    <section id="suggestions" class="suggestions">
+      <section id="transcript" class="transcript">
+        <h4 class="title">Conversation Transcript</h4>
+      </section>
+      <section id="faq" class="faq">
+        <div class="title-container">
+          <h4 class="title">FAQ & Article Suggestions</h4>
+          <button type="button" class="close-btn">
+            <img src="../public/assets/close.svg" alt="close" />
+          </button>
+        </div>
+      </section>
+      <section id="knowledge-assist" class="knowledge-assist">
+        <div class="title-container">
+          <h4 class="title">Gen AI Knowledge Assist</h4>
+          <button type="button" class="close-btn">
+            <img src="../public/assets/close.svg" alt="close" />
+          </button>
+        </div>
+      </section>
+    </section>
+    <section id="smart-reply" class="smart-reply">
+      <div class="title-container">
+        <h4 class="title">Smart Reply</h4>
+        <button type="button" class="close-btn">
+          <img src="../public/assets/close.svg" alt="close" />
+        </button>
+      </div>
+    </section>
+  </main>
   <script>
     window.addEventListener('load', function () {
-      const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
-      const TRANSCRIPT_SELECTOR = 'agent-assist-transcript';
-      const proxyServerEndPoint = '<%= proxyServer %>';
-      const conversationProfile = '<%= conversationProfile %>';
-      const features = '<%= features %>';
-      const genesysCloudRegion = '<%= genesysCloudRegion %>';
-      const clientId = '<%= clientID %>'
-      const channel = '<%= channel %>'
-      var applicationServer = '<%= applicationServer %>'
-      var accessToken = '';
-      const urlParams = new URLSearchParams(window.location.search);
-      const currentConversationId = urlParams.get('conversationid');
-      const gcHostOrigin = urlParams.get('gcHostOrigin');
-      const gcTargetEnv = urlParams.get('gcTargetEnv');
-      applicationServer = applicationServer.replace(/\/$/, "");
-      var firstTimeLoad = false;
-      const redirectUri = `${applicationServer}?conversationProfile=${conversationProfile}&features=${features}`;
-      var existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
-      const appContainer = document.querySelector('.app-container');
-      const uiModulesContainer = document.querySelector('.ui-modules-container');
-      const transcriptContainer = document.querySelector('.transcript-container');
+      function setupToggler(togglerId, targetId) {
+        const toggler = document.getElementById(togglerId);
+        const target = document.getElementById(targetId);
 
-      function createTranscriptUIElement() {
-        const uiModulesTranscriptEl = document.createElement(TRANSCRIPT_SELECTOR);
-        uiModulesTranscriptEl.style.maxHeight = '100%';
-        transcriptContainer.appendChild(uiModulesTranscriptEl);
-      }
-
-      function createUIElement(accessToken) {
-        if (existingUiModulesEl) {
-          existingUiModulesEl.setAttribute('auth-token', accessToken);
-        } else {
-          var uiModulesEl = document.createElement(UI_MODULES_EL_SELECTOR);
-          var attributes = getAttributes(channel)
-          for (var [attribute, value] of attributes) {
-            uiModulesEl.setAttribute(attribute, value);
-          }
-          uiModulesEl.config = getKnowledgeAssistConfig();
-          uiModulesContainer.appendChild(uiModulesEl);
-        }
-      }
-
-      function getKnowledgeAssistConfig() {
-        return {
-          knowledgeAssistConfig: {
-            articleLinkConfig: {
-              target: 'popup',
-              popupWindowOptions: 'height=800,width=600,left=600,top=100',
-            }
-          }
-        };
-      }
-
-      function getAttributes(channel) {
-        var attributes = [
-          ['agent-desktop', 'GenesysCloud'],
-          ['features', features],
-          ['conversation-profile', conversationProfile],
-          ['auth-token', accessToken],
-          ['use-custom-conversation-id', 'true'],
-          ['oauth-client-id', clientId],
-          ['redirect-uri', redirectUri],
-          ['custom-api-endpoint', proxyServerEndPoint],
-          ['genesys-cloud-region', genesysCloudRegion],
-          ['show-header', false]
-        ];
-        if (channel === "voice") {
-          attributes = [
-            ...attributes,
-            ['channel', 'voice'],
-            ['notifier-server-endpoint', proxyServerEndPoint],
-            ['event-based-library', 'SocketIo'],
-          ];
-        }
-        return attributes;
-      }
-
-      if (channel !== "voice") {
-        transcriptContainer.style.display = "none";
-      }
-
-      /** When the first time UI module load, parse an empty token */
-      if (!existingUiModulesEl && !accessToken) {
-        createUIElement(accessToken);
-        if (channel === "voice") {
-          createTranscriptUIElement();
-        }
-      }
-
-      /** After the genesys OAuth, get the access token */
-      addAgentAssistEventListener(
-        'genesys-cloud-connector-access-token-received', function (event) {
-          const genesysCloudAccessToken = event.detail.accessToken;
-          authenticateGenesysCloud(genesysCloudAccessToken).then(function (res) {
-            if (res.status !== 200) {
-              document.body.removeChild(existingUiModulesEl);
-            }
-            return res.json();
-          }).then(function (body) {
-            existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
-            // If there is unauthenticated existingUIModule,
-            // the accessToken will be undefined
-            // Set the accessToken to the existingUIModule
-            firstTimeLoad = existingUiModulesEl && !accessToken;
-            if (firstTimeLoad) {
-              accessToken = body.token;
-              createUIElement(accessToken);
-            }
-          });
-        });
-
-
-      /**
-      * Authenticate the Genesys Cloud access token
-      * @param {string} accessToken
-      * @return {!Promise<number>}
-      */
-      function authenticateGenesysCloud(accessToken) {
-        return fetch(proxyServerEndPoint + '/register', {
-          method: 'POST',
-          headers: [['Authorization', accessToken]],
+        toggler.addEventListener('click', function () {
+          toggler.classList.toggle('toggle-btn-active');
+          target.classList.toggle('show');
         });
       }
-    });
+
+      setupToggler('summary-toggler', 'summary');
+      setupToggler('faq-toggler', 'faq');
+      setupToggler('knowledge-assist-toggler', 'knowledge-assist');
+      setupToggler('smart-reply-toggler', 'smart-reply');
+    })
   </script>
 </body>
 

@@ -2,114 +2,161 @@ html {
   height: 100%;
 }
 
-body {
-  margin: 0;
-  padding: 0;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-body {
-  height: 100%;
-  background-color: #fff;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.header-bar > h2 {
-  color: #5f6368;
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  font-family: 'Google Sans', Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 24px;
-  margin-top: 16px;
-  padding-left: 8px;
-  position: relative;
-  top: -1.5px;
-  vertical-align: middle;
+  justify-content: center;
 }
 
-.header-bar > h2 > img {
-  margin-top: 2px;
-  margin-right: 8px;
-}
-
-.app-container {
-  display: flex;
-  height: 95%;
+body {
   width: 100%;
-}
-
-.ui-modules-wrapper {
-  flex: 1;
-  width: 60%;
-  position: relative;
-  top: 0px;
-  border-left: 1px solid #dadce0;
-}
-
-.ui-modules-container {
-  flex: 1;
+  max-width: 1500px;
   height: 100%;
-  width: 100%;
-}
-
-.transcript-container {
-  flex: 1;
-  height: 100%;
-  overflow: auto;
-}
-
-.header-bar {
+  margin: 0 auto;
+  background-color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
   display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.header {
+  width: 100%;
+  height: 52px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 5%;
+  border: 1px solid #e8e8e8;
+  background: #f8f8f8;
 }
 
-.header-bar::after {
-  content: '';
-  position: absolute;
-  top: 5%;
-  left: 0;
-  right: 0;
-  height: 0px;
-  border-bottom: 1px solid #dadce0;
+.header-title {
+  color: #000000;
+  margin: 0px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+  color: #2e2329;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
 
-.authenticate-message {
-  font-family: 'Roboto', sans-serif;
+.toggle-btn-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.toggle-btn {
+  width: 34px;
+  height: 34px;
+  /* background: #4965cd;
+  color: #ffffff; */
+  background: transparent;
+  color: #000000;
+}
+
+.toggle-btn-active {
+  background: #4965cd;
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+.toggle-btn-active > svg {
+  fill: #ffffff;
+  color: #ffffff;
+}
+
+.title-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  text-transform: capitalize;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary {
+  width: 100%;
+  height: 120px;
+  border-bottom: 1px solid var(--text-border, #e0e0e0);
+  padding: 10px;
+  display: none;
+}
+
+.suggestions {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.faq,
+.knowledge-assist,
+.transcript {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+  display: none;
+}
+
+.faq {
+  background: #e2eaff;
+}
+
+.smart-reply {
+  width: 100%;
+  height: 120px;
+  border: 1px solid #e8e8e8;
+  padding: 10px;
+  background: #ffffff;
+  display: none;
+}
+
+.close-btn {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #b9b9b9;
+  background: transparent;
   font-size: 12px;
-  color: #333;
+  color: #424242;
 }
 
-/*Change the value according to preference 576px, 768px */
-@media (max-width: 576px) {
-  .app-container {
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .app-container .ui-modules-wrapper {
-    width: 100%;
-    height: 60%;
-    border-right: none;
-    border-bottom: 1px solid #dadce0;
-    top: 0;
-    position: relative;
-  }
-
-  .app-container .ui-modules-container {
-    height: calc(100% - 1px);
-  }
-
-  .app-container .transcript-container {
-    height: 40%;
-    border-left: none;
-    border-top: 1px solid #dadce0;
-  }
-  .transcript-container {
-    border-left: none;
-    border-top: 1px solid #dadce0;
-    padding-left: 0;
-  }
+.show {
+  display: block;
 }
