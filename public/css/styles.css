@@ -66,7 +66,7 @@ body {
 .toggle-btn-container {
   display: flex;
   flex-direction: row;
-  gap: var(--gap-small);
+  gap: var(--gap-medium);
 }
 
 .toggle-btn {
@@ -120,7 +120,7 @@ body {
 .title-btn-container {
   display: flex;
   align-items: center;
-  gap: var(--gap-small);
+  gap: var(--gap-medium);
 }
 
 .main {
@@ -140,8 +140,21 @@ body {
   display: none;
   max-height: 250px;
   min-height: 50px;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  overflow-y: auto;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+  margin-top: var(--gap-medium);
+}
+
+.summary-text {
+  background: var(--color-light-blue);
+  padding: var(--padding-small);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-medium);
 }
 
 .summary-expander {
@@ -154,13 +167,10 @@ body {
   cursor: ns-resize;
   display: none;
   transform: rotate(90deg);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
 }
 
 .summary:hover .summary-expander {
   display: block;
-  opacity: 1;
 }
 
 .suggestions {
@@ -179,8 +189,6 @@ body {
   padding: var(--padding-small);
   border: 1px solid var(--color-border);
   display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
 }
 
 .faq {
@@ -195,8 +203,6 @@ body {
   padding: var(--padding-small);
   background: var(--color-white);
   display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
   max-height: 250px;
   min-height: 50px;
 }
@@ -215,7 +221,6 @@ body {
 
 .smart-reply:hover .smart-reply-expander {
   display: block;
-  opacity: 1;
 }
 
 .close-btn {
@@ -237,5 +242,4 @@ body {
 
 .show {
   display: block;
-  opacity: 1;
 }

@@ -32,97 +32,86 @@ export function setupAndInitializeToggler(togglerId, targetId) {
   }
 }
 
-export function setupHeightAdjusterBottom(expanderId, targetId) {
-  const target = document.getElementById(targetId);
-  const expander = document.getElementById(expanderId);
+// export function setupHeightAdjuster(expanderId, targetId) {
+//   const target = document.getElementById(targetId);
+//   const expander = document.getElementById(expanderId);
 
-  console.log(target, expander);
+//   let isResizing = false;
 
-  let isResizing = false;
+//   function onMouseMove(e) {
+//     if (!isResizing) return;
 
-  function onMouseMove(e) {
-    if (!isResizing) return;
+//     const newHeight = e.clientY - target.getBoundingClientRect().top;
+//     target.style.height = `${newHeight}px`;
+//   }
 
-    const newHeight = e.clientY - target.getBoundingClientRect().top;
+//   function onMouseUp() {
+//     isResizing = false;
+//     document.body.style.cursor = 'default';
 
-    console.log(newHeight);
-    target.style.height = `${newHeight}px`;
-  }
+//     // Remove event listeners after resizing is finished
+//     document.removeEventListener('mousemove', onMouseMove);
+//     document.removeEventListener('mouseup', onMouseUp);
+//   }
 
-  function onMouseUp() {
-    isResizing = false;
-    document.body.style.cursor = 'default';
+//   expander.addEventListener('mousedown', function (e) {
+//     isResizing = true;
+//     document.body.style.cursor = 'ns-resize';
+//     e.preventDefault();
 
-    console.log('mouseup...seems like leaving');
+//     // Add the event listeners for mousemove and mouseup
+//     document.addEventListener('mousemove', onMouseMove);
+//     document.addEventListener('mouseup', onMouseUp);
+//   });
 
-    // Remove event listeners after resizing is finished
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  }
+//   expander.addEventListener('mouseleave', function () {
+//     if (isResizing) {
+//       onMouseUp(); // Stop resizing when the mouse leaves the expander
+//     }
+//   });
+// }
 
-  expander.addEventListener('mousedown', function (e) {
-    isResizing = true;
-    document.body.style.cursor = 'ns-resize';
-    e.preventDefault(); // prevent text-selection
+// export function setupHeightAdjusterTop(expanderId, targetId) {
+//   const target = document.getElementById(targetId);
+//   const expander = document.getElementById(expanderId);
 
-    // Add the event listeners for mousemove and mouseup
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
+//   let isResizing = false;
+//   let initialMouseY = 0;
+//   let initialHeight = 0;
 
-  expander.addEventListener('mouseleave', function () {
-    if (isResizing) {
-      onMouseUp(); // Stop resizing when the mouse leaves the expander
-    }
-  });
-}
+//   function onMouseMove(e) {
+//     if (!isResizing) return;
 
-export function setupHeightAdjusterTop(expanderId, targetId) {
-  const target = document.getElementById(targetId);
-  const expander = document.getElementById(expanderId);
+//     const deltaY = initialMouseY - e.clientY;
+//     const newHeight = initialHeight + deltaY;
+//     const adjustedHeight = Math.max(minHeight, Math.min(maxHeight, newHeight));
 
-  let isResizing = false;
-  let initialMouseY = 0;
-  let initialHeight = 0;
+//     target.style.height = `${adjustedHeight}px`;
+//   }
 
-  function onMouseMove(e) {
-    if (!isResizing) return;
+//   function onMouseUp() {
+//     isResizing = false;
+//     document.body.style.cursor = 'default';
 
-    const deltaY = initialMouseY - e.clientY;
-    const newHeight = initialHeight + deltaY;
+//     document.removeEventListener('mousemove', onMouseMove);
+//     document.removeEventListener('mouseup', onMouseUp);
+//   }
 
-    // Enforce min and max height
-    const minHeight = 50; // Adjust as needed
-    const maxHeight = 250; // Adjust as needed
-    target.style.height = `${Math.max(
-      minHeight,
-      Math.min(maxHeight, newHeight)
-    )}px`;
-  }
+//   expander.addEventListener('mousedown', function (e) {
+//     isResizing = true;
+//     initialMouseY = e.clientY;
+//     initialHeight = target.getBoundingClientRect().height;
 
-  function onMouseUp() {
-    isResizing = false;
-    document.body.style.cursor = 'default';
+//     document.body.style.cursor = 'ns-resize';
+//     e.preventDefault();
 
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  }
+//     document.addEventListener('mousemove', onMouseMove);
+//     document.addEventListener('mouseup', onMouseUp);
+//   });
 
-  expander.addEventListener('mousedown', function (e) {
-    isResizing = true;
-    initialMouseY = e.clientY;
-    initialHeight = target.getBoundingClientRect().height;
-
-    document.body.style.cursor = 'ns-resize';
-    e.preventDefault();
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
-  expander.addEventListener('mouseleave', function () {
-    if (isResizing) {
-      onMouseUp();
-    }
-  });
-}
+//   expander.addEventListener('mouseleave', function () {
+//     if (isResizing) {
+//       onMouseUp();
+//     }
+//   });
+// }
