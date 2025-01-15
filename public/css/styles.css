@@ -165,12 +165,8 @@ body {
   width: 20px;
   height: 20px;
   cursor: ns-resize;
-  display: none;
-  transform: rotate(90deg);
-}
-
-.summary:hover .summary-expander {
   display: block;
+  transform: rotate(90deg);
 }
 
 .suggestions {
@@ -215,12 +211,8 @@ body {
   width: 20px;
   height: 20px;
   cursor: ns-resize;
-  display: none;
-  transform: rotate(90deg);
-}
-
-.smart-reply:hover .smart-reply-expander {
   display: block;
+  transform: rotate(90deg);
 }
 
 .close-btn {
