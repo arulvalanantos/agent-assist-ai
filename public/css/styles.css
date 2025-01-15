@@ -69,6 +69,11 @@ body {
   background: transparent;
   color: var(--color-black);
   border: 1px solid var(--color-gray);
+  transition: all 500ms ease-in-out;
+}
+
+.toggle-btn:hover {
+  transform: scale(0.9);
 }
 
 .toggle-btn > svg {
@@ -103,6 +108,7 @@ body {
   text-decoration-skip-ink: none;
   text-transform: capitalize;
   user-select: none;
+  color: var(--color-text-primary);
 }
 
 .title-btn-container {
@@ -128,6 +134,8 @@ body {
   display: none;
   max-height: 250px;
   min-height: 50px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .summary-expander {
@@ -140,10 +148,13 @@ body {
   cursor: ns-resize;
   display: none;
   transform: rotate(90deg);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .summary:hover .summary-expander {
   display: block;
+  opacity: 1;
 }
 
 .suggestions {
@@ -162,6 +173,8 @@ body {
   padding: var(--padding-small);
   border: 1px solid var(--color-border);
   display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .faq {
@@ -176,6 +189,8 @@ body {
   padding: var(--padding-small);
   background: var(--color-white);
   display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   max-height: 250px;
   min-height: 50px;
 }
@@ -194,6 +209,7 @@ body {
 
 .smart-reply:hover .smart-reply-expander {
   display: block;
+  opacity: 1;
 }
 
 .close-btn {
@@ -215,4 +231,5 @@ body {
 
 .show {
   display: block;
+  opacity: 1;
 }
