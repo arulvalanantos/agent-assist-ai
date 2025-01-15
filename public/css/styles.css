@@ -57,6 +57,12 @@ body {
   text-decoration-skip-ink: none;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--padding-medium);
+}
+
 .toggle-btn-container {
   display: flex;
   flex-direction: row;
