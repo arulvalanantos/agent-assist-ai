@@ -32,86 +32,78 @@ export function setupAndInitializeToggler(togglerId, targetId) {
   }
 }
 
-// export function setupHeightAdjuster(expanderId, targetId) {
-//   const target = document.getElementById(targetId);
-//   const expander = document.getElementById(expanderId);
+export function bottomHeightAdjuster(targetId) {
+  const container = document.getElementById(targetId);
+  let isResizing = false;
 
-//   let isResizing = false;
+  container.addEventListener('mousedown', e => {
+    // Check if the click is near the bottom border
+    const containerRect = container.getBoundingClientRect();
+    const isBottomBorder =
+      Math.abs(e.clientY - (containerRect.top + containerRect.height)) <= 5;
 
-//   function onMouseMove(e) {
-//     if (!isResizing) return;
+    if (isBottomBorder) {
+      isResizing = true;
+      container.classList.add('resizing');
+      document.body.style.cursor = 'row-resize';
+    }
+  });
 
-//     const newHeight = e.clientY - target.getBoundingClientRect().top;
-//     target.style.height = `${newHeight}px`;
-//   }
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
 
-//   function onMouseUp() {
-//     isResizing = false;
-//     document.body.style.cursor = 'default';
+    const containerRect = container.getBoundingClientRect();
+    const newHeight = e.clientY - containerRect.top;
 
-//     // Remove event listeners after resizing is finished
-//     document.removeEventListener('mousemove', onMouseMove);
-//     document.removeEventListener('mouseup', onMouseUp);
-//   }
+    // Ensure minimum height
+    const minHeight = 50;
+    container.style.height = Math.max(newHeight, minHeight) + 'px';
+  });
 
-//   expander.addEventListener('mousedown', function (e) {
-//     isResizing = true;
-//     document.body.style.cursor = 'ns-resize';
-//     e.preventDefault();
+  document.addEventListener('mouseup', () => {
+    if (isResizing) {
+      isResizing = false;
+      container.classList.remove('resizing');
+      document.body.style.cursor = 'default';
+    }
+  });
+}
 
-//     // Add the event listeners for mousemove and mouseup
-//     document.addEventListener('mousemove', onMouseMove);
-//     document.addEventListener('mouseup', onMouseUp);
-//   });
+export function topHeightAdjuster(targetId) {
+  const resizableContainer = document.getElementById(targetId);
+  let isResizing = false;
+  let startY, startHeight;
 
-//   expander.addEventListener('mouseleave', function () {
-//     if (isResizing) {
-//       onMouseUp(); // Stop resizing when the mouse leaves the expander
-//     }
-//   });
-// }
+  resizableContainer.addEventListener('mousedown', e => {
+    // Check if the click is near the top border
+    const containerRect = resizableContainer.getBoundingClientRect();
+    const isTopBorder = Math.abs(e.clientY - containerRect.top) <= 5;
 
-// export function setupHeightAdjusterTop(expanderId, targetId) {
-//   const target = document.getElementById(targetId);
-//   const expander = document.getElementById(expanderId);
+    if (isTopBorder) {
+      isResizing = true;
+      startY = e.clientY;
+      startHeight = containerRect.height;
+      resizableContainer.classList.add('top-resizing');
+      document.body.style.cursor = 'row-resize';
+    }
+  });
 
-//   let isResizing = false;
-//   let initialMouseY = 0;
-//   let initialHeight = 0;
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
 
-//   function onMouseMove(e) {
-//     if (!isResizing) return;
+    const diffY = startY - e.clientY; // Calculate the movement difference
+    const newHeight = startHeight + diffY;
 
-//     const deltaY = initialMouseY - e.clientY;
-//     const newHeight = initialHeight + deltaY;
-//     const adjustedHeight = Math.max(minHeight, Math.min(maxHeight, newHeight));
+    // Ensure minimum height
+    const minHeight = 50;
+    resizableContainer.style.height = Math.max(newHeight, minHeight) + 'px';
+  });
 
-//     target.style.height = `${adjustedHeight}px`;
-//   }
-
-//   function onMouseUp() {
-//     isResizing = false;
-//     document.body.style.cursor = 'default';
-
-//     document.removeEventListener('mousemove', onMouseMove);
-//     document.removeEventListener('mouseup', onMouseUp);
-//   }
-
-//   expander.addEventListener('mousedown', function (e) {
-//     isResizing = true;
-//     initialMouseY = e.clientY;
-//     initialHeight = target.getBoundingClientRect().height;
-
-//     document.body.style.cursor = 'ns-resize';
-//     e.preventDefault();
-
-//     document.addEventListener('mousemove', onMouseMove);
-//     document.addEventListener('mouseup', onMouseUp);
-//   });
-
-//   expander.addEventListener('mouseleave', function () {
-//     if (isResizing) {
-//       onMouseUp();
-//     }
-//   });
-// }
+  document.addEventListener('mouseup', () => {
+    if (isResizing) {
+      isResizing = false;
+      resizableContainer.classList.remove('top-resizing');
+      document.body.style.cursor = 'default';
+    }
+  });
+}
