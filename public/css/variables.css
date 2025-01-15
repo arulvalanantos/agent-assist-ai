@@ -1,0 +1,31 @@
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray: #b9b9b9;
+  --color-dark-gray: #424242;
+  --color-blue: #4965cd;
+  --color-light-blue: #e2eaff;
+  --color-background: #f8f8f8;
+  --color-border: #e8e8e8;
+  --color-text-border: #e0e0e0;
+
+  --font-family-primary: 'Roboto', sans-serif;
+  --font-family-secondary: 'Open Sans', sans-serif;
+
+  --font-size-small: 12px;
+  --font-size-medium: 16px;
+  --font-size-large: 18px;
+
+  --line-height-small: 28px;
+  --line-height-medium: 28px;
+
+  --border-radius: 3px;
+
+  --button-width: 34px;
+  --button-height: 34px;
+  --button-small-width: 20px;
+  --button-small-height: 20px;
+
+  --gap-small: 8px;
+  --padding-small: 10px;
+}

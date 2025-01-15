@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 html {
   height: 100%;
 }
@@ -12,7 +14,7 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,8 +26,8 @@ body {
   max-width: 1500px;
   height: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
-  font-family: 'Open Sans', sans-serif;
+  background-color: var(--color-white);
+  font-family: var(--font-family-primary);
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -34,23 +36,22 @@ body {
 .header {
   width: 100%;
   height: 52px;
-  padding: 10px;
+  padding: var(--padding-small);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #e8e8e8;
-  background: #f8f8f8;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
 }
 
 .header-title {
-  color: #000000;
+  color: var(--color-black);
   margin: 0px;
-  font-family: Roboto;
-  font-size: 18px;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-large);
   font-weight: 700;
-  line-height: 28px;
-  color: #2e2329;
+  line-height: var(--line-height-small);
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
@@ -59,27 +60,29 @@ body {
 .toggle-btn-container {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: var(--gap-small);
 }
 
 .toggle-btn {
-  width: 34px;
-  height: 34px;
-  /* background: #4965cd;
-  color: #ffffff; */
+  width: var(--button-width);
+  height: var(--button-height);
   background: transparent;
-  color: #000000;
+  color: var(--color-black);
+  border: 1px solid var(--color-gray);
+}
+
+.toggle-btn > svg {
+  fill: currentColor;
 }
 
 .toggle-btn-active {
-  background: #4965cd;
-  color: #ffffff;
-  fill: #ffffff;
+  background: var(--color-blue);
+  color: var(--color-white);
+  border: none;
 }
 
 .toggle-btn-active > svg {
-  fill: #ffffff;
-  color: #ffffff;
+  fill: currentColor;
 }
 
 .title-container {
@@ -91,14 +94,20 @@ body {
 }
 
 .title {
-  font-family: Roboto;
-  font-size: 16px;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-medium);
   font-weight: 700;
-  line-height: 28px;
+  line-height: var(--line-height-medium);
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   text-transform: capitalize;
+}
+
+.title-btn-container {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
 }
 
 .main {
@@ -112,8 +121,8 @@ body {
 .summary {
   width: 100%;
   height: 120px;
-  border-bottom: 1px solid var(--text-border, #e0e0e0);
-  padding: 10px;
+  border-bottom: 1px solid var(--color-text-border);
+  padding: var(--padding-small);
   display: none;
 }
 
@@ -130,31 +139,39 @@ body {
   flex: 1;
   width: 100%;
   height: 100%;
-  padding: 10px;
-  border: 1px solid #e8e8e8;
+  padding: var(--padding-small);
+  border: 1px solid var(--color-border);
   display: none;
 }
 
 .faq {
-  background: #e2eaff;
+  background: var(--color-light-blue);
 }
 
 .smart-reply {
   width: 100%;
   height: 120px;
-  border: 1px solid #e8e8e8;
-  padding: 10px;
-  background: #ffffff;
+  border: 1px solid var(--color-border);
+  padding: var(--padding-small);
+  background: var(--color-white);
   display: none;
 }
 
 .close-btn {
-  width: 20px;
-  height: 20px;
-  border: 1px solid #b9b9b9;
+  width: var(--button-small-width);
+  height: var(--button-small-height);
+  border: 1px solid var(--color-gray);
   background: transparent;
-  font-size: 12px;
-  color: #424242;
+  font-size: var(--font-size-small);
+  color: var(--color-dark-gray);
+}
+
+.regenerate-btn {
+  width: var(--button-small-width);
+  height: var(--button-small-height);
+  font-size: var(--font-size-small);
+  background: var(--color-blue);
+  color: var(--color-white);
 }
 
 .show {

@@ -28,16 +28,17 @@
       <div class="sentiment-container"></div>
       <div class="toggle-btn-container">
         <button id="summary-toggler" type="button" class="toggle-btn">
-          <img src="../public/assets/buttons/summary.svg" alt="Summary" />
+          <img id="summary-toggler-image" src="../public/assets/buttons/summary-black.svg" alt="Summary" />
         </button>
         <button id="faq-toggler" type="button" class="toggle-btn">
-          <img src="../public/assets/buttons/faq.svg" alt="Faq" />
+          <img id="faq-toggler-image" src="../public/assets/buttons/faq-black.svg" alt="Faq" />
         </button>
         <button id="knowledge-assist-toggler" type="button" class="toggle-btn">
-          <img src="../public/assets/buttons/gen-ai.svg" alt="Gen AI Knowledge Assist" />
+          <img id="knowledge-assist-toggler-image" src="../public/assets/buttons/gen-ai-black.svg"
+            alt="Gen AI Knowledge Assist" />
         </button>
         <button id="smart-reply-toggler" type="button" class="toggle-btn">
-          <img src="../public/assets/buttons/smart-reply.svg" alt="Smart Reply" />
+          <img id="smart-reply-toggler-image" src="../public/assets/buttons/smart-reply-black.svg" alt="Smart Reply" />
         </button>
       </div>
     </div>
@@ -46,9 +47,14 @@
     <section id="summary" class="summary">
       <div class="title-container">
         <h4 class="title">Generate Summary</h4>
-        <button type="button" class="close-btn">
-          <img src="../public/assets/close.svg" alt="close" />
-        </button>
+        <div class="title-btn-container">
+          <button type="button" class="regenerate-btn">
+            <img src="../public/assets/regenerate.svg" alt="regenerate" />
+          </button>
+          <button id="summary-close-btn" type="button" class="close-btn">
+            <img src="../public/assets/close.svg" alt="close" />
+          </button>
+        </div>
       </div>
     </section>
     <section id="suggestions" class="suggestions">
@@ -58,7 +64,7 @@
       <section id="faq" class="faq">
         <div class="title-container">
           <h4 class="title">FAQ & Article Suggestions</h4>
-          <button type="button" class="close-btn">
+          <button id="faq-close-btn" type="button" class="close-btn">
             <img src="../public/assets/close.svg" alt="close" />
           </button>
         </div>
@@ -66,7 +72,7 @@
       <section id="knowledge-assist" class="knowledge-assist">
         <div class="title-container">
           <h4 class="title">Gen AI Knowledge Assist</h4>
-          <button type="button" class="close-btn">
+          <button id="knowledge-assist-close-btn" type="button" class="close-btn">
             <img src="../public/assets/close.svg" alt="close" />
           </button>
         </div>
@@ -75,7 +81,7 @@
     <section id="smart-reply" class="smart-reply">
       <div class="title-container">
         <h4 class="title">Smart Reply</h4>
-        <button type="button" class="close-btn">
+        <button id="smart-reply-close-btn" type="button" class="close-btn">
           <img src="../public/assets/close.svg" alt="close" />
         </button>
       </div>
@@ -83,21 +89,52 @@
   </main>
   <script>
     window.addEventListener('load', function () {
-      function setupToggler(togglerId, targetId) {
-        const toggler = document.getElementById(togglerId);
-        const target = document.getElementById(targetId);
+      const togglers = [
+        { togglerId: 'summary-toggler', targetId: 'summary' },
+        { togglerId: 'faq-toggler', targetId: 'faq' },
+        { togglerId: 'knowledge-assist-toggler', targetId: 'knowledge-assist' },
+        { togglerId: 'smart-reply-toggler', targetId: 'smart-reply' }
+      ];
 
+      function setupAndInitializeToggler(togglerId, targetId) {
+        const toggler = document.getElementById(togglerId);
+        const closeBtn = document.getElementById(`${targetId}-close-btn`);
+        const target = document.getElementById(targetId);
+        const toggleBtnImage = document.getElementById(`${togglerId}-image`);
+
+        // Add initial active classes
+        toggler.classList.add('toggle-btn-active');
+        target.classList.add('show');
+        if (toggleBtnImage) toggleBtnImage.src = toggleBtnImage.src.replace('black', 'white');
+
+
+        // Setup event listener
         toggler.addEventListener('click', function () {
           toggler.classList.toggle('toggle-btn-active');
           target.classList.toggle('show');
+
+          if (toggleBtnImage) {
+            toggleBtnImage.src = toggler.classList.contains('toggle-btn-active')
+              ? toggleBtnImage.src.replace('black', 'white')
+              : toggleBtnImage.src.replace('white', 'black');
+          }
         });
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function () {
+            toggler.classList.remove('toggle-btn-active');
+            target.classList.remove('show');
+            if (toggleBtnImage) toggleBtnImage.src = toggleBtnImage.src.replace('white', 'black');
+          });
+        }
       }
 
-      setupToggler('summary-toggler', 'summary');
-      setupToggler('faq-toggler', 'faq');
-      setupToggler('knowledge-assist-toggler', 'knowledge-assist');
-      setupToggler('smart-reply-toggler', 'smart-reply');
+      togglers.forEach(({ togglerId, targetId }) => {
+        setupAndInitializeToggler(togglerId, targetId);
+      });
     })
+
+    document.getElementById('transcript').classList.add('show');
   </script>
 </body>
 
