@@ -20,7 +20,7 @@
 <body>
   <header class="header">
     <div>
-      <img src="../public/assets/logo.svg" alt="Omni Assist AI" height="34px" />
+      <img class="logo" src="../public/assets/logo.svg" alt="Omni Assist AI" height="34px" />
     </div>
     <div>
       <!-- <div class="status-container"></div> -->
@@ -56,6 +56,9 @@
           </button>
         </div>
       </div>
+      <div class="summary-expander" id="summary-expander">
+        <img src="../public/assets/breaker.svg" alt="expand" />
+      </div>
     </section>
     <section id="suggestions" class="suggestions">
       <section id="transcript" class="transcript">
@@ -79,6 +82,9 @@
       </section>
     </section>
     <section id="smart-reply" class="smart-reply">
+      <div class="smart-reply-expander" id="smart-reply-expander">
+        <img src="../public/assets/breaker.svg" alt="expand" />
+      </div>
       <div class="title-container">
         <h4 class="title">Smart Reply</h4>
         <button id="smart-reply-close-btn" type="button" class="close-btn">
@@ -87,55 +93,7 @@
       </div>
     </section>
   </main>
-  <script>
-    window.addEventListener('load', function () {
-      const togglers = [
-        { togglerId: 'summary-toggler', targetId: 'summary' },
-        { togglerId: 'faq-toggler', targetId: 'faq' },
-        { togglerId: 'knowledge-assist-toggler', targetId: 'knowledge-assist' },
-        { togglerId: 'smart-reply-toggler', targetId: 'smart-reply' }
-      ];
-
-      function setupAndInitializeToggler(togglerId, targetId) {
-        const toggler = document.getElementById(togglerId);
-        const closeBtn = document.getElementById(`${targetId}-close-btn`);
-        const target = document.getElementById(targetId);
-        const toggleBtnImage = document.getElementById(`${togglerId}-image`);
-
-        // Add initial active classes
-        toggler.classList.add('toggle-btn-active');
-        target.classList.add('show');
-        if (toggleBtnImage) toggleBtnImage.src = toggleBtnImage.src.replace('black', 'white');
-
-
-        // Setup event listener
-        toggler.addEventListener('click', function () {
-          toggler.classList.toggle('toggle-btn-active');
-          target.classList.toggle('show');
-
-          if (toggleBtnImage) {
-            toggleBtnImage.src = toggler.classList.contains('toggle-btn-active')
-              ? toggleBtnImage.src.replace('black', 'white')
-              : toggleBtnImage.src.replace('white', 'black');
-          }
-        });
-
-        if (closeBtn) {
-          closeBtn.addEventListener('click', function () {
-            toggler.classList.remove('toggle-btn-active');
-            target.classList.remove('show');
-            if (toggleBtnImage) toggleBtnImage.src = toggleBtnImage.src.replace('white', 'black');
-          });
-        }
-      }
-
-      togglers.forEach(({ togglerId, targetId }) => {
-        setupAndInitializeToggler(togglerId, targetId);
-      });
-    })
-
-    document.getElementById('transcript').classList.add('show');
-  </script>
+  <script type="module" src="../public/js/main.js"></script>
 </body>
 
 </html>
