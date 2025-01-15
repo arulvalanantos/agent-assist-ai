@@ -107,3 +107,62 @@ export function topHeightAdjuster(targetId) {
     }
   });
 }
+
+export function enableSectionDragging() {
+  // Select all draggable sections
+  const sections = document.querySelectorAll('.suggestions > section');
+
+  // Variable to track the currently dragged section
+  let draggedSection = null;
+
+  // Add event listeners to each section
+  sections.forEach(section => {
+    // Start dragging
+    section.addEventListener('dragstart', () => {
+      draggedSection = section;
+      section.classList.add('dragging');
+    });
+
+    // End dragging
+    section.addEventListener('dragend', () => {
+      draggedSection = null;
+      section.classList.remove('dragging');
+    });
+
+    // Show receiver UI on dragover
+    section.addEventListener('dragover', e => {
+      e.preventDefault(); // Necessary to allow dropping
+      if (section !== draggedSection) {
+        section.classList.add('receiver');
+      }
+    });
+
+    // Remove receiver UI on dragleave
+    section.addEventListener('dragleave', () => {
+      section.classList.remove('receiver');
+    });
+
+    // Handle drop event
+    section.addEventListener('drop', e => {
+      e.preventDefault();
+      section.classList.remove('receiver'); // Remove receiver UI
+      const targetSection = e.target.closest('section');
+
+      // Swap the dragged section with the target section
+      if (draggedSection && targetSection && draggedSection !== targetSection) {
+        const parent = draggedSection.parentNode;
+        const draggedIndex = Array.from(parent.children).indexOf(
+          draggedSection
+        );
+        const targetIndex = Array.from(parent.children).indexOf(targetSection);
+
+        // Perform the swap
+        if (draggedIndex > targetIndex) {
+          parent.insertBefore(draggedSection, targetSection);
+        } else {
+          parent.insertBefore(draggedSection, targetSection.nextSibling);
+        }
+      }
+    });
+  });
+}

@@ -1,6 +1,7 @@
 import { togglers } from './static.js';
 import {
   bottomHeightAdjuster,
+  enableSectionDragging,
   setupAndInitializeToggler,
   topHeightAdjuster,
 } from './utils.js';
@@ -12,6 +13,8 @@ window.addEventListener('load', function () {
 
   bottomHeightAdjuster('summary');
   topHeightAdjuster('smart-reply');
+
+  enableSectionDragging();
 });
 
 document.getElementById('transcript').classList.add('show');
