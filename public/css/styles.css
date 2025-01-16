@@ -161,8 +161,9 @@ img {
 
 .summary-content {
   display: flex;
-  flex-direction: column;
-  gap: var(--gap-small);
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-medium);
   margin-top: var(--gap-medium);
 }
 
@@ -170,7 +171,7 @@ img {
   background: var(--color-light-blue);
   padding: var(--padding-small);
   border-radius: var(--border-radius);
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-small);
 }
 
 .suggestions {
@@ -231,7 +232,7 @@ img {
 }
 
 .smart-reply-text {
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-small);
   border-radius: var(--border-radius);
   padding: var(--padding-small);
 }
@@ -254,12 +255,62 @@ img {
   color: var(--color-dark-gray);
 }
 
+.close-btn:hover {
+  border-width: 1.5px;
+}
+
+.close-btn img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.close-btn:hover img {
+  transform: scale(0.9);
+}
+
 .regenerate-btn {
   width: var(--button-small-width);
   height: var(--button-small-height);
   font-size: var(--font-size-small);
   background: var(--color-blue);
   color: var(--color-white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.regenerate-btn:hover {
+  scale: 0.9;
+}
+
+.regenerate-btn img {
+  transition: transform 0.3s ease;
+}
+
+.regenerate-btn:hover img {
+  transform: rotate(360deg);
+}
+
+.view-btn {
+  padding: var(--padding-xx-small);
+  background: transparent;
+  border: 1px solid var(--color-blue);
+  color: var(--color-blue);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  transition: border-width 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+}
+
+.view-btn > span {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.view-btn:hover {
+  background: var(--color-background);
+  transform: scale(1.04);
 }
 
 .show {

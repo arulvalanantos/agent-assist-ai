@@ -1,3 +1,6 @@
+let isSummaryResizing = false;
+let isSmartReplyResizing = false;
+
 export function setupAndInitializeToggler(togglerId, targetId) {
   const toggler = document.getElementById(togglerId);
   const closeBtn = document.getElementById(`${targetId}-close-btn`);
@@ -34,7 +37,7 @@ export function setupAndInitializeToggler(togglerId, targetId) {
 
 export function bottomHeightAdjuster(targetId) {
   const container = document.getElementById(targetId);
-  let isResizing = false;
+  const sections = document.querySelectorAll('.suggestions > section');
 
   container.addEventListener('mousedown', e => {
     // Check if the click is near the bottom border
@@ -43,14 +46,19 @@ export function bottomHeightAdjuster(targetId) {
       Math.abs(e.clientY - (containerRect.top + containerRect.height)) <= 5;
 
     if (isBottomBorder) {
-      isResizing = true;
+      isSummaryResizing = true;
       container.classList.add('resizing');
       document.body.style.cursor = 'row-resize';
+
+      // prevent dragging of sections
+      sections.forEach(section => {
+        section.setAttribute('draggable', false);
+      });
     }
   });
 
   document.addEventListener('mousemove', e => {
-    if (!isResizing) return;
+    if (!isSummaryResizing) return;
 
     const containerRect = container.getBoundingClientRect();
     const newHeight = e.clientY - containerRect.top;
@@ -61,17 +69,22 @@ export function bottomHeightAdjuster(targetId) {
   });
 
   document.addEventListener('mouseup', () => {
-    if (isResizing) {
-      isResizing = false;
+    if (isSummaryResizing) {
+      isSummaryResizing = false;
       container.classList.remove('resizing');
       document.body.style.cursor = 'default';
+
+      // allow dragging of sections
+      sections.forEach(section => {
+        section.setAttribute('draggable', true);
+      });
     }
   });
 }
 
 export function topHeightAdjuster(targetId) {
   const resizableContainer = document.getElementById(targetId);
-  let isResizing = false;
+
   let startY, startHeight;
 
   resizableContainer.addEventListener('mousedown', e => {
@@ -80,7 +93,7 @@ export function topHeightAdjuster(targetId) {
     const isTopBorder = Math.abs(e.clientY - containerRect.top) <= 5;
 
     if (isTopBorder) {
-      isResizing = true;
+      isSmartReplyResizing = true;
       startY = e.clientY;
       startHeight = containerRect.height;
       resizableContainer.classList.add('top-resizing');
@@ -89,7 +102,7 @@ export function topHeightAdjuster(targetId) {
   });
 
   document.addEventListener('mousemove', e => {
-    if (!isResizing) return;
+    if (!isSmartReplyResizing) return;
 
     const diffY = startY - e.clientY; // Calculate the movement difference
     const newHeight = startHeight + diffY;
@@ -100,8 +113,8 @@ export function topHeightAdjuster(targetId) {
   });
 
   document.addEventListener('mouseup', () => {
-    if (isResizing) {
-      isResizing = false;
+    if (isSmartReplyResizing) {
+      isSmartReplyResizing = false;
       resizableContainer.classList.remove('top-resizing');
       document.body.style.cursor = 'default';
     }
@@ -119,8 +132,10 @@ export function enableSectionDragging() {
   sections.forEach(section => {
     // Start dragging
     section.addEventListener('dragstart', () => {
-      draggedSection = section;
-      section.classList.add('dragging');
+      if (!isSmartReplyResizing && !isSummaryResizing) {
+        draggedSection = section;
+        section.classList.add('dragging');
+      }
     });
 
     // End dragging
