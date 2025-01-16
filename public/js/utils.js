@@ -98,6 +98,11 @@ export function topHeightAdjuster(targetId) {
       startHeight = containerRect.height;
       resizableContainer.classList.add('top-resizing');
       document.body.style.cursor = 'row-resize';
+
+      // prevent dragging of sections
+      sections.forEach(section => {
+        section.setAttribute('draggable', false);
+      });
     }
   });
 
@@ -117,6 +122,11 @@ export function topHeightAdjuster(targetId) {
       isSmartReplyResizing = false;
       resizableContainer.classList.remove('top-resizing');
       document.body.style.cursor = 'default';
+
+      // allow dragging of sections
+      sections.forEach(section => {
+        section.setAttribute('draggable', true);
+      });
     }
   });
 }
