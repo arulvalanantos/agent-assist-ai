@@ -58,6 +58,7 @@ export function bottomHeightAdjuster(targetId) {
   const knowledgeBaseSuggestions = document.querySelectorAll(
     '.knowledge-assist-content-item'
   );
+  const transcript = document.querySelector('.transcript-content');
 
   container.addEventListener('mousedown', e => {
     // Check if the click is near the bottom border
@@ -79,6 +80,7 @@ export function bottomHeightAdjuster(targetId) {
       disablePointerEventsAndUserSelect(faqSuggestions);
       disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
       disablePointerEventsAndUserSelect([summary]);
+      disablePointerEventsAndUserSelect([transcript]);
     }
   });
 
@@ -108,6 +110,7 @@ export function bottomHeightAdjuster(targetId) {
       enablePointerEventsAndUserSelect(faqSuggestions);
       enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
       enablePointerEventsAndUserSelect([summary]);
+      enablePointerEventsAndUserSelect([transcript]);
     }
   });
 }
@@ -145,6 +148,7 @@ export function topHeightAdjuster(targetId) {
       disablePointerEventsAndUserSelect(faqSuggestions);
       disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
       disablePointerEventsAndUserSelect([summary]);
+      disablePointerEventsAndUserSelect([transcript]);
     }
   });
 
@@ -174,6 +178,7 @@ export function topHeightAdjuster(targetId) {
       enablePointerEventsAndUserSelect(faqSuggestions);
       enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
       enablePointerEventsAndUserSelect([summary]);
+      enablePointerEventsAndUserSelect([transcript]);
     }
   });
 }

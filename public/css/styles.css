@@ -15,6 +15,16 @@ h4 {
   margin-block-end: 0px;
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-primary);
+}
+
 button {
   border: none;
   outline: none;
@@ -131,12 +141,11 @@ img {
   text-transform: capitalize;
   user-select: none;
   pointer-events: none;
-  color: var(--color-text-primary);
 }
 
 @media (max-width: 700px) {
   .title {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-base);
   }
 }
 
@@ -226,12 +235,21 @@ img {
   overflow-y: auto;
 }
 
+@media (max-height: 700px) {
+  .faq,
+  .knowledge-assist,
+  .transcript {
+    padding: var(--padding-xxx-small);
+  }
+}
+
 .faq {
   background: var(--color-light-blue);
 }
 
 .faq-content,
-.knowledge-assist-content {
+.knowledge-assist-content,
+.transcript-content {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -239,6 +257,72 @@ img {
   overflow-y: auto;
   max-height: 100%;
   min-height: 50px;
+  padding-right: var(--padding-xx-small);
+  scrollbar-gutter: auto | stable && both-edges?;
+}
+
+.transcript-user,
+.transcript-agent {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-small);
+}
+
+.transcript-user-logo {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-blue);
+}
+.transcript-user-message,
+.transcript-agent-message {
+  border-radius: var(--border-radius);
+  padding: var(--padding-small);
+  font-size: var(--font-size-small);
+  color: var(--text-primary);
+}
+
+.transcript-user-message-container,
+.transcript-agent-message-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+  flex: 1;
+}
+
+.transcript-user-message-time,
+.transcript-agent-message-time {
+  font-size: var(--font-size-xxx-small);
+  color: var(--color-text-border);
+}
+
+.transcript-agent-message-time {
+  align-self: flex-end;
+}
+
+.transcript-user-message {
+  background: var(--color-background);
+}
+
+.transcript-agent-message {
+  background: var(--color-light-blue);
+}
+
+.transcript-agent-logo {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background);
 }
 
 .knowledge-assist-content-item {
@@ -256,6 +340,12 @@ img {
 .knowledge-assist-content-item:nth-child(even) {
   background: transparent;
   border: 1px solid var(--color-text-border);
+}
+
+.knowledge-assist-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
 }
 
 .faq-search-container {
@@ -315,6 +405,12 @@ img {
 
 .faq-actions-left > button:hover {
   transform: scale(0.9);
+}
+
+.faq-actions-right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
 }
 
 .faq-suggestion-title,
@@ -387,6 +483,10 @@ img {
   font-size: var(--font-size-small);
   border-radius: var(--border-radius);
   padding: var(--padding-small);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-medium);
 }
 
 @media (max-width: 700px) {
@@ -468,7 +568,7 @@ img {
 
 .view-btn:hover {
   background: var(--color-background);
-  transform: scale(1.04);
+  transform: scale(1.01);
 }
 
 .show {

@@ -13,8 +13,10 @@
   --font-family-primary: 'Roboto', sans-serif;
   --font-family-secondary: 'Open Sans', sans-serif;
 
+  --font-size-xxx-small: 8px;
   --font-size-xx-small: 10px;
   --font-size-small: 12px;
+  --font-size-base: 14px;
   --font-size-medium: 16px;
   --font-size-large: 18px;
 
