@@ -1,6 +1,20 @@
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
 
+export function disablePointerEventsAndUserSelect(elements) {
+  elements.forEach(element => {
+    element.style.pointerEvents = 'none';
+    element.style.userSelect = 'none';
+  });
+}
+
+export function enablePointerEventsAndUserSelect(elements) {
+  elements.forEach(element => {
+    element.style.pointerEvents = 'auto';
+    element.style.userSelect = 'auto';
+  });
+}
+
 export function setupAndInitializeToggler(togglerId, targetId) {
   const toggler = document.getElementById(togglerId);
   const closeBtn = document.getElementById(`${targetId}-close-btn`);
@@ -38,6 +52,12 @@ export function setupAndInitializeToggler(togglerId, targetId) {
 export function bottomHeightAdjuster(targetId) {
   const container = document.getElementById(targetId);
   const sections = document.querySelectorAll('.suggestions > section');
+  const summary = document.querySelector('.summary-text');
+  const smartReplies = document.querySelectorAll('.smart-reply-text');
+  const faqSuggestions = document.querySelectorAll('.faq-suggestion');
+  const knowledgeBaseSuggestions = document.querySelectorAll(
+    '.knowledge-assist-content-item'
+  );
 
   container.addEventListener('mousedown', e => {
     // Check if the click is near the bottom border
@@ -54,6 +74,11 @@ export function bottomHeightAdjuster(targetId) {
       sections.forEach(section => {
         section.setAttribute('draggable', false);
       });
+
+      disablePointerEventsAndUserSelect(smartReplies);
+      disablePointerEventsAndUserSelect(faqSuggestions);
+      disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      disablePointerEventsAndUserSelect([summary]);
     }
   });
 
@@ -78,6 +103,11 @@ export function bottomHeightAdjuster(targetId) {
       sections.forEach(section => {
         section.setAttribute('draggable', true);
       });
+
+      enablePointerEventsAndUserSelect(smartReplies);
+      enablePointerEventsAndUserSelect(faqSuggestions);
+      enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      enablePointerEventsAndUserSelect([summary]);
     }
   });
 }
@@ -85,7 +115,12 @@ export function bottomHeightAdjuster(targetId) {
 export function topHeightAdjuster(targetId) {
   const resizableContainer = document.getElementById(targetId);
   const sections = document.querySelectorAll('.suggestions > section');
+  const summary = document.querySelector('.summary-text');
   const smartReplies = document.querySelectorAll('.smart-reply-text');
+  const faqSuggestions = document.querySelectorAll('.faq-suggestion');
+  const knowledgeBaseSuggestions = document.querySelectorAll(
+    '.knowledge-assist-content-item'
+  );
 
   let startY, startHeight;
 
@@ -106,10 +141,10 @@ export function topHeightAdjuster(targetId) {
         section.setAttribute('draggable', false);
       });
 
-      smartReplies.forEach(smartReply => {
-        smartReply.style.pointerEvents = 'none';
-        smartReply.style.userSelect = 'none';
-      });
+      disablePointerEventsAndUserSelect(smartReplies);
+      disablePointerEventsAndUserSelect(faqSuggestions);
+      disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      disablePointerEventsAndUserSelect([summary]);
     }
   });
 
@@ -135,10 +170,10 @@ export function topHeightAdjuster(targetId) {
         section.setAttribute('draggable', true);
       });
 
-      smartReplies.forEach(smartReply => {
-        smartReply.style.pointerEvents = 'auto';
-        smartReply.style.userSelect = 'auto';
-      });
+      enablePointerEventsAndUserSelect(smartReplies);
+      enablePointerEventsAndUserSelect(faqSuggestions);
+      enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      enablePointerEventsAndUserSelect([summary]);
     }
   });
 }
@@ -146,6 +181,7 @@ export function topHeightAdjuster(targetId) {
 export function enableSectionDragging() {
   // Select all draggable sections
   const sections = document.querySelectorAll('.suggestions > section');
+  const summary = document.querySelector('.summary-text');
 
   // Variable to track the currently dragged section
   let draggedSection = null;
@@ -157,6 +193,8 @@ export function enableSectionDragging() {
       if (!isSmartReplyResizing && !isSummaryResizing) {
         draggedSection = section;
         section.classList.add('dragging');
+
+        disablePointerEventsAndUserSelect([summary]);
       }
     });
 
@@ -164,6 +202,8 @@ export function enableSectionDragging() {
     section.addEventListener('dragend', () => {
       draggedSection = null;
       section.classList.remove('dragging');
+
+      enablePointerEventsAndUserSelect([summary]);
     });
 
     // Show receiver UI on dragover

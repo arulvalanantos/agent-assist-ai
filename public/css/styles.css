@@ -10,6 +10,11 @@ html {
   box-sizing: border-box;
 }
 
+h4 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
 button {
   border: none;
   outline: none;
@@ -24,7 +29,7 @@ button {
 
 body {
   width: 100vw;
-  max-width: 1500px;
+  max-width: 100vw;
   height: 100vh;
   margin: 0 auto;
   background-color: var(--color-white);
@@ -32,6 +37,12 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+@media (min-width: 1500px) {
+  body {
+    max-width: 1500px;
+  }
 }
 
 img {
@@ -123,6 +134,12 @@ img {
   color: var(--color-text-primary);
 }
 
+@media (max-width: 700px) {
+  .title {
+    font-size: var(--font-size-small);
+  }
+}
+
 .title-btn-container {
   display: flex;
   align-items: center;
@@ -150,6 +167,12 @@ img {
   overflow-y: auto;
 }
 
+@media (max-height: 700px) {
+  .summary {
+    padding: var(--padding-xxx-small);
+  }
+}
+
 .summary::after {
   content: '';
   position: absolute;
@@ -175,12 +198,18 @@ img {
   font-size: var(--font-size-small);
 }
 
+@media (max-width: 700px) {
+  .summary-text {
+    font-size: var(--font-size-xx-small);
+  }
+}
+
 .suggestions {
   flex: 1;
   display: flex;
   flex-direction: row;
   min-height: 50px;
-  /* max-height: 100%; */
+  max-height: 100%;
 }
 
 .suggestions > section {
@@ -208,8 +237,25 @@ img {
   flex-direction: column;
   gap: var(--gap-medium);
   overflow-y: auto;
-  /* max-height: 100%; */
+  max-height: 100%;
   min-height: 50px;
+}
+
+.knowledge-assist-content-item {
+  padding: var(--padding-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+  border-radius: var(--border-radius);
+}
+
+.knowledge-assist-content-item:nth-child(odd) {
+  background: var(--color-light-blue);
+}
+
+.knowledge-assist-content-item:nth-child(even) {
+  background: transparent;
+  border: 1px solid var(--color-text-border);
 }
 
 .faq-search-container {
@@ -271,23 +317,6 @@ img {
   transform: scale(0.9);
 }
 
-.knowledge-assist-content-item {
-  padding: var(--padding-small);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-medium);
-  border-radius: var(--border-radius);
-}
-
-.knowledge-assist-content-item:nth-child(odd) {
-  background: var(--color-light-blue);
-}
-
-.knowledge-assist-content-item:nth-child(even) {
-  background: transparent;
-  border: 1px solid var(--color-text-border);
-}
-
 .faq-suggestion-title,
 .knowledge-assist-title {
   font-size: var(--font-size-medium);
@@ -297,6 +326,18 @@ img {
 .faq-suggestion-content,
 .knowledge-assist-suggestion {
   font-size: var(--font-size-small);
+}
+
+@media (max-width: 700px) {
+  .faq-suggestion-title,
+  .knowledge-assist-title {
+    font-size: var(--font-size-small);
+  }
+
+  .faq-suggestion-content,
+  .knowledge-assist-suggestion {
+    font-size: var(--font-size-xx-small);
+  }
 }
 
 .smart-reply {
@@ -310,6 +351,12 @@ img {
   max-height: 250px;
   min-height: 50px;
   overflow-y: auto;
+}
+
+@media (max-height: 700px) {
+  .smart-reply {
+    padding: var(--padding-xxx-small);
+  }
 }
 
 .smart-reply::after {
@@ -340,6 +387,12 @@ img {
   font-size: var(--font-size-small);
   border-radius: var(--border-radius);
   padding: var(--padding-small);
+}
+
+@media (max-width: 700px) {
+  .smart-reply-text {
+    font-size: var(--font-size-xx-small);
+  }
 }
 
 .smart-reply-text:nth-child(odd) {
@@ -421,7 +474,13 @@ img {
 .show {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--gap-medium);
+}
+
+@media (max-width: 700px) {
+  .show {
+    gap: var(--gap-small);
+  }
 }
 
 .resizing {
