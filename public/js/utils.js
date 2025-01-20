@@ -84,6 +84,8 @@ export function bottomHeightAdjuster(targetId) {
 
 export function topHeightAdjuster(targetId) {
   const resizableContainer = document.getElementById(targetId);
+  const sections = document.querySelectorAll('.suggestions > section');
+  const smartReplies = document.querySelectorAll('.smart-reply-text');
 
   let startY, startHeight;
 
@@ -102,6 +104,11 @@ export function topHeightAdjuster(targetId) {
       // prevent dragging of sections
       sections.forEach(section => {
         section.setAttribute('draggable', false);
+      });
+
+      smartReplies.forEach(smartReply => {
+        smartReply.style.pointerEvents = 'none';
+        smartReply.style.userSelect = 'none';
       });
     }
   });
@@ -126,6 +133,11 @@ export function topHeightAdjuster(targetId) {
       // allow dragging of sections
       sections.forEach(section => {
         section.setAttribute('draggable', true);
+      });
+
+      smartReplies.forEach(smartReply => {
+        smartReply.style.pointerEvents = 'auto';
+        smartReply.style.userSelect = 'auto';
       });
     }
   });
