@@ -19,6 +19,7 @@ button {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  background: transparent;
 }
 
 body {
@@ -199,6 +200,7 @@ img {
   background: var(--color-light-blue);
 }
 
+.faq-content,
 .knowledge-assist-content {
   flex: 1;
   height: 100%;
@@ -210,6 +212,65 @@ img {
   min-height: 50px;
 }
 
+.faq-search-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  border: 1px solid var(--color-gray);
+  padding: var(--padding-xx-small);
+  border-radius: var(--border-radius);
+  background: var(--color-white);
+}
+
+.faq-search-container:focus-within {
+  border-color: var(--color-blue);
+}
+
+.faq-search {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--font-size-xx-small);
+}
+
+.faq-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+}
+
+.faq-suggestion {
+  padding: var(--padding-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-blue);
+}
+
+.faq-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-actions-left > button {
+  transition: transform 0.3s ease-in-out;
+}
+
+.faq-actions-left > button:hover {
+  transform: scale(0.9);
+}
+
 .knowledge-assist-content-item {
   border: 1px solid var(--color-text-border);
   padding: var(--padding-small);
@@ -218,11 +279,13 @@ img {
   gap: var(--gap-medium);
 }
 
+.faq-suggestion-title,
 .knowledge-assist-title {
   font-size: var(--font-size-medium);
   font-weight: 600;
 }
 
+.faq-suggestion-content,
 .knowledge-assist-suggestion {
   font-size: var(--font-size-small);
 }
@@ -315,14 +378,14 @@ img {
 }
 
 .view-btn {
-  padding: var(--padding-xx-small);
+  padding: var(--padding-xxx-small) var(--padding-xx-small);
   background: transparent;
   border: 1px solid var(--color-blue);
   color: var(--color-blue);
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xx-small);
   font-weight: 500;
   transition: border-width 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
