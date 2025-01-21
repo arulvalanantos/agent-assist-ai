@@ -249,6 +249,37 @@ export function enableSectionDragging() {
   });
 }
 
+export function showToast(message, duration = 3000) {
+  const toastContainer = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+
+  const tickImage = document.createElement('img');
+  tickImage.src = '../public/assets/tick.png'; // Update the path to your tick image
+  tickImage.alt = 'tick';
+  tickImage.style.width = '16px';
+  tickImage.style.height = '16px';
+  tickImage.style.marginRight = '8px';
+
+  toast.appendChild(tickImage);
+  toast.appendChild(document.createTextNode(message));
+
+  toastContainer.appendChild(toast);
+
+  // Show the toast
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 100);
+
+  // Hide the toast after the specified duration
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => {
+      toastContainer.removeChild(toast);
+    }, 300);
+  }, duration);
+}
+
 export function setupCopyButtons(selector, contentSelector) {
   document.querySelectorAll(selector).forEach(item => {
     const copyBtn = item.querySelector('.copy-btn');
@@ -259,6 +290,7 @@ export function setupCopyButtons(selector, contentSelector) {
         .writeText(content)
         .then(() => {
           // alert('Content copied to clipboard');
+          showToast('Content copied to clipboard');
         })
         .catch(err => {
           console.error('Failed to copy: ', err);
