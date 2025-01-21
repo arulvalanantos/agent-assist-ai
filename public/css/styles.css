@@ -475,6 +475,38 @@ img {
   }
 }
 
+.faq-view-mode {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-base);
+  background: var(--color-light-blue);
+  display: none;
+  padding: var(--padding-medium);
+  height: 100%;
+}
+
+.faq-view-mode-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-view-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-base);
+}
+
+.faq-view-suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+}
+
+.faq-view-suggestion {
+  font-size: var(--font-size-small);
+}
+
 .smart-reply {
   position: relative;
   width: 100%;

@@ -383,3 +383,51 @@ export function handleSmartReplyContentView() {
     smartReply.style.padding = '8px';
   });
 }
+
+export function handleFaqContentView() {
+  const viewButtons = document.querySelectorAll('.faq .view-btn');
+  const faq = document.querySelector('.faq');
+
+  const titleContainer = faq.querySelector('.title-container');
+  const searchContainer = faq.querySelector('.faq-search-container');
+  const content = faq.querySelector('.faq-content');
+  const viewMode = faq.querySelector('.faq-view-mode');
+
+  viewButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const contentItem = this.closest('.faq-suggestion');
+      const title = contentItem.querySelector(
+        '.faq-suggestion-title'
+      ).innerText;
+      const suggestion = contentItem.querySelector(
+        '.faq-suggestion-content'
+      ).innerText;
+
+      // Hide the faq content and title
+      content.style.display = 'none';
+      titleContainer.style.display = 'none';
+      searchContainer.style.display = 'none';
+      faq.style.padding = '0px';
+
+      // Show the view mode section
+      viewMode.style.display = 'flex';
+
+      // Update the view mode section with the corresponding title and content
+      viewMode.querySelector('.faq-view-title').innerText = title;
+      viewMode.querySelector('.faq-view-suggestion').innerText = suggestion;
+    });
+  });
+
+  // Close view mode button functionality
+  const closeViewButton = viewMode.querySelector('.close-view-btn');
+  closeViewButton.addEventListener('click', function () {
+    // Hide the view mode section
+    viewMode.style.display = 'none';
+
+    // Show the faq content and title
+    content.style.display = 'flex';
+    titleContainer.style.display = 'flex';
+    searchContainer.style.display = 'flex';
+    faq.style.padding = '8px';
+  });
+}

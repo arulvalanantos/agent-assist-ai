@@ -7,6 +7,7 @@ import {
   setupCopyButtons,
   handleKnowledgeAssistContentView,
   handleSmartReplyContentView,
+  handleFaqContentView,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -30,6 +31,7 @@ window.addEventListener('load', function () {
 
   handleKnowledgeAssistContentView();
   handleSmartReplyContentView();
+  handleFaqContentView();
 });
 
 document.getElementById('transcript').classList.add('show');
