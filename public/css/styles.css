@@ -360,6 +360,8 @@ img {
   display: none;
   padding: var(--padding-medium);
   height: 100%;
+  border-radius: var(--border-radius);
+  overflow-y: auto;
 }
 
 .knowledge-assist-view-mode-actions {
@@ -483,6 +485,8 @@ img {
   display: none;
   padding: var(--padding-medium);
   height: 100%;
+  border-radius: var(--border-radius);
+  overflow-y: auto;
 }
 
 .faq-view-mode-actions {
@@ -583,6 +587,8 @@ img {
   display: none;
   padding: var(--padding-medium);
   height: 100%;
+  border-radius: var(--border-radius);
+  overflow-y: auto;
 }
 
 .smart-reply-view-mode-actions {

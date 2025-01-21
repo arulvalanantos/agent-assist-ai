@@ -320,7 +320,6 @@ export function handleKnowledgeAssistContentView() {
       // Hide the knowledge-assist content and title
       content.style.display = 'none';
       titleContainer.style.display = 'none';
-      knowledgeAssist.style.padding = '0px';
 
       // Show the view mode section
       viewMode.style.display = 'flex';
@@ -341,7 +340,6 @@ export function handleKnowledgeAssistContentView() {
     // Show the knowledge-assist content and title
     content.style.display = 'flex';
     titleContainer.style.display = 'flex';
-    knowledgeAssist.style.padding = '8px';
   });
 
   // Copy button functionality
@@ -372,7 +370,6 @@ export function handleSmartReplyContentView() {
       // Hide the smart-reply content and title
       content.style.display = 'none';
       titleContainer.style.display = 'none';
-      smartReply.style.padding = '0px';
 
       // Show the view mode section
       viewMode.style.display = 'flex';
@@ -391,7 +388,6 @@ export function handleSmartReplyContentView() {
     // Show the smart-reply content and title
     content.style.display = 'flex';
     titleContainer.style.display = 'flex';
-    smartReply.style.padding = '8px';
   });
 
   // Copy button functionality
@@ -429,7 +425,6 @@ export function handleFaqContentView() {
       content.style.display = 'none';
       titleContainer.style.display = 'none';
       searchContainer.style.display = 'none';
-      faq.style.padding = '0px';
 
       // Show the view mode section
       viewMode.style.display = 'flex';
@@ -450,7 +445,6 @@ export function handleFaqContentView() {
     content.style.display = 'flex';
     titleContainer.style.display = 'flex';
     searchContainer.style.display = 'flex';
-    faq.style.padding = '8px';
   });
 
   // Copy button functionality
