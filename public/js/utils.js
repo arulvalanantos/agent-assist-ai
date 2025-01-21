@@ -343,6 +343,17 @@ export function handleKnowledgeAssistContentView() {
     titleContainer.style.display = 'flex';
     knowledgeAssist.style.padding = '8px';
   });
+
+  // Copy button functionality
+  const copyButton = viewMode.querySelector('.copy-btn');
+  copyButton.addEventListener('click', function () {
+    const suggestionContent = viewMode.querySelector(
+      '.knowledge-assist-view-suggestion'
+    ).innerText;
+    navigator.clipboard.writeText(suggestionContent).then(() => {
+      showToast('Content copied to clipboard');
+    });
+  });
 }
 
 export function handleSmartReplyContentView() {
@@ -381,6 +392,17 @@ export function handleSmartReplyContentView() {
     content.style.display = 'flex';
     titleContainer.style.display = 'flex';
     smartReply.style.padding = '8px';
+  });
+
+  // Copy button functionality
+  const copyButton = viewMode.querySelector('.copy-btn');
+  copyButton.addEventListener('click', function () {
+    const suggestionContent = viewMode.querySelector(
+      '.smart-reply-view-text'
+    ).innerText;
+    navigator.clipboard.writeText(suggestionContent).then(() => {
+      showToast('Content copied to clipboard');
+    });
   });
 }
 
@@ -429,5 +451,16 @@ export function handleFaqContentView() {
     titleContainer.style.display = 'flex';
     searchContainer.style.display = 'flex';
     faq.style.padding = '8px';
+  });
+
+  // Copy button functionality
+  const copyButton = viewMode.querySelector('.copy-btn');
+  copyButton.addEventListener('click', function () {
+    const suggestionContent = viewMode.querySelector(
+      '.faq-view-suggestion'
+    ).innerText;
+    navigator.clipboard.writeText(suggestionContent).then(() => {
+      showToast('Content copied to clipboard');
+    });
   });
 }
