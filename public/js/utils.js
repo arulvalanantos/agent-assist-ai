@@ -298,3 +298,88 @@ export function setupCopyButtons(selector, contentSelector) {
     });
   });
 }
+
+export function handleKnowledgeAssistContentView() {
+  const viewButtons = document.querySelectorAll('.view-btn');
+  const knowledgeAssist = document.querySelector('.knowledge-assist');
+
+  const titleContainer = knowledgeAssist.querySelector('.title-container');
+  const content = knowledgeAssist.querySelector('.knowledge-assist-content');
+  const viewMode = knowledgeAssist.querySelector('.knowledge-assist-view-mode');
+
+  viewButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const contentItem = this.closest('.knowledge-assist-content-item');
+      const title = contentItem.querySelector(
+        '.knowledge-assist-title'
+      ).innerText;
+      const suggestion = contentItem.querySelector(
+        '.knowledge-assist-suggestion'
+      ).innerText;
+
+      // Hide the knowledge-assist content and title
+      content.style.display = 'none';
+      titleContainer.style.display = 'none';
+      knowledgeAssist.style.padding = '0px';
+
+      // Show the view mode section
+      viewMode.style.display = 'flex';
+
+      // Update the view mode section with the corresponding title and content
+      viewMode.querySelector('.knowledge-assist-view-title').innerText = title;
+      viewMode.querySelector('.knowledge-assist-view-suggestion').innerText =
+        suggestion;
+    });
+  });
+
+  // Close view mode button functionality
+  const closeViewButton = viewMode.querySelector('.close-view-btn');
+  closeViewButton.addEventListener('click', function () {
+    // Hide the view mode section
+    viewMode.style.display = 'none';
+
+    // Show the knowledge-assist content and title
+    content.style.display = 'flex';
+    titleContainer.style.display = 'flex';
+    knowledgeAssist.style.padding = '8px';
+  });
+}
+
+export function handleSmartReplyContentView() {
+  const viewButtons = document.querySelectorAll('.smart-reply .view-btn');
+  const smartReply = document.querySelector('.smart-reply');
+
+  const titleContainer = smartReply.querySelector('.title-container');
+  const content = smartReply.querySelector('.smart-reply-content');
+  const viewMode = smartReply.querySelector('.smart-reply-view-mode');
+
+  viewButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const contentItem = this.closest('.smart-reply-text');
+      const text = contentItem.querySelector('p').innerText;
+
+      // Hide the smart-reply content and title
+      content.style.display = 'none';
+      titleContainer.style.display = 'none';
+      smartReply.style.padding = '0px';
+
+      // Show the view mode section
+      viewMode.style.display = 'flex';
+
+      // Update the view mode section with the corresponding content
+      viewMode.querySelector('.smart-reply-view-text').innerText = text;
+    });
+  });
+
+  // Close view mode button functionality
+  const closeViewButton = viewMode.querySelector('.close-view-btn');
+  closeViewButton.addEventListener('click', function () {
+    // Hide the view mode section
+    viewMode.style.display = 'none';
+
+    // Show the smart-reply content and title
+    content.style.display = 'flex';
+    titleContainer.style.display = 'flex';
+    smartReply.style.padding = '8px';
+  });
+}

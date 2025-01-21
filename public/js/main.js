@@ -4,7 +4,9 @@ import {
   enableSectionDragging,
   setupAndInitializeToggler,
   topHeightAdjuster,
-  setupCopyButtons
+  setupCopyButtons,
+  handleKnowledgeAssistContentView,
+  handleSmartReplyContentView,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -25,6 +27,9 @@ window.addEventListener('load', function () {
     '.knowledge-assist-content-item',
     '.knowledge-assist-suggestion'
   );
+
+  handleKnowledgeAssistContentView();
+  handleSmartReplyContentView();
 });
 
 document.getElementById('transcript').classList.add('show');

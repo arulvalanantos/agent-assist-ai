@@ -32,9 +32,12 @@
 
   --gap-small: 4px;
   --gap-medium: 8px;
+  --gap-base: 12px;
+  --gap-large: 16px;
 
   --padding-xxx-small: 4px;
   --padding-xx-small: 8px;
   --padding-small: 10px;
   --padding-medium: 12px;
+  --padding-large: 16px;
 }
