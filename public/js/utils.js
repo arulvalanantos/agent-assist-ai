@@ -248,3 +248,21 @@ export function enableSectionDragging() {
     });
   });
 }
+
+export function setupCopyButtons(selector, contentSelector) {
+  document.querySelectorAll(selector).forEach(item => {
+    const copyBtn = item.querySelector('.copy-btn');
+    const content = item.querySelector(contentSelector).innerText;
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard
+        .writeText(content)
+        .then(() => {
+          // alert('Content copied to clipboard');
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    });
+  });
+}

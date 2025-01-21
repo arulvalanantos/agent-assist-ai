@@ -546,7 +546,8 @@ img {
   transform: rotate(360deg);
 }
 
-.view-btn {
+.view-btn,
+.copy-btn {
   padding: var(--padding-xxx-small) var(--padding-xx-small);
   background: transparent;
   border: 1px solid var(--color-blue);
@@ -560,13 +561,15 @@ img {
   transition: transform 0.1s ease-in-out;
 }
 
-.view-btn > span {
+.view-btn > span,
+.copy-btn > span {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
 
-.view-btn:hover {
+.view-btn:hover,
+.copy-btn:hover {
   background: var(--color-background);
   transform: scale(1.01);
 }
