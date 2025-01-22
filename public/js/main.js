@@ -32,7 +32,7 @@ window.addEventListener('load', function () {
 
   // show transcript only for voice channel
   const channel = document.body.getAttribute('data-channel');
-  if (channel === 'voice') {
+  if (channel?.toLowerCase() === 'voice') {
     document.getElementById('transcript').classList.add('show');
   }
 });

@@ -55,6 +55,18 @@ body {
   }
 }
 
+.icon {
+  width: var(--font-size-medium);
+  height: var(--font-size-medium);
+}
+
+@media (max-width: 700px) {
+  .icon {
+    width: var(--font-size-small);
+    height: var(--font-size-small);
+  }
+}
+
 img {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -667,7 +679,7 @@ img {
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
-  font-size: var(--font-size-xx-small);
+  font-size: var(--font-size-small);
   font-weight: 500;
   transition: border-width 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
@@ -678,6 +690,11 @@ img {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+}
+
+.view-btn .icon,
+.copy-btn .icon {
+  fill: currentColor;
 }
 
 .view-btn:hover,
@@ -693,9 +710,13 @@ img {
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
-  font-size: var(--font-size-xx-small);
+  font-size: var(--font-size-small);
   font-weight: 500;
   transition: transform 0.1s ease-in-out;
+}
+
+.close-view-btn .icon {
+  fill: currentColor;
 }
 
 .close-view-btn:hover {
@@ -763,4 +784,14 @@ img {
 .toast.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+.like-btn,
+.dislike-btn {
+  color: var(--color-blue);
+}
+
+.like-btn .icon,
+.dislike-btn .icon {
+  fill: currentColor;
 }
