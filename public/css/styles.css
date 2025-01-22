@@ -455,6 +455,9 @@ img {
 .knowledge-assist-title {
   font-size: var(--font-size-medium);
   font-weight: 600;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .faq-suggestion-content,

@@ -1,3 +1,4 @@
+import constants from './constants.js';
 import { modules, togglers } from './static.js';
 
 let isSummaryResizing = false;
@@ -291,8 +292,7 @@ export function setupCopyButtons(selector, contentSelector) {
       navigator.clipboard
         .writeText(content)
         .then(() => {
-          // alert('Content copied to clipboard');
-          showToast('Content copied to clipboard');
+          showToast(constants.MESSAGE.COPIED);
         })
         .catch(err => {
           console.error('Failed to copy: ', err);
@@ -351,7 +351,7 @@ export function handleKnowledgeAssistContentView() {
       '.knowledge-assist-view-suggestion'
     ).innerText;
     navigator.clipboard.writeText(suggestionContent).then(() => {
-      showToast('Content copied to clipboard');
+      showToast(constants.MESSAGE.COPIED);
     });
   });
 }
@@ -399,7 +399,7 @@ export function handleSmartReplyContentView() {
       '.smart-reply-view-text'
     ).innerText;
     navigator.clipboard.writeText(suggestionContent).then(() => {
-      showToast('Content copied to clipboard');
+      showToast(constants.MESSAGE.COPIED);
     });
   });
 }
@@ -456,7 +456,7 @@ export function handleFaqContentView() {
       '.faq-view-suggestion'
     ).innerText;
     navigator.clipboard.writeText(suggestionContent).then(() => {
-      showToast('Content copied to clipboard');
+      showToast(constants.MESSAGE.COPIED);
     });
   });
 }
