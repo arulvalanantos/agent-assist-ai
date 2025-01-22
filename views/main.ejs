@@ -13,11 +13,11 @@
   <script src="https://www.gstatic.com/external_hosted/document_register_element/document-register-element.js"></script>
   <!-- Core UI module container. Loads all UI module-specific scripts. -->
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.11/container.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.4/common.js"></script>
+  <!-- <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.4/common.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.1/knowledge_assist.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v2.9/knowledge_assist.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/smart_reply.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/summarization.js"></script>
+  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/summarization.js"></script> -->
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.2/transcript.js"></script>
   <!-- Favicon -->
   <link rel="icon" href="../public/assets/favicon.svg" type="image/svg+xml">
@@ -64,7 +64,7 @@
       <section id="transcript" class="transcript" draggable="true">
         <h4 class="title">Conversation Transcript</h4>
         <div class="transcript-content">
-          <div class="transcript-user">
+          <!-- <div class="transcript-user">
             <div class="transcript-user-logo">
               <img src="../public/assets/headset.svg" alt="user" />
             </div>
@@ -135,7 +135,7 @@
             <div class="transcript-agent-logo">
               <img src="../public/assets/person.svg" alt="agent" />
             </div>
-          </div>
+          </div> -->
         </div>
       </section>
       <section id="faq" class="faq" draggable="true">
@@ -145,7 +145,8 @@
             <img src="../public/assets/close.svg" alt="close" />
           </button>
         </div>
-        <div class="faq-search-container">
+        <div class="faq-content"></div>
+        <!-- <div class="faq-search-container">
           <img src="../public/assets/search.svg" width="12px" height="12px" alt="faq search" />
           <input id="faq-search" type="text" class="faq-search" placeholder="Ask a question or search for content" />
         </div>
@@ -441,7 +442,7 @@
             <h3 class="faq-view-title"></h3>
             <p class="faq-view-suggestion"></p>
           </div>
-        </div>
+        </div> -->
       </section>
       <section id="knowledge-assist" class="knowledge-assist" draggable="true">
         <div class="title-container">
@@ -737,7 +738,134 @@
     </section>
   </main>
   <div id="toast-container" class="toast-container"></div>
-  <script type="module" src="../public/js/genesys-cloud.js" defer></script>
+  <script>
+    window.addEventListener('load', function () {
+      const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
+      const TRANSCRIPT_SELECTOR = 'agent-assist-transcript';
+      const proxyServerEndPoint = '<%= proxyServer %>';
+      const conversationProfile = '<%= conversationProfile %>';
+      const features = '<%= features %>';
+      const genesysCloudRegion = '<%= genesysCloudRegion %>';
+      const clientId = '<%= clientID %>'
+      const channel = '<%= channel %>'
+      var applicationServer = '<%= applicationServer %>'
+      var accessToken = '';
+      const urlParams = new URLSearchParams(window.location.search);
+      const currentConversationId = urlParams.get('conversationid');
+      const gcHostOrigin = urlParams.get('gcHostOrigin');
+      const gcTargetEnv = urlParams.get('gcTargetEnv');
+      applicationServer = applicationServer.replace(/\/$/, "");
+      var firstTimeLoad = false;
+      const redirectUri = `${applicationServer}?conversationProfile=${conversationProfile}&features=${features}`;
+      var existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
+      const appContainer = document.querySelector('.app-container');
+      const uiModulesContainer = document.querySelector('.faq-content');
+      const transcriptContainer = document.querySelector('.transcript-content');
+
+      function createTranscriptUIElement() {
+        const uiModulesTranscriptEl = document.createElement(TRANSCRIPT_SELECTOR);
+        uiModulesTranscriptEl.style.maxHeight = '100%';
+        transcriptContainer.appendChild(uiModulesTranscriptEl);
+      }
+
+      function createUIElement(accessToken) {
+        if (existingUiModulesEl) {
+          existingUiModulesEl.setAttribute('auth-token', accessToken);
+        } else {
+          var uiModulesEl = document.createElement(UI_MODULES_EL_SELECTOR);
+          var attributes = getAttributes(channel)
+          for (var [attribute, value] of attributes) {
+            uiModulesEl.setAttribute(attribute, value);
+          }
+          uiModulesEl.config = getKnowledgeAssistConfig();
+          uiModulesContainer.appendChild(uiModulesEl);
+        }
+      }
+
+      function getKnowledgeAssistConfig() {
+        return {
+          knowledgeAssistConfig: {
+            articleLinkConfig: {
+              target: 'popup',
+              popupWindowOptions: 'height=800,width=600,left=600,top=100',
+            }
+          }
+        };
+      }
+
+      function getAttributes(channel) {
+        var attributes = [
+          ['agent-desktop', 'GenesysCloud'],
+          ['features', features],
+          ['conversation-profile', conversationProfile],
+          ['auth-token', accessToken],
+          ['use-custom-conversation-id', 'true'],
+          ['oauth-client-id', clientId],
+          ['redirect-uri', redirectUri],
+          ['custom-api-endpoint', proxyServerEndPoint],
+          ['genesys-cloud-region', genesysCloudRegion],
+          ['show-header', false]
+        ];
+        if (channel === "voice") {
+          attributes = [
+            ...attributes,
+            ['channel', 'voice'],
+            ['notifier-server-endpoint', proxyServerEndPoint],
+            ['event-based-library', 'SocketIo'],
+          ];
+        }
+        return attributes;
+      }
+
+      if (channel !== "voice") {
+        transcriptContainer.style.display = "none";
+      }
+
+      /** When the first time UI module load, parse an empty token */
+      if (!existingUiModulesEl && !accessToken) {
+        createUIElement(accessToken);
+        if (channel === "voice") {
+          createTranscriptUIElement();
+        }
+      }
+
+      /** After the genesys OAuth, get the access token */
+      addAgentAssistEventListener(
+        'genesys-cloud-connector-access-token-received', function (event) {
+          const genesysCloudAccessToken = event.detail.accessToken;
+          authenticateGenesysCloud(genesysCloudAccessToken).then(function (res) {
+            if (res.status !== 200) {
+              document.body.removeChild(existingUiModulesEl);
+            }
+            return res.json();
+          }).then(function (body) {
+            existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
+            // If there is unauthenticated existingUIModule,
+            // the accessToken will be undefined
+            // Set the accessToken to the existingUIModule
+            firstTimeLoad = existingUiModulesEl && !accessToken;
+            if (firstTimeLoad) {
+              accessToken = body.token;
+              createUIElement(accessToken);
+            }
+          });
+        });
+
+
+      /**
+      * Authenticate the Genesys Cloud access token
+      * @param {string} accessToken
+      * @return {!Promise<number>}
+      */
+      function authenticateGenesysCloud(accessToken) {
+        return fetch(proxyServerEndPoint + '/register', {
+          method: 'POST',
+          headers: [['Authorization', accessToken]],
+        });
+      }
+    });
+  </script>
+  <!-- <script type="module" src="../public/js/genesys-cloud.js" defer></script> -->
   <script type="module" src="../public/js/main.js" defer></script>
 </body>
 

@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
 
   handleKnowledgeAssistContentView();
   handleSmartReplyContentView();
-  handleFaqContentView();
+  // handleFaqContentView();
 
   // show transcript only for voice channel
   const channel = document.body.getAttribute('data-channel');

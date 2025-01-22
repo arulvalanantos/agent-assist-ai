@@ -474,15 +474,15 @@ export function authenticateGenesysCloud(accessToken) {
 }
 
 export function initializeToggleButtons() {
-  const features = document.body.getAttribute('data-features');
-  const featureList = features.split(',');
-  const filteredFeatures = featureList.filter(feature => modules[feature]);
-  const filteredTogglers = togglers.filter(({ moduleName }) =>
-    filteredFeatures.includes(moduleName)
-  );
+  // const features = document.body.getAttribute('data-features');
+  // const featureList = features.split(',');
+  // const filteredFeatures = featureList.filter(feature => modules[feature]);
+  // const filteredTogglers = togglers.filter(({ moduleName }) =>
+  //   filteredFeatures.includes(moduleName)
+  // );
 
   const togglerContainer = document.getElementById('toggle-btn-container');
-  filteredTogglers.forEach(toggler => {
+  togglers.forEach(toggler => {
     const button = document.createElement('button');
     button.id = toggler.togglerId;
     button.type = 'button';
@@ -498,7 +498,7 @@ export function initializeToggleButtons() {
     togglerContainer.appendChild(button);
   });
 
-  filteredTogglers.forEach(({ togglerId, targetId }) => {
+  togglers.forEach(({ togglerId, targetId }) => {
     setupAndInitializeToggler(togglerId, targetId);
   });
 }

@@ -29,8 +29,8 @@ window.addEventListener('load', function () {
   let existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
 
   const appContainer = document.querySelector('.app-container');
-  const uiModulesContainer = document.querySelector('.ui-modules-container');
-  const transcriptContainer = document.querySelector('.transcript-container');
+  const uiModulesContainer = document.querySelector('.faq');
+  const transcriptContainer = document.querySelector('.transcript');
 
   function createTranscriptUIElement() {
     const uiModulesTranscriptEl = document.createElement(TRANSCRIPT_SELECTOR);
