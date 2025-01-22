@@ -289,6 +289,9 @@ img {
   padding: var(--padding-small);
   font-size: var(--font-size-small);
   color: var(--text-primary);
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .transcript-user-message-container,
@@ -303,6 +306,9 @@ img {
 .transcript-agent-message-time {
   font-size: var(--font-size-xxx-small);
   color: var(--color-text-border);
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .transcript-agent-message-time {
