@@ -274,7 +274,6 @@ img {
   overflow-y: auto;
   max-height: 100%;
   min-height: 50px;
-  padding-right: var(--padding-xx-small);
   scrollbar-gutter: auto | stable && both-edges?;
 }
 
