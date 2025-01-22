@@ -1,8 +1,7 @@
-import { togglers } from './static.js';
 import {
   bottomHeightAdjuster,
   enableSectionDragging,
-  setupAndInitializeToggler,
+  initializeToggleButtons,
   topHeightAdjuster,
   setupCopyButtons,
   handleKnowledgeAssistContentView,
@@ -11,9 +10,7 @@ import {
 } from './utils.js';
 
 window.addEventListener('load', function () {
-  togglers.forEach(({ togglerId, targetId }) => {
-    setupAndInitializeToggler(togglerId, targetId);
-  });
+  initializeToggleButtons();
 
   bottomHeightAdjuster('summary');
   topHeightAdjuster('smart-reply');
@@ -32,6 +29,10 @@ window.addEventListener('load', function () {
   handleKnowledgeAssistContentView();
   handleSmartReplyContentView();
   handleFaqContentView();
-});
 
-document.getElementById('transcript').classList.add('show');
+  // show transcript only for voice channel
+  const channel = document.body.getAttribute('data-channel');
+  if (channel === 'voice') {
+    document.getElementById('transcript').classList.add('show');
+  }
+});

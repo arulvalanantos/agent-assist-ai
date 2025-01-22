@@ -18,7 +18,9 @@
   <link rel="icon" href="../public/assets/favicon.svg" type="image/svg+xml">
 </head>
 
-<body>
+<body data-proxy-server="<%= proxyServer %>" data-conversation-profile="<%= conversationProfile %>"
+  data-features="<%= features %>" data-genesys-cloud-region="<%= genesysCloudRegion %>" data-client-id="<%= clientID %>"
+  data-channel="<%= channel %>" data-application-server="<%= applicationServer %>">
   <header class="header">
     <div>
       <img class="logo" src="../public/assets/logo.svg" alt="Omni Assist AI" height="34px" />
@@ -29,20 +31,20 @@
       <div class="sentiment-container">
         <img src="../public/assets/emotion/slightly_smiling_face.svg" alt="Sentiment" />
       </div>
-      <div class="toggle-btn-container">
-        <button id="summary-toggler" type="button" class="toggle-btn" title="Summary">
+      <div id="toggle-btn-container" class="toggle-btn-container">
+        <!-- <button id="summary-toggler" type="button" class="toggle-btn" title="Summary">
           <img id="summary-toggler-image" src="../public/assets/buttons/summary-black.svg" alt="Summary" />
         </button>
         <button id="faq-toggler" type="button" class="toggle-btn" title="FAQ">
           <img id="faq-toggler-image" src="../public/assets/buttons/faq-black.svg" alt="Faq" />
         </button>
         <button id="knowledge-assist-toggler" type="button" class="toggle-btn" title="Gen AI Knowledge Assist">
-          <img id="knowledge-assist-toggler-image" src="../public/assets/buttons/gen-ai-black.svg"
+          <img id="knowledge-assist-toggler-image" src="../public/assets/buttons/knowledge-assist-black.svg"
             alt="Gen AI Knowledge Assist" />
         </button>
         <button id="smart-reply-toggler" type="button" class="toggle-btn" title="Smart Reply">
           <img id="smart-reply-toggler-image" src="../public/assets/buttons/smart-reply-black.svg" alt="Smart Reply" />
-        </button>
+        </button> -->
       </div>
     </div>
   </header>
@@ -507,7 +509,8 @@
     </section>
   </main>
   <div id="toast-container" class="toast-container"></div>
-  <script type="module" src="../public/js/main.js"></script>
+  <script type="module" src="../public/js/genesys-cloud.js" defer></script>
+  <script type="module" src="../public/js/main.js" defer></script>
 </body>
 
 </html>

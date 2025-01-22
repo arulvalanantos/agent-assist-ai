@@ -1,3 +1,5 @@
+import { modules, togglers } from './static.js';
+
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
 
@@ -456,5 +458,47 @@ export function handleFaqContentView() {
     navigator.clipboard.writeText(suggestionContent).then(() => {
       showToast('Content copied to clipboard');
     });
+  });
+}
+
+/**
+ * Authenticate the Genesys Cloud access token
+ * @param {string} accessToken
+ * @return {!Promise<number>}
+ */
+export function authenticateGenesysCloud(accessToken) {
+  return fetch(proxyServerEndPoint + '/register', {
+    method: 'POST',
+    headers: [['Authorization', accessToken]],
+  });
+}
+
+export function initializeToggleButtons() {
+  const features = document.body.getAttribute('data-features');
+  const featureList = features.split(',');
+  const filteredFeatures = featureList.filter(feature => modules[feature]);
+  const filteredTogglers = togglers.filter(({ moduleName }) =>
+    filteredFeatures.includes(moduleName)
+  );
+
+  const togglerContainer = document.getElementById('toggle-btn-container');
+  filteredTogglers.forEach(toggler => {
+    const button = document.createElement('button');
+    button.id = toggler.togglerId;
+    button.type = 'button';
+    button.className = 'toggle-btn';
+    button.title = toggler.title;
+
+    const img = document.createElement('img');
+    img.id = `${toggler.togglerId}-image`;
+    img.src = `../public/assets/buttons/${toggler.targetId}-black.svg`;
+    img.alt = toggler.title;
+
+    button.appendChild(img);
+    togglerContainer.appendChild(button);
+  });
+
+  filteredTogglers.forEach(({ togglerId, targetId }) => {
+    setupAndInitializeToggler(togglerId, targetId);
   });
 }
