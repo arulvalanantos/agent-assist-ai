@@ -58,6 +58,7 @@ body {
 .icon {
   width: var(--font-size-medium);
   height: var(--font-size-medium);
+  object-fit: cover;
 }
 
 @media (max-width: 700px) {
