@@ -38,6 +38,7 @@ const {
   OAUTH_CLIENT_ID,
   PROXY_SERVER,
   FEATURES,
+  LOGO_URL,
 } = process.env;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -79,6 +80,7 @@ app.get('/', (req, res) => {
   const applicationServer = APPLICATION_SERVER_URL;
   const genesysCloudRegion = GENESYS_CLOUD_REGION;
   const channel = CHANNEL;
+  const logoURL = LOGO_URL;
 
   const payload = {
     conversationProfile,
@@ -88,6 +90,7 @@ app.get('/', (req, res) => {
     applicationServer,
     genesysCloudRegion,
     channel,
+    logoURL,
   };
 
   res.render('main', payload);

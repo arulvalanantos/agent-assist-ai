@@ -7,9 +7,12 @@ import {
   handleKnowledgeAssistContentView,
   handleSmartReplyContentView,
   handleFaqContentView,
+  addLogo,
 } from './utils.js';
 
 window.addEventListener('load', function () {
+  addLogo();
+
   initializeToggleButtons();
 
   bottomHeightAdjuster('summary');

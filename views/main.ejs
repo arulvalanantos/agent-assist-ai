@@ -25,11 +25,9 @@
 
 <body data-proxy-server="<%= proxyServer %>" data-conversation-profile="<%= conversationProfile %>"
   data-features="<%= features %>" data-genesys-cloud-region="<%= genesysCloudRegion %>" data-client-id="<%= clientID %>"
-  data-channel="<%= channel %>" data-application-server="<%= applicationServer %>">
+  data-channel="<%= channel %>" data-application-server="<%= applicationServer %>" data-logo-url="<%= logoURL %>">
   <header class="header">
-    <div>
-      <img class="logo" src="../public/assets/logo.svg" alt="Omni Assist AI" height="34px" />
-    </div>
+    <div id="logo-container" class="logo-container"></div>
     <div class="header-right">
       <!-- <div class="status-container"></div> -->
       <div class="transcript-container"></div>

@@ -56,8 +56,8 @@ body {
 }
 
 .icon {
-  width: var(--font-size-medium);
-  height: var(--font-size-medium);
+  width: var(--font-size-base);
+  height: var(--font-size-base);
   object-fit: cover;
 }
 

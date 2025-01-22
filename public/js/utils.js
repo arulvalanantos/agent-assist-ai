@@ -502,3 +502,16 @@ export function initializeToggleButtons() {
     setupAndInitializeToggler(togglerId, targetId);
   });
 }
+
+export function addLogo() {
+  const logoURL = document.body.getAttribute('data-logo-url');
+  const logoContainer = document.getElementById('logo-container');
+  const img = document.createElement('img');
+
+  img.src = logoURL;
+  img.alt = 'Logo';
+  img.height = 34;
+  img.classList.add('logo');
+
+  logoContainer.appendChild(img);
+}
