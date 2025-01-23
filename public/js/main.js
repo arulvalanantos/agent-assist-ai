@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
   );
 
   // handleKnowledgeAssistContentView();
-  handleSmartReplyContentView();
+  // handleSmartReplyContentView();
   // handleFaqContentView();
 
   // show transcript only for voice channel
