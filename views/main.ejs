@@ -13,11 +13,11 @@
   <script src="https://www.gstatic.com/external_hosted/document_register_element/document-register-element.js"></script>
   <!-- Core UI module container. Loads all UI module-specific scripts. -->
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.11/container.js"></script>
-  <!-- <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.4/common.js"></script>
+  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.4/common.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.1/knowledge_assist.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v2.9/knowledge_assist.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/smart_reply.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/summarization.js"></script> -->
+  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/summarization.js"></script>
   <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.2/transcript.js"></script>
   <!-- Favicon -->
   <link rel="icon" href="../public/assets/favicon.svg" type="image/svg+xml">
@@ -51,13 +51,13 @@
         </div>
       </div>
       <div class="summary-content">
-        <p class="summary-text">
+        <!-- <p class="summary-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim
           sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a,
           semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non
           fermentum
           diam nisl sit amet erat. Duis semper. Duis arcu massa
-        </p>
+        </p> -->
       </div>
     </section>
     <section id="suggestions" class="suggestions">
@@ -452,7 +452,7 @@
           </button>
         </div>
         <div class="knowledge-assist-content">
-          <div class="knowledge-assist-content-item">
+          <!-- <div class="knowledge-assist-content-item">
             <h3 class="knowledge-assist-title">Keeping the User Updated and Engaged</h3>
             <p class="knowledge-assist-suggestion">Rest assured, John, we’ll get this resolved for you. Let me
               double-check if
@@ -611,9 +611,9 @@
                 <span>Copy</span>
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div class="knowledge-assist-view-mode">
+        <!-- <div class="knowledge-assist-view-mode">
           <div class="knowledge-assist-view-mode-actions">
             <button type="button" class="copy-btn" title="Copy">
               <svg class="icon" width="8" height="10" viewBox="0 0 8 10" fill="currentColor"
@@ -640,7 +640,7 @@
             <h3 class="knowledge-assist-view-title"></h3>
             <p class="knowledge-assist-view-suggestion"></p>
           </div>
-        </div>
+        </div> -->
       </section>
     </section>
     <section id="smart-reply" class="smart-reply" draggable="false">
@@ -740,8 +740,12 @@
   <div id="toast-container" class="toast-container"></div>
   <script>
     window.addEventListener('load', function () {
+      const connector = new UiModulesConnector();
+
       const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
       const TRANSCRIPT_SELECTOR = 'agent-assist-transcript';
+      const SUMMARY_SELECTOR = 'agent-assist-summarization';
+
       const proxyServerEndPoint = '<%= proxyServer %>';
       const conversationProfile = '<%= conversationProfile %>';
       const features = '<%= features %>';
@@ -761,6 +765,7 @@
       const appContainer = document.querySelector('.app-container');
       const uiModulesContainer = document.querySelector('.faq-content');
       const transcriptContainer = document.querySelector('.transcript-content');
+      const summaryContainer = document.querySelector('.summary-content');
 
       function createTranscriptUIElement() {
         const uiModulesTranscriptEl = document.createElement(TRANSCRIPT_SELECTOR);
@@ -779,6 +784,9 @@
           }
           uiModulesEl.config = getKnowledgeAssistConfig();
           uiModulesContainer.appendChild(uiModulesEl);
+
+          const summaryEl = document.createElement(SUMMARY_SELECTOR);
+          summaryContainer.appendChild(summaryEl);
         }
       }
 
@@ -838,14 +846,14 @@
               document.body.removeChild(existingUiModulesEl);
             }
             return res.json();
-          }).then(function (body) {
+          }).then(function (result) {
             existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
             // If there is unauthenticated existingUIModule,
             // the accessToken will be undefined
             // Set the accessToken to the existingUIModule
             firstTimeLoad = existingUiModulesEl && !accessToken;
             if (firstTimeLoad) {
-              accessToken = body.token;
+              accessToken = result.token;
               createUIElement(accessToken);
             }
           });

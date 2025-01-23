@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
     '.knowledge-assist-suggestion'
   );
 
-  handleKnowledgeAssistContentView();
+  // handleKnowledgeAssistContentView();
   handleSmartReplyContentView();
   // handleFaqContentView();
 
