@@ -1,3 +1,19 @@
 agent-assist-summarization {
   width: 100%;
 }
+
+.mat-icon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+agent-assist-knowledge-assist .document-and-faq-assist__suggestions-empty {
+  margin: 0px !important;
+}
+
+agent-assist-smart-reply .smart-reply__chip--empty {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  margin-left: 10px !important;
+}

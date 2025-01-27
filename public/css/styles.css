@@ -84,6 +84,12 @@ img {
   justify-content: space-between;
   border: 1px solid var(--color-border);
   background: var(--color-background);
+  overflow: hidden;
+}
+
+.ui-modules-container {
+  width: 5px;
+  visibility: hidden;
 }
 
 .header-title {

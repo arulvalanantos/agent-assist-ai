@@ -29,6 +29,7 @@
   data-channel="<%= channel %>" data-application-server="<%= applicationServer %>" data-logo-url="<%= logoURL %>">
   <header class="header">
     <div id="logo-container" class="logo-container"></div>
+    <div id="ui-modules-container" class="ui-modules-container"></div>
     <div class="header-right">
       <!-- <div class="status-container"></div> -->
       <div class="transcript-container"></div>
@@ -105,22 +106,28 @@
       const genesysCloudRegion = '<%= genesysCloudRegion %>';
       const clientId = '<%= clientID %>'
       const channel = '<%= channel %>'
-      var applicationServer = '<%= applicationServer %>'
-      var accessToken = '';
+      
+      let applicationServer = '<%= applicationServer %>'
+      let accessToken = '';
+      
       const urlParams = new URLSearchParams(window.location.search);
       const currentConversationId = urlParams.get('conversationid');
       const gcHostOrigin = urlParams.get('gcHostOrigin');
       const gcTargetEnv = urlParams.get('gcTargetEnv');
       applicationServer = applicationServer.replace(/\/$/, "");
-      var firstTimeLoad = false;
+      
+      let firstTimeLoad = false;
       const redirectUri = `${applicationServer}?conversationProfile=${conversationProfile}&features=${features}`;
-      var existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
+      let existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
+      
       const appContainer = document.querySelector('.app-container');
-      const uiModulesContainer = document.querySelector('.faq-content');
+      const uiModulesContainer = document.querySelector('.ui-modules-container');
+
       const transcriptContainer = document.querySelector('.transcript-content');
       const summaryContainer = document.querySelector('.summary-content');
       const smartReplyContainer = document.querySelector('.smart-reply-content');
       const knowledgeAssistContainer = document.querySelector('.knowledge-assist-content');
+      const faqContainer = document.querySelector('.faq-content');
 
       function createTranscriptUIElement() {
         const transcriptEl = document.createElement(TRANSCRIPT_SELECTOR);
@@ -148,6 +155,9 @@
 
           const knowledgeAssistEl = document.createElement(KNOWLEDGE_ASSIST_SELECTOR);
           knowledgeAssistContainer.appendChild(knowledgeAssistEl);
+
+          const faqEl = document.createElement(FAQ_SELECTOR);
+          faqContainer.appendChild(faqEl);
         }
       }
 
