@@ -4,19 +4,19 @@ import { modules, togglers } from './static.js';
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
 
-export function disablePointerEventsAndUserSelect(elements) {
-  elements.forEach(element => {
-    element.style.pointerEvents = 'none';
-    element.style.userSelect = 'none';
-  });
-}
+// export function disablePointerEventsAndUserSelect(elements) {
+//   elements.forEach(element => {
+//     element.style.pointerEvents = 'none';
+//     element.style.userSelect = 'none';
+//   });
+// }
 
-export function enablePointerEventsAndUserSelect(elements) {
-  elements.forEach(element => {
-    element.style.pointerEvents = 'auto';
-    element.style.userSelect = 'auto';
-  });
-}
+// export function enablePointerEventsAndUserSelect(elements) {
+//   elements.forEach(element => {
+//     element.style.pointerEvents = 'auto';
+//     element.style.userSelect = 'auto';
+//   });
+// }
 
 export function setupAndInitializeToggler(togglerId, targetId) {
   const toggler = document.getElementById(togglerId);
@@ -79,11 +79,11 @@ export function bottomHeightAdjuster(targetId) {
         section.setAttribute('draggable', false);
       });
 
-      disablePointerEventsAndUserSelect(smartReplies);
-      disablePointerEventsAndUserSelect(faqSuggestions);
-      disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      disablePointerEventsAndUserSelect([summary]);
-      disablePointerEventsAndUserSelect([transcript]);
+      // disablePointerEventsAndUserSelect(smartReplies);
+      // disablePointerEventsAndUserSelect(faqSuggestions);
+      // disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      // disablePointerEventsAndUserSelect([summary]);
+      // disablePointerEventsAndUserSelect([transcript]);
     }
   });
 
@@ -109,11 +109,11 @@ export function bottomHeightAdjuster(targetId) {
         section.setAttribute('draggable', true);
       });
 
-      enablePointerEventsAndUserSelect(smartReplies);
-      enablePointerEventsAndUserSelect(faqSuggestions);
-      enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      enablePointerEventsAndUserSelect([summary]);
-      enablePointerEventsAndUserSelect([transcript]);
+      // enablePointerEventsAndUserSelect(smartReplies);
+      // enablePointerEventsAndUserSelect(faqSuggestions);
+      // enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      // enablePointerEventsAndUserSelect([summary]);
+      // enablePointerEventsAndUserSelect([transcript]);
     }
   });
 }
@@ -147,11 +147,11 @@ export function topHeightAdjuster(targetId) {
         section.setAttribute('draggable', false);
       });
 
-      disablePointerEventsAndUserSelect(smartReplies);
-      disablePointerEventsAndUserSelect(faqSuggestions);
-      disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      disablePointerEventsAndUserSelect([summary]);
-      disablePointerEventsAndUserSelect([transcript]);
+      // disablePointerEventsAndUserSelect(smartReplies);
+      // disablePointerEventsAndUserSelect(faqSuggestions);
+      // disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      // disablePointerEventsAndUserSelect([summary]);
+      // disablePointerEventsAndUserSelect([transcript]);
     }
   });
 
@@ -177,11 +177,11 @@ export function topHeightAdjuster(targetId) {
         section.setAttribute('draggable', true);
       });
 
-      enablePointerEventsAndUserSelect(smartReplies);
-      enablePointerEventsAndUserSelect(faqSuggestions);
-      enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      enablePointerEventsAndUserSelect([summary]);
-      enablePointerEventsAndUserSelect([transcript]);
+      // enablePointerEventsAndUserSelect(smartReplies);
+      // enablePointerEventsAndUserSelect(faqSuggestions);
+      // enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
+      // enablePointerEventsAndUserSelect([summary]);
+      // enablePointerEventsAndUserSelect([transcript]);
     }
   });
 }
@@ -202,7 +202,7 @@ export function enableSectionDragging() {
         draggedSection = section;
         section.classList.add('dragging');
 
-        disablePointerEventsAndUserSelect([summary]);
+        // disablePointerEventsAndUserSelect([summary]);
       }
     });
 
@@ -211,7 +211,7 @@ export function enableSectionDragging() {
       draggedSection = null;
       section.classList.remove('dragging');
 
-      enablePointerEventsAndUserSelect([summary]);
+      // enablePointerEventsAndUserSelect([summary]);
     });
 
     // Show receiver UI on dragover

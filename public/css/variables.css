@@ -26,6 +26,7 @@
   --line-height-medium: 28px;
 
   --border-radius: 3px;
+  --border-radius-medium: 5px;
 
   --button-width: 34px;
   --button-height: 34px;
@@ -33,6 +34,7 @@
   --button-small-height: 20px;
 
   --gap-small: 4px;
+  --gap-xx-medium: 6px;
   --gap-medium: 8px;
   --gap-base: 12px;
   --gap-large: 16px;

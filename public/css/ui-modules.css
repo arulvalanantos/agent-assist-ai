@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 agent-assist-summarization {
   width: 100%;
 }
@@ -16,4 +18,74 @@ agent-assist-smart-reply .smart-reply__chip--empty {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
   margin-left: 10px !important;
+}
+
+agent-assist-knowledge-assist-v2 .input-wrapper {
+  border: 1px solid var(--color-gray) !important;
+  padding: var(--padding-xx-small);
+  border-radius: var(--border-radius-medium) !important;
+  background: var(--color-white);
+  gap: var(--gap-xx-medium) !important;
+}
+
+agent-assist-knowledge-assist-v2 .input-wrapper:focus-within {
+  box-shadow: none !important;
+  border-color: var(--color-blue) !important;
+}
+
+agent-assist-knowledge-assist-v2 .search-input-button {
+  padding: 0px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px !important;
+}
+
+agent-assist-knowledge-assist-v2
+  .mat-mdc-icon-button
+  .mat-mdc-button-touch-target {
+  width: 100%;
+  height: 100%;
+}
+agent-assist-knowledge-assist-v2 .mat-mdc-icon-button.mat-mdc-button-base {
+  width: 24px;
+  height: 24px;
+}
+
+agent-assist-knowledge-assist-v2 .mat-mdc-icon-button img,
+agent-assist-knowledge-assist-v2 .mat-mdc-icon-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+agent-assist-knowledge-assist-v2 .bottom-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+}
+
+knowledge-search-card {
+  background: var(--color-white);
+  border-radius: 8px;
+  border: 1px solid var(--color-blue);
+  margin-bottom: 0px !important;
+}
+
+knowledge-search-card .answer-card-container {
+  margin-bottom: 0px !important;
+}
+
+knowledge-search-card .answer-card-header-container {
+  margin: 0px !important;
+}
+
+knowledge-search-card .typing-indicator-bubble {
+  margin: 0px !important;
+  width: 36px !important;
+  height: 20px !important;
+}
+
+knowledge-search-card .answer-card-knowledge {
+  margin: 0px !important;
+  margin-top: var(--padding-xx-small) !important;
 }
