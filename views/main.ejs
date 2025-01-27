@@ -42,9 +42,9 @@
   <main class="main">
     <section id="summary" class="summary">
       <div class="title-container" draggable="false">
-        <h4 class="title">Summary</h4>
+        <h4 class="title">Conversation Summary</h4>
         <div class="title-btn-container">
-          <button type="button" class="regenerate-btn" title="Regenerate">
+          <button id="regenerate-btn" type="button" class="regenerate-btn" title="Regenerate">
             <img src="../public/assets/regenerate.svg" alt="regenerate" />
           </button>
           <button id="summary-close-btn" type="button" class="close-btn" title="Close">
@@ -154,9 +154,12 @@
           smartReplyContainer.appendChild(smartReplyEl);
 
           const knowledgeAssistEl = document.createElement(KNOWLEDGE_ASSIST_SELECTOR);
+          knowledgeAssistEl.config = getKnowledgeAssistConfig();
+          knowledgeAssistEl.setAttribute('features', 'ARTICLE_SEARCH,FAQ,ARTICLE_SUGGESTION');
           knowledgeAssistContainer.appendChild(knowledgeAssistEl);
 
           const faqEl = document.createElement(FAQ_SELECTOR);
+          faqEl.config = getKnowledgeAssistConfig();
           faqContainer.appendChild(faqEl);
         }
       }
@@ -168,7 +171,9 @@
               target: 'popup',
               popupWindowOptions: 'height=800,width=600,left=600,top=100',
             }
-          }
+          },
+          showCopyAnswer: true,
+          showPasteAnswer: true,
         };
       }
 

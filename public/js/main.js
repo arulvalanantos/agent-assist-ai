@@ -13,6 +13,13 @@ import {
 window.addEventListener('load', function () {
   addLogo();
 
+  // set up regenerate button to trigger generate summary button
+  document
+    .getElementById('regenerate-btn')
+    .addEventListener('click', function () {
+      document.querySelector('.generate-summary').click();
+    });
+
   initializeToggleButtons();
 
   bottomHeightAdjuster('summary');
@@ -21,13 +28,13 @@ window.addEventListener('load', function () {
   enableSectionDragging();
 
   // Set up copy buttons for FAQ suggestions
-  setupCopyButtons('.faq-suggestion', '.faq-suggestion-content');
+  // setupCopyButtons('.faq-suggestion', '.faq-suggestion-content');
 
-  // Set up copy buttons for Knowledge Assist content items
-  setupCopyButtons(
-    '.knowledge-assist-content-item',
-    '.knowledge-assist-suggestion'
-  );
+  // // Set up copy buttons for Knowledge Assist content items
+  // setupCopyButtons(
+  //   '.knowledge-assist-content-item',
+  //   '.knowledge-assist-suggestion'
+  // );
 
   // handleKnowledgeAssistContentView();
   // handleSmartReplyContentView();
