@@ -10,14 +10,26 @@ agent-assist-summarization {
   justify-content: center;
 }
 
+mat-spinner {
+  width: 24px !important;
+  height: 24px !important;
+  margin-top: 0px !important;
+}
+
+mat-chip-listbox {
+  margin-top: 0px !important;
+}
+
 agent-assist-knowledge-assist .document-and-faq-assist__suggestions-empty {
   margin: 0px !important;
+  font-size: var(--font-size-small);
 }
 
 agent-assist-smart-reply .smart-reply__chip--empty {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
   margin-left: 10px !important;
+  font-size: var(--font-size-small);
 }
 
 agent-assist-knowledge-assist-v2 .input-wrapper {
@@ -26,6 +38,10 @@ agent-assist-knowledge-assist-v2 .input-wrapper {
   border-radius: var(--border-radius-medium) !important;
   background: var(--color-white);
   gap: var(--gap-xx-medium) !important;
+}
+
+.pending-suggested-queries {
+  margin: 2px !important;
 }
 
 agent-assist-knowledge-assist-v2 .input-wrapper:focus-within {

@@ -30,6 +30,8 @@
 
   --button-width: 34px;
   --button-height: 34px;
+  --button-medium-width: 28px;
+  --button-medium-height: 28px;
   --button-small-width: 20px;
   --button-small-height: 20px;
 
@@ -44,4 +46,10 @@
   --padding-small: 10px;
   --padding-medium: 12px;
   --padding-large: 16px;
+
+  --width-small: 20px;
+  --width-base: 32px;
+  
+  --height-small: 20px;
+  --height-base: 32px;
 }

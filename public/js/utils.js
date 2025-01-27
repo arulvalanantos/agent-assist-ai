@@ -487,12 +487,13 @@ export function initializeToggleButtons() {
     button.id = toggler.togglerId;
     button.type = 'button';
     button.className = 'toggle-btn';
-    button.title = toggler.title;
+    button.title = toggler.targetId;
 
     const img = document.createElement('img');
     img.id = `${toggler.togglerId}-image`;
+    img.classList.add('toggle-btn-image');
     img.src = `../public/assets/buttons/${toggler.targetId}-black.svg`;
-    img.alt = toggler.title;
+    img.alt = toggler.targetId;
 
     button.appendChild(img);
     togglerContainer.appendChild(button);
