@@ -134,10 +134,17 @@ agent-assist-knowledge-assist-v2 .bottom-container {
 }
 
 knowledge-search-card {
-  background: var(--color-white);
   border-radius: 8px;
-  border: 1px solid var(--color-blue);
   margin-bottom: 0px !important;
+}
+
+knowledge-search-card:nth-child(odd) {
+  background: var(--color-light-blue) !important;
+}
+
+knowledge-search-card:nth-child(even) {
+  background: transparent !important;
+  border: 1px solid var(--color-text-border) !important;
 }
 
 knowledge-search-card .answer-card-container {
@@ -218,4 +225,27 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   border-radius: 8px !important;
   border: 1px solid var(--color-blue) !important;
   margin-bottom: 0px !important;
+  position: relative !important;
+}
+
+.document-and-faq-assist__suggestions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--gap-medium) !important;
+}
+
+.document-and-faq-assist__suggestions-header {
+  margin: 0px !important;
+}
+
+.document-and-faq-assist__suggestion-feedback {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: var(--gap-medium) !important;
+}
+
+.document-and-faq-assist__copy-faq-answer-button {
+  position: absolute !important;
+  bottom: 0px !important;
+  right: 0px !important;
 }
