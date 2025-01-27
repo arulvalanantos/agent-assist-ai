@@ -222,6 +222,12 @@ img {
   gap: var(--gap-medium);
 }
 
+.summary-edit-container {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+}
+
 .main {
   flex: 1;
   width: 100%;
@@ -258,6 +264,11 @@ img {
   height: 5px;
   cursor: row-resize;
   background: transparent;
+}
+
+.edit-btn-image {
+  width: var(--font-size-small);
+  height: var(--font-size-small);
 }
 
 .summary-content {

@@ -29,8 +29,35 @@ agent-assist-summarization .generate-summary {
   right: 65px;
 }
 
+[data-test-id='copy-summary-button'] {
+  position: absolute !important;
+  top: 0px !important;
+  right: 0px !important;
+  display: none !important;
+}
+
+[data-test-id='edit-summary-button'] {
+  position: absolute !important;
+  bottom: 0px !important;
+  right: 0px !important;
+  display: none !important;
+}
+
 agent-assist-summarization .summary__content-details {
   display: none;
+}
+
+agent-assist-summarization .summary__content-summary {
+  margin: 0px !important;
+}
+
+agent-assist-summarization .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 0px !important;
+}
+
+agent-assist-summarization textarea {
+  margin: 0px !important;
 }
 
 agent-assist-summarization .summary__content-wrapper {
@@ -133,5 +160,62 @@ knowledge-search-card .answer-card-knowledge {
 }
 
 agent-assist-knowledge-assist .mat-mdc-form-field-infix {
+  min-height: 0px !important;
   padding: 0px !important;
+}
+
+agent-assist-knowledge-assist .mat-icon {
+  margin: 0px !important;
+}
+
+agent-assist-knowledge-assist .mat-mdc-text-field-wrapper {
+  border-radius: var(--border-radius-medium) !important;
+  border: 1px solid var(--color-gray) !important;
+  background: var(--color-white) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: var(--gap-xx-medium) !important;
+  padding: var(--padding-xx-small) !important;
+}
+
+agent-assist-knowledge-assist .mat-mdc-text-field-wrapper:focus-within {
+  border-color: var(--color-blue) !important;
+}
+
+agent-assist-knowledge-assist
+  .mat-mdc-icon-button
+  .mat-mdc-button-touch-target {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+agent-assist-knowledge-assist .mat-mdc-icon-button.mat-mdc-button-base {
+  padding: 0px !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+agent-assist-knowledge-assist mat-ripple mat-mdc-button-ripple {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+agent-assist-knowledge-assist .mat-mdc-form-field-icon-suffix {
+  padding: 0px !important;
+}
+
+agent-assist-knowledge-assist .mdc-line-ripple {
+  display: none !important;
+}
+
+.document-and-faq-assist__suggestion {
+  background: var(--color-white) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--color-blue) !important;
+  margin-bottom: 0px !important;
 }

@@ -42,9 +42,17 @@
   <main class="main">
     <section id="summary" class="summary">
       <div class="title-container" draggable="false">
-        <h4 class="title">Conversation Summary</h4>
+        <div class="summary-edit-container">
+          <h4 class="title">Conversation Summary</h4>
+          <button id="edit-btn" type="button" title="Edit Summary">
+            <img class="edit-btn-image" src="../public/assets/edit.png" alt="edit summary" />
+          </button>
+        </div>
         <div class="title-btn-container">
-          <button id="regenerate-btn" type="button" class="regenerate-btn" title="Regenerate">
+          <button id="copy-btn" type="button" class="close-btn" title="Copy Summary">
+            <img src="../public/assets/copy.svg" alt="copy summary" />
+          </button>
+          <button id="regenerate-btn" type="button" class="regenerate-btn" title="Regenerate Summary">
             <img src="../public/assets/regenerate.svg" alt="regenerate" />
           </button>
           <button id="summary-close-btn" type="button" class="close-btn" title="Close">
@@ -96,8 +104,8 @@
       const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
       const TRANSCRIPT_SELECTOR = 'agent-assist-transcript';
       const SUMMARY_SELECTOR = 'agent-assist-summarization';
-      const KNOWLEDGE_ASSIST_SELECTOR = 'agent-assist-knowledge-assist';
-      const FAQ_SELECTOR = 'agent-assist-knowledge-assist-v2';
+      const KNOWLEDGE_ASSIST_SELECTOR = 'agent-assist-knowledge-assist-v2';
+      const FAQ_SELECTOR = 'agent-assist-knowledge-assist';
       const SMART_REPLY_SELECTOR = 'agent-assist-smart-reply';
 
       const proxyServerEndPoint = '<%= proxyServer %>';
@@ -155,11 +163,11 @@
 
           const knowledgeAssistEl = document.createElement(KNOWLEDGE_ASSIST_SELECTOR);
           knowledgeAssistEl.config = getKnowledgeAssistConfig();
-          knowledgeAssistEl.setAttribute('features', 'ARTICLE_SEARCH,FAQ,ARTICLE_SUGGESTION');
           knowledgeAssistContainer.appendChild(knowledgeAssistEl);
 
           const faqEl = document.createElement(FAQ_SELECTOR);
           faqEl.config = getKnowledgeAssistConfig();
+          faqEl.setAttribute('features', 'ARTICLE_SEARCH,FAQ,ARTICLE_SUGGESTION');
           faqContainer.appendChild(faqEl);
         }
       }

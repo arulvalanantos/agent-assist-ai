@@ -20,6 +20,16 @@ window.addEventListener('load', function () {
       document.querySelector('.generate-summary').click();
     });
 
+  // set up copy button to trigger copy summary button
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    document.querySelector('[data-test-id="copy-summary-button"]').click();
+  });
+
+  // set up edit button to trigger edit summary button
+  document.getElementById('edit-btn').addEventListener('click', function () {
+    document.querySelector('[data-test-id="edit-summary-button"]').click();
+  });
+
   initializeToggleButtons();
 
   bottomHeightAdjuster('summary');
@@ -45,4 +55,6 @@ window.addEventListener('load', function () {
   if (channel?.toLowerCase() === 'voice') {
     document.getElementById('transcript').classList.add('show');
   }
+
+  document.getElementById('regenerate-btn').click();
 });
