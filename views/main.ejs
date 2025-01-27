@@ -106,20 +106,20 @@
       const genesysCloudRegion = '<%= genesysCloudRegion %>';
       const clientId = '<%= clientID %>'
       const channel = '<%= channel %>'
-      
+
       let applicationServer = '<%= applicationServer %>'
       let accessToken = '';
-      
+
       const urlParams = new URLSearchParams(window.location.search);
       const currentConversationId = urlParams.get('conversationid');
       const gcHostOrigin = urlParams.get('gcHostOrigin');
       const gcTargetEnv = urlParams.get('gcTargetEnv');
       applicationServer = applicationServer.replace(/\/$/, "");
-      
+
       let firstTimeLoad = false;
       const redirectUri = `${applicationServer}?conversationProfile=${conversationProfile}&features=${features}`;
       let existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
-      
+
       const appContainer = document.querySelector('.app-container');
       const uiModulesContainer = document.querySelector('.ui-modules-container');
 
