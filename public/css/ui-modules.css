@@ -38,8 +38,9 @@ agent-assist-summarization .generate-summary {
 
 [data-test-id='edit-summary-button'] {
   position: absolute !important;
-  bottom: 0px !important;
-  right: 0px !important;
+  top: -85px !important;
+  left: 50% !important;
+  tranform: translateX(-50%) !important;
   display: none !important;
 }
 
@@ -253,9 +254,19 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   display: flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
-  padding: 4px 8px !important;
+  padding: 0px 12px !important;
   border: 1px solid var(--color-blue) !important;
   border-radius: var(--border-radius) !important;
-  font-size: var(--font-size-base) !important;
+  font-size: var(--font-size-small) !important;
   color: var(--color-blue) !important;
+}
+
+.document-and-faq-assist__suggestion-body {
+  margin-bottom: var(--padding-xx-small) !important;
+}
+
+.document-and-faq-assist__copy-faq-answer-button
+  .mat-mdc-outlined-button
+  .mat-mdc-button-touch-target {
+  height: 0px !important;
 }

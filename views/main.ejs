@@ -1,270 +1,366 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <base href="/" />
+    <title>Omni Assist AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="../public/css/styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="../public/css/ui-modules.css"
+      type="text/css"
+    />
+    <!-- WebComponents polyfill. Needed for rendering web components in older browsers. -->
+    <script src="https://www.gstatic.com/external_hosted/document_register_element/document-register-element.js"></script>
+    <!-- Core UI module container. Loads all UI module-specific scripts. -->
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.11/container.js"></script>
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.4/common.js"></script>
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.1/knowledge_assist.js"></script>
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v2.9/knowledge_assist.js"></script>
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/smart_reply.js"></script>
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/summarization.js"></script>
+    <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.2/transcript.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="../public/assets/favicon.svg" type="image/svg+xml" />
+  </head>
 
-<head>
-  <base href="/" />
-  <title>Omni Assist AI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <!-- CSS Styles -->
-  <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
-  <link rel="stylesheet" href="../public/css/ui-modules.css" type="text/css">
-  <!-- WebComponents polyfill. Needed for rendering web components in older browsers. -->
-  <script src="https://www.gstatic.com/external_hosted/document_register_element/document-register-element.js"></script>
-  <!-- Core UI module container. Loads all UI module-specific scripts. -->
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.11/container.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.4/common.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.1/knowledge_assist.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v2.9/knowledge_assist.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/smart_reply.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.3/summarization.js"></script>
-  <script src="https://www.gstatic.com/agent-assist-ui-modules/v1.2/transcript.js"></script>
-  <!-- Favicon -->
-  <link rel="icon" href="../public/assets/favicon.svg" type="image/svg+xml">
-</head>
-
-<body data-proxy-server="<%= proxyServer %>" data-conversation-profile="<%= conversationProfile %>"
-  data-features="<%= features %>" data-genesys-cloud-region="<%= genesysCloudRegion %>" data-client-id="<%= clientID %>"
-  data-channel="<%= channel %>" data-application-server="<%= applicationServer %>" data-logo-url="<%= logoURL %>">
-  <header class="header">
-    <div id="logo-container" class="logo-container"></div>
-    <div id="ui-modules-container" class="ui-modules-container"></div>
-    <div class="header-right">
-      <!-- <div class="status-container"></div> -->
-      <div class="transcript-container"></div>
-      <div class="sentiment-container">
-        <img class="sentiment-image" src="../public/assets/emotion/slightly_smiling_face.svg" alt="Sentiment" />
+  <body
+    data-features="<%= features %>"
+    data-client-id="<%= clientID %>"
+    data-channel="<%= channel %>"
+    data-logo-url="<%= logoURL %>"
+    data-knowledge-assist-features="<%= knowledgeAssistFeatures %>"
+  >
+    <header class="header">
+      <div id="logo-container" class="logo-container"></div>
+      <div id="ui-modules-container" class="ui-modules-container"></div>
+      <div class="header-right">
+        <!-- <div class="status-container"></div> -->
+        <div class="transcript-container"></div>
+        <div class="sentiment-container">
+          <img
+            class="sentiment-image"
+            src="../public/assets/emotion/slightly_smiling_face.svg"
+            alt="Sentiment"
+          />
+        </div>
+        <div id="toggle-btn-container" class="toggle-btn-container"></div>
       </div>
-      <div id="toggle-btn-container" class="toggle-btn-container"></div>
-    </div>
-  </header>
-  <main class="main">
-    <section id="summary" class="summary">
-      <div class="title-container" draggable="false">
-        <div class="summary-edit-container">
-          <h4 class="title">Conversation Summary</h4>
-          <button id="edit-btn" type="button" title="Edit Summary">
-            <img class="edit-btn-image" src="../public/assets/edit.png" alt="edit summary" />
-          </button>
+    </header>
+    <main class="main">
+      <section id="summary" class="summary">
+        <div class="title-container" draggable="false">
+          <div class="summary-edit-container">
+            <h4 class="title">Conversation Summary</h4>
+            <button id="edit-btn" type="button" title="Edit Summary">
+              <img
+                class="edit-btn-image"
+                src="../public/assets/edit.png"
+                alt="edit summary"
+              />
+            </button>
+          </div>
+          <div class="title-btn-container">
+            <button
+              id="copy-btn"
+              type="button"
+              class="close-btn"
+              title="Copy Summary"
+            >
+              <img
+                src="../public/assets/copy.svg"
+                class="copy-btn-image"
+                alt="copy summary"
+              />
+            </button>
+            <button
+              id="regenerate-btn"
+              type="button"
+              class="regenerate-btn"
+              title="Regenerate Summary"
+            >
+              <img
+                src="../public/assets/regenerate.svg"
+                class="regenerate-btn-image"
+                alt="regenerate"
+              />
+            </button>
+            <button
+              id="summary-close-btn"
+              type="button"
+              class="close-btn"
+              title="Close"
+            >
+              <img
+                src="../public/assets/close.svg"
+                class="close-btn-image"
+                alt="close"
+              />
+            </button>
+          </div>
         </div>
-        <div class="title-btn-container">
-          <button id="copy-btn" type="button" class="close-btn" title="Copy Summary">
-            <img src="../public/assets/copy.svg" class="copy-btn-image" alt="copy summary" />
-          </button>
-          <button id="regenerate-btn" type="button" class="regenerate-btn" title="Regenerate Summary">
-            <img src="../public/assets/regenerate.svg" class="regenerate-btn-image" alt="regenerate" />
-          </button>
-          <button id="summary-close-btn" type="button" class="close-btn" title="Close">
-            <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
-          </button>
-        </div>
-      </div>
-      <div class="summary-content"></div>
-    </section>
-    <section id="suggestions" class="suggestions">
-      <section id="transcript" class="transcript" draggable="true">
-        <div class="title-container">
-          <h4 class="title">Conversation Transcript</h4>
-          <button id="transcript-close-btn" type="button" class="close-btn" title="Close">
-            <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
-          </button>
-        </div>
-        <div class="transcript-content"></div>
+        <div class="summary-content"></div>
       </section>
-      <section id="faq" class="faq" draggable="true">
+      <section id="suggestions" class="suggestions">
+        <section id="transcript" class="transcript" draggable="true">
+          <div class="title-container">
+            <h4 class="title">Conversation Transcript</h4>
+            <button
+              id="transcript-close-btn"
+              type="button"
+              class="close-btn"
+              title="Close"
+            >
+              <img
+                src="../public/assets/close.svg"
+                class="close-btn-image"
+                alt="close"
+              />
+            </button>
+          </div>
+          <div class="transcript-content"></div>
+        </section>
+        <section id="faq" class="faq" draggable="true">
+          <div class="title-container">
+            <h4 class="title">FAQ & Article Suggestions</h4>
+            <button
+              id="faq-close-btn"
+              type="button"
+              class="close-btn"
+              title="Close"
+            >
+              <img
+                src="../public/assets/close.svg"
+                class="close-btn-image"
+                alt="close"
+              />
+            </button>
+          </div>
+          <div class="faq-content"></div>
+        </section>
+        <section
+          id="knowledge-assist"
+          class="knowledge-assist"
+          draggable="true"
+        >
+          <div class="title-container">
+            <h4 class="title">Gen AI Knowledge Assist</h4>
+            <button
+              id="knowledge-assist-close-btn"
+              type="button"
+              class="close-btn"
+              title="Close"
+            >
+              <img
+                src="../public/assets/close.svg"
+                class="close-btn-image"
+                alt="close"
+              />
+            </button>
+          </div>
+          <div class="knowledge-assist-content"></div>
+        </section>
+      </section>
+      <section id="smart-reply" class="smart-reply" draggable="false">
         <div class="title-container">
-          <h4 class="title">FAQ & Article Suggestions</h4>
-          <button id="faq-close-btn" type="button" class="close-btn" title="Close">
-            <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
+          <h4 class="title">Smart Reply</h4>
+          <button
+            id="smart-reply-close-btn"
+            type="button"
+            class="close-btn"
+            title="Close"
+          >
+            <img
+              src="../public/assets/close.svg"
+              class="close-btn-image"
+              alt="close"
+            />
           </button>
         </div>
-        <div class="faq-content"></div>
+        <div class="smart-reply-content"></div>
       </section>
-      <section id="knowledge-assist" class="knowledge-assist" draggable="true">
-        <div class="title-container">
-          <h4 class="title">Gen AI Knowledge Assist</h4>
-          <button id="knowledge-assist-close-btn" type="button" class="close-btn" title="Close">
-            <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
-          </button>
-        </div>
-        <div class="knowledge-assist-content"></div>
-      </section>
-    </section>
-    <section id="smart-reply" class="smart-reply" draggable="false">
-      <div class="title-container">
-        <h4 class="title">Smart Reply</h4>
-        <button id="smart-reply-close-btn" type="button" class="close-btn" title="Close">
-          <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
-        </button>
-      </div>
-      <div class="smart-reply-content"></div>
-    </section>
-  </main>
-  <div id="toast-container" class="toast-container"></div>
-  <script>
-    window.addEventListener('load', function () {
-      // const connector = new UiModulesConnector();
+    </main>
+    <div id="toast-container" class="toast-container"></div>
+    <script>
+      window.addEventListener('load', function () {
+        const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
+        const TRANSCRIPT_EL_SELECTOR = 'agent-assist-transcript';
+        const SUMMARY_EL_SELECTOR = 'agent-assist-summarization';
+        const KNOWLEDGE_ASSIST_EL_SELECTOR = 'agent-assist-knowledge-assist-v2';
+        const FAQ_EL_SELECTOR = 'agent-assist-knowledge-assist';
+        const SMART_REPLY_EL_SELECTOR = 'agent-assist-smart-reply';
 
-      const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
-      const TRANSCRIPT_SELECTOR = 'agent-assist-transcript';
-      const SUMMARY_SELECTOR = 'agent-assist-summarization';
-      const KNOWLEDGE_ASSIST_SELECTOR = 'agent-assist-knowledge-assist-v2';
-      const FAQ_SELECTOR = 'agent-assist-knowledge-assist';
-      const SMART_REPLY_SELECTOR = 'agent-assist-smart-reply';
+        const proxyServerEndPoint = '<%= proxyServer %>';
+        const conversationProfile = '<%= conversationProfile %>';
+        const features = '<%= features %>';
+        const genesysCloudRegion = '<%= genesysCloudRegion %>';
+        const clientId = '<%= clientID %>';
+        const channel = '<%= channel %>';
+        const knowledgeAssistFeatures = '<%= knowledgeAssistFeatures %>';
 
-      const proxyServerEndPoint = '<%= proxyServer %>';
-      const conversationProfile = '<%= conversationProfile %>';
-      const features = '<%= features %>';
-      const genesysCloudRegion = '<%= genesysCloudRegion %>';
-      const clientId = '<%= clientID %>'
-      const channel = '<%= channel %>'
+        let accessToken = '';
+        let firstTimeLoad = false;
+        let existingUiModulesEl = document.querySelector(
+          UI_MODULES_EL_SELECTOR
+        );
 
-      let applicationServer = '<%= applicationServer %>'
-      let accessToken = '';
+        let applicationServer = '<%= applicationServer %>';
+        applicationServer = applicationServer.replace(/\/$/, '');
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const currentConversationId = urlParams.get('conversationid');
-      const gcHostOrigin = urlParams.get('gcHostOrigin');
-      const gcTargetEnv = urlParams.get('gcTargetEnv');
-      applicationServer = applicationServer.replace(/\/$/, "");
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentConversationId = urlParams.get('conversationid');
+        const gcHostOrigin = urlParams.get('gcHostOrigin');
+        const gcTargetEnv = urlParams.get('gcTargetEnv');
 
-      let firstTimeLoad = false;
-      const redirectUri = `${applicationServer}?conversationProfile=${conversationProfile}&features=${features}`;
-      let existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
+        const redirectUri = `${applicationServer}?conversationProfile=${conversationProfile}&features=${features}`;
 
-      const appContainer = document.querySelector('.app-container');
-      const uiModulesContainer = document.querySelector('.ui-modules-container');
+        const appContainer = document.querySelector('.app-container');
+        const uiModulesContainer = document.querySelector(
+          '.ui-modules-container'
+        );
 
-      const transcriptContainer = document.querySelector('.transcript-content');
-      const summaryContainer = document.querySelector('.summary-content');
-      const smartReplyContainer = document.querySelector('.smart-reply-content');
-      const knowledgeAssistContainer = document.querySelector('.knowledge-assist-content');
-      const faqContainer = document.querySelector('.faq-content');
+        const transcriptContainer = document.querySelector(
+          '.transcript-content'
+        );
+        const summaryContainer = document.querySelector('.summary-content');
+        const smartReplyContainer = document.querySelector(
+          '.smart-reply-content'
+        );
+        const knowledgeAssistContainer = document.querySelector(
+          '.knowledge-assist-content'
+        );
+        const faqContainer = document.querySelector('.faq-content');
 
-      function createTranscriptUIElement() {
-        const transcriptEl = document.createElement(TRANSCRIPT_SELECTOR);
-        transcriptEl.style.maxHeight = '100%';
-        transcriptContainer.appendChild(transcriptEl);
-      }
+        function createTranscriptUIElement() {
+          const transcriptEl = document.createElement(TRANSCRIPT_EL_SELECTOR);
+          transcriptEl.style.maxHeight = '100%';
+          transcriptContainer.appendChild(transcriptEl);
+        }
 
-      function createUIElement(accessToken) {
-        if (existingUiModulesEl) {
-          existingUiModulesEl.setAttribute('auth-token', accessToken);
-        } else {
-          var uiModulesEl = document.createElement(UI_MODULES_EL_SELECTOR);
-          var attributes = getAttributes(channel)
-          for (var [attribute, value] of attributes) {
-            uiModulesEl.setAttribute(attribute, value);
+        function createUIElement(accessToken) {
+          if (existingUiModulesEl) {
+            existingUiModulesEl.setAttribute('auth-token', accessToken);
+          } else {
+            var uiModulesEl = document.createElement(UI_MODULES_EL_SELECTOR);
+            var attributes = getAttributes(channel);
+            for (var [attribute, value] of attributes) {
+              uiModulesEl.setAttribute(attribute, value);
+            }
+            uiModulesEl.config = getKnowledgeAssistConfig();
+            uiModulesContainer.appendChild(uiModulesEl);
+
+            const summaryEl = document.createElement(SUMMARY_EL_SELECTOR);
+            summaryContainer.appendChild(summaryEl);
+
+            const smartReplyEl = document.createElement(
+              SMART_REPLY_EL_SELECTOR
+            );
+            smartReplyContainer.appendChild(smartReplyEl);
+
+            const knowledgeAssistEl = document.createElement(
+              KNOWLEDGE_ASSIST_EL_SELECTOR
+            );
+            knowledgeAssistEl.config = getKnowledgeAssistConfig();
+            knowledgeAssistContainer.appendChild(knowledgeAssistEl);
+
+            const faqEl = document.createElement(FAQ_EL_SELECTOR);
+            faqEl.config = getKnowledgeAssistConfig();
+            faqEl.setAttribute('features', knowledgeAssistFeatures);
+            faqContainer.appendChild(faqEl);
           }
-          uiModulesEl.config = getKnowledgeAssistConfig();
-          uiModulesContainer.appendChild(uiModulesEl);
-
-          const summaryEl = document.createElement(SUMMARY_SELECTOR);
-          summaryContainer.appendChild(summaryEl);
-
-          const smartReplyEl = document.createElement(SMART_REPLY_SELECTOR);
-          smartReplyContainer.appendChild(smartReplyEl);
-
-          const knowledgeAssistEl = document.createElement(KNOWLEDGE_ASSIST_SELECTOR);
-          knowledgeAssistEl.config = getKnowledgeAssistConfig();
-          knowledgeAssistContainer.appendChild(knowledgeAssistEl);
-
-          const faqEl = document.createElement(FAQ_SELECTOR);
-          faqEl.config = getKnowledgeAssistConfig();
-          faqEl.setAttribute('features', 'ARTICLE_SEARCH,FAQ,ARTICLE_SUGGESTION');
-          faqContainer.appendChild(faqEl);
         }
-      }
 
-      function getKnowledgeAssistConfig() {
-        return {
-          knowledgeAssistConfig: {
-            articleLinkConfig: {
-              target: 'popup',
-              popupWindowOptions: 'height=800,width=600,left=600,top=100',
-            }
-          },
-          showCopyAnswer: true,
-          showPasteAnswer: true,
-        };
-      }
+        function getKnowledgeAssistConfig() {
+          return {
+            knowledgeAssistConfig: {
+              articleLinkConfig: {
+                target: 'popup',
+                popupWindowOptions: 'height=800,width=600,left=600,top=100',
+              },
+            },
+            showCopyAnswer: true,
+            showPasteAnswer: true,
+          };
+        }
 
-      function getAttributes(channel) {
-        var attributes = [
-          ['agent-desktop', 'GenesysCloud'],
-          ['features', features],
-          ['conversation-profile', conversationProfile],
-          ['auth-token', accessToken],
-          ['use-custom-conversation-id', 'true'],
-          ['oauth-client-id', clientId],
-          ['redirect-uri', redirectUri],
-          ['custom-api-endpoint', proxyServerEndPoint],
-          ['genesys-cloud-region', genesysCloudRegion],
-          ['show-header', false]
-        ];
-        if (channel === "voice") {
-          attributes = [
-            ...attributes,
-            ['channel', 'voice'],
-            ['notifier-server-endpoint', proxyServerEndPoint],
-            ['event-based-library', 'SocketIo'],
+        function getAttributes(channel) {
+          var attributes = [
+            ['agent-desktop', 'GenesysCloud'],
+            ['features', features],
+            ['conversation-profile', conversationProfile],
+            ['auth-token', accessToken],
+            ['use-custom-conversation-id', 'true'],
+            ['oauth-client-id', clientId],
+            ['redirect-uri', redirectUri],
+            ['custom-api-endpoint', proxyServerEndPoint],
+            ['genesys-cloud-region', genesysCloudRegion],
+            ['show-header', false],
           ];
+          if (channel === 'voice') {
+            attributes = [
+              ...attributes,
+              ['channel', 'voice'],
+              ['notifier-server-endpoint', proxyServerEndPoint],
+              ['event-based-library', 'SocketIo'],
+            ];
+          }
+          return attributes;
         }
-        return attributes;
-      }
 
-      if (channel !== "voice") {
-        transcriptContainer.style.display = "none";
-      }
-
-      /** When the first time UI module load, parse an empty token */
-      if (!existingUiModulesEl && !accessToken) {
-        createUIElement(accessToken);
-        if (channel === "voice") {
-          createTranscriptUIElement();
-        }
-      }
-
-      // /** After the genesys OAuth, get the access token */
-      addAgentAssistEventListener(
-        'genesys-cloud-connector-access-token-received', function (event) {
-          const genesysCloudAccessToken = event.detail.accessToken;
-          authenticateGenesysCloud(genesysCloudAccessToken).then(function (result) {
-            if (result.status !== 200) {
-              document.body.removeChild(existingUiModulesEl);
-            }
-            return result.json();
-          }).then(function (response) {
-            existingUiModulesEl = document.querySelector(UI_MODULES_EL_SELECTOR);
-            // If there is unauthenticated existingUIModule,
-            // the accessToken will be undefined
-            // Set the accessToken to the existingUIModule
-            firstTimeLoad = existingUiModulesEl && !accessToken;
-            if (firstTimeLoad) {
-              accessToken = response.token;
-              createUIElement(accessToken);
-            }
+        function authenticateGenesysCloud(accessToken) {
+          return fetch(proxyServerEndPoint + '/register', {
+            method: 'POST',
+            headers: [['Authorization', accessToken]],
           });
-        });
+        }
 
+        if (channel !== 'voice') {
+          transcriptContainer.style.display = 'none';
+        }
 
-      /**
-      * Authenticate the Genesys Cloud access token
-      * @param {string} accessToken
-      * @return {!Promise<number>}
-      */
-      function authenticateGenesysCloud(accessToken) {
-        return fetch(proxyServerEndPoint + '/register', {
-          method: 'POST',
-          headers: [['Authorization', accessToken]],
-        });
-      }
-    });
-  </script>
-  <!-- <script type="module" src="../public/js/genesys-cloud.js" defer></script> -->
-  <script type="module" src="../public/js/main.js" defer></script>
-</body>
+        /** When the first time UI module load, parse an empty token */
+        if (!existingUiModulesEl && !accessToken) {
+          createUIElement(accessToken);
+          if (channel === 'voice') {
+            createTranscriptUIElement();
+          }
+        }
 
+        // /** After the genesys OAuth, get the access token */
+        addAgentAssistEventListener(
+          'genesys-cloud-connector-access-token-received',
+          function (event) {
+            const genesysCloudAccessToken = event.detail.accessToken;
+            authenticateGenesysCloud(genesysCloudAccessToken)
+              .then(function (result) {
+                if (result.status !== 200) {
+                  document.body.removeChild(existingUiModulesEl);
+                }
+                return result.json();
+              })
+              .then(function (response) {
+                existingUiModulesEl = document.querySelector(
+                  UI_MODULES_EL_SELECTOR
+                );
+                // If there is unauthenticated existingUIModule,
+                // the accessToken will be undefined
+                // Set the accessToken to the existingUIModule
+                firstTimeLoad = existingUiModulesEl && !accessToken;
+                if (firstTimeLoad) {
+                  accessToken = response.token;
+                  createUIElement(accessToken);
+                }
+              });
+          }
+        );
+      });
+    </script>
+    <script type="module" src="../public/js/main.js" defer></script>
+  </body>
 </html>

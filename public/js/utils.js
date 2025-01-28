@@ -506,7 +506,11 @@ export function initializeToggleButtons() {
   );
 
   // include transcript toggler
-  const updatedTogglers = [filteredTogglers[0], togglers[1], ...filteredTogglers.slice(1)]
+  const updatedTogglers = [
+    filteredTogglers[0],
+    togglers[1],
+    ...filteredTogglers.slice(1),
+  ];
 
   const togglerContainer = document.getElementById('toggle-btn-container');
   updatedTogglers.forEach(toggler => {
@@ -577,14 +581,15 @@ export function setupSummaryButtonTriggersAndListeners() {
     const button = document.querySelector(buttonListener.targetId);
     const summary = document.querySelector('.summary');
 
-    if (button) {
-      button.addEventListener('click', function () {
-        const latestSummaryHeight = sessionStorage.getItem(
-          constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
-        );
+    if (!button) return;
 
-        summary.style.height = latestSummaryHeight ?? '120px';
-      });
-    }
+    button.addEventListener('click', function () {
+      const latestSummaryHeight = sessionStorage.getItem(
+        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
+      );
+      console.log('latestSummaryHeight', latestSummaryHeight);
+
+      summary.style.height = latestSummaryHeight ?? '120px';
+    });
   });
 }
