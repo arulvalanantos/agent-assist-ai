@@ -535,7 +535,20 @@ export function setupButtonTriggers() {
       .getElementById(mapping.triggerId)
       .addEventListener('click', function () {
         const button = document.querySelector(mapping.targetSelector);
-        if (button) button.click();
+        if (button) {
+          button.click();
+
+          if (mapping.triggerId === 'edit-btn') {
+            const summary = document.querySelector('.summary');
+            const summaryHeight = summary.getBoundingClientRect().height;
+            sessionStorage.setItem(
+              constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
+              summaryHeight
+            );
+
+            summary.style.height = '250px';
+          }
+        }
       });
   });
 }

@@ -21,7 +21,7 @@ mat-chip-listbox {
 }
 
 agent-assist-summarization .generate-summary {
-  font-size: var(--font-size-small) !important;
+  font-size: var(--font-size-base) !important;
   background: var(--color-blue) !important;
   display: none;
   position: absolute;
@@ -227,6 +227,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   border: 1px solid var(--color-blue) !important;
   margin-bottom: 0px !important;
   position: relative !important;
+  padding: var(--padding-xx-small) !important;
 }
 
 .document-and-faq-assist__suggestions {
@@ -247,6 +248,14 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 
 .document-and-faq-assist__copy-faq-answer-button {
   position: absolute !important;
-  bottom: 0px !important;
-  right: 0px !important;
+  bottom: var(--padding-xx-small) !important;
+  right: var(--padding-xx-small) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 4px 8px !important;
+  border: 1px solid var(--color-blue) !important;
+  border-radius: var(--border-radius) !important;
+  font-size: var(--font-size-base) !important;
+  color: var(--color-blue) !important;
 }
