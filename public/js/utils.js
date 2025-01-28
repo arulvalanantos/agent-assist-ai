@@ -593,3 +593,14 @@ export function setupSummaryButtonTriggersAndListeners() {
     });
   });
 }
+
+export function removeDuplicateElements(selector) {
+  const elements = document.querySelectorAll(selector);
+
+  if (elements.length > 1) {
+    // Loop through elements and keep only the first one
+    for (let i = 1; i < elements.length; i++) {
+      elements[i].remove();
+    }
+  }
+}

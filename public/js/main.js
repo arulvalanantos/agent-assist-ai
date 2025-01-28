@@ -5,6 +5,7 @@ import {
   topHeightAdjuster,
   setupSummaryButtonTriggersAndListeners,
   importLogo,
+  removeDuplicateElements,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -26,4 +27,14 @@ window.addEventListener('load', function () {
   }
 
   document.getElementById('regenerate-btn').click();
+
+  const observer = new MutationObserver(() => {
+    removeDuplicateElements('.cdk-overlay-container');
+  });
+
+  // Start observing the body for child changes
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 });

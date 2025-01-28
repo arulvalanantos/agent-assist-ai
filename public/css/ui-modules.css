@@ -324,3 +324,9 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 .answer-card-header-query {
   margin: 0px !important;
 }
+
+.mat-mdc-chip-selected,
+.mdc-evolution-chip--selected {
+  background: var(--color-blue) !important;
+  color: var(--color-white) !important;
+}
