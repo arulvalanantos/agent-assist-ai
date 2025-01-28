@@ -22,7 +22,7 @@ mat-chip-listbox {
 
 agent-assist-summarization .generate-summary {
   font-size: var(--font-size-base) !important;
-  background: var(--color-blue) !important;
+  background: var(--color-primary) !important;
   display: none;
   position: absolute;
   top: 5px;
@@ -106,7 +106,7 @@ agent-assist-knowledge-assist-v2 .input-wrapper {
 
 agent-assist-knowledge-assist-v2 .input-wrapper:focus-within {
   box-shadow: none !important;
-  border-color: var(--color-blue) !important;
+  border-color: var(--color-primary) !important;
 }
 
 agent-assist-knowledge-assist-v2 .search-input-button {
@@ -146,7 +146,7 @@ knowledge-search-card {
 }
 
 knowledge-search-card:nth-child(odd) {
-  background: var(--color-light-blue) !important;
+  background: var(--color-secondary) !important;
 }
 
 knowledge-search-card:nth-child(even) {
@@ -194,7 +194,7 @@ agent-assist-knowledge-assist .mat-mdc-text-field-wrapper {
 }
 
 agent-assist-knowledge-assist .mat-mdc-text-field-wrapper:focus-within {
-  border-color: var(--color-blue) !important;
+  border-color: var(--color-primary) !important;
 }
 
 agent-assist-knowledge-assist
@@ -230,7 +230,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 .document-and-faq-assist__suggestion {
   background: var(--color-white) !important;
   border-radius: 8px !important;
-  border: 1px solid var(--color-blue) !important;
+  border: 1px solid var(--color-primary) !important;
   margin-bottom: 0px !important;
   position: relative !important;
   padding: var(--padding-xx-small) !important;
@@ -261,10 +261,10 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   align-items: center !important;
   gap: 0.5rem !important;
   padding: 6px 8px !important;
-  border: 1px solid var(--color-blue) !important;
+  border: 1px solid var(--color-primary) !important;
   border-radius: var(--border-radius) !important;
   font-size: var(--font-size-small) !important;
-  color: var(--color-blue) !important;
+  color: var(--color-primary) !important;
 }
 
 [data-test-id='confirm-edit-summary-button'],
@@ -327,7 +327,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 
 .mat-mdc-chip-selected,
 .mdc-evolution-chip--selected {
-  background: var(--color-blue) !important;
+  background: var(--color-primary) !important;
   color: var(--color-white) !important;
 }
 
@@ -342,7 +342,7 @@ agent-assist-transcript .end-user .bubble-content {
 }
 
 agent-assist-transcript .agent .bubble-content {
-  background-color: var(--color-light-blue) !important;
+  background-color: var(--color-secondary) !important;
 }
 
 .answer-card-header-query,
@@ -353,4 +353,8 @@ agent-assist-smart-reply .smart-reply__chip--empty {
   -webkit-user-select: none !important; /* Safari */
   -ms-user-select: none !important; /* IE 10 and IE 11 */
   user-select: none !important; /* Standard syntax */
+}
+
+mat-spinner circle {
+  stroke: var(--color-primary) !important;
 }

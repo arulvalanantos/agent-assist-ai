@@ -38,6 +38,8 @@
     data-knowledge-assist-features="<%= knowledgeAssistFeatures %>"
     data-sentiment-analysis="<%= sentimentAnalysis %>"
     data-translation="<%= translation %>"
+    data-theme-primary="<%= themePrimary %>"
+    data-theme-secondary="<%= themeSecondary %>"
   >
     <header class="header">
       <div id="logo-container" class="logo-container"></div>
@@ -173,6 +175,7 @@
       </section>
     </main>
     <div id="toast-container" class="toast-container"></div>
+    <script src="../public/js/theme.js" defer></script>
     <script>
       window.addEventListener('load', function () {
         const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';

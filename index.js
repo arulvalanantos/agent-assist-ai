@@ -41,6 +41,8 @@ const {
   LOGO_URL,
   SENTIMENT_ANALYSIS,
   TRANSLATION,
+  THEME_PRIMARY_COLOR,
+  THEME_SECONDARY_COLOR,
 } = process.env;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -85,6 +87,8 @@ app.get('/', (req, res) => {
   const logoURL = LOGO_URL;
   const sentimentAnalysis = SENTIMENT_ANALYSIS ?? false;
   const translation = TRANSLATION ?? false;
+  const themePrimary = THEME_PRIMARY_COLOR;
+  const themeSecondary = THEME_SECONDARY_COLOR;
 
   const faq = ['ARTICLE_SEARCH', 'FAQ', 'ARTICLE_SUGGESTION'];
   const knowledgeAssistFeatures = features
@@ -104,6 +108,8 @@ app.get('/', (req, res) => {
     knowledgeAssistFeatures,
     sentimentAnalysis,
     translation,
+    themePrimary,
+    themeSecondary
   };
 
   res.render('main', payload);

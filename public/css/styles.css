@@ -166,7 +166,7 @@ img {
 }
 
 .toggle-btn-active {
-  background: var(--color-blue);
+  background: var(--color-primary);
   color: var(--color-white);
   border: none;
 }
@@ -284,7 +284,7 @@ img {
 }
 
 .summary-text {
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
   padding: var(--padding-small);
   border-radius: var(--border-radius);
   font-size: var(--font-size-small);
@@ -333,7 +333,7 @@ img {
 }
 
 .faq {
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
 }
 
 .faq-content,
@@ -365,7 +365,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-blue);
+  background: var(--color-primary);
 }
 .transcript-user-message,
 .transcript-agent-message {
@@ -404,7 +404,7 @@ img {
 }
 
 .transcript-agent-message {
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
 }
 
 .transcript-agent-logo {
@@ -428,7 +428,7 @@ img {
 }
 
 .knowledge-assist-content-item:nth-child(odd) {
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
 }
 
 .knowledge-assist-content-item:nth-child(even) {
@@ -446,7 +446,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--gap-base);
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
   display: none;
   padding: var(--padding-medium);
   height: 100%;
@@ -488,7 +488,7 @@ img {
 }
 
 .faq-search-container:focus-within {
-  border-color: var(--color-blue);
+  border-color: var(--color-primary);
 }
 
 .faq-search {
@@ -512,7 +512,7 @@ img {
   gap: var(--gap-medium);
   background: var(--color-white);
   border-radius: var(--border-radius);
-  border: 1px solid var(--color-blue);
+  border: 1px solid var(--color-primary);
 }
 
 .faq-actions {
@@ -574,7 +574,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--gap-base);
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
   display: none;
   padding: var(--padding-medium);
   height: 100%;
@@ -664,7 +664,7 @@ img {
 }
 
 .smart-reply-text:nth-child(odd) {
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
 }
 
 .smart-reply-text:nth-child(even) {
@@ -676,7 +676,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--gap-base);
-  background: var(--color-light-blue);
+  background: var(--color-secondary);
   display: none;
   padding: var(--padding-medium);
   height: 100%;
@@ -725,7 +725,7 @@ img {
   width: var(--button-small-width);
   height: var(--button-small-height);
   font-size: var(--font-size-base);
-  background: var(--color-blue);
+  background: var(--color-primary);
   color: var(--color-white);
   transition: transform 0.3s ease-in-out;
 }
@@ -746,8 +746,8 @@ img {
 .copy-btn {
   padding: var(--padding-xxx-small) var(--padding-xx-small);
   background: transparent;
-  border: 1px solid var(--color-blue);
-  color: var(--color-blue);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
@@ -777,7 +777,7 @@ img {
 
 .close-view-btn {
   padding: var(--padding-xxx-small) var(--padding-xx-small);
-  background: var(--color-blue);
+  background: var(--color-primary);
   color: var(--color-white);
   display: flex;
   align-items: center;
@@ -808,11 +808,11 @@ img {
 }
 
 .resizing {
-  border-bottom: 2px solid var(--color-blue);
+  border-bottom: 2px solid var(--color-primary);
 }
 
 .top-resizing {
-  border-top: 2px solid var(--color-blue);
+  border-top: 2px solid var(--color-primary);
 }
 
 .dragging {
@@ -820,8 +820,8 @@ img {
 }
 
 .receiver {
-  outline: 3px dashed var(--color-blue);
-  background-color: var(--color-light-blue);
+  outline: 3px dashed var(--color-primary);
+  background-color: var(--color-secondary);
   transition: background-color 0.2s ease, outline 0.2s ease;
   z-index: 999;
 }
@@ -860,7 +860,7 @@ img {
 
 .like-btn,
 .dislike-btn {
-  color: var(--color-blue);
+  color: var(--color-primary);
 }
 
 .like-btn .icon,
@@ -915,6 +915,6 @@ img {
 }
 
 .translation-btn.active {
-  background: var(--color-blue);
+  background: var(--color-primary);
   color: var(--color-white);
 }

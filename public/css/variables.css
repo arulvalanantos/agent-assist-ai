@@ -3,10 +3,8 @@
   --color-white: #ffffff;
   --color-gray: #b9b9b9;
   --color-dark-gray: #424242;
-  --color-blue: #4965cd;
-  --color-light-blue: #e2eaff;
-  /* --color-blue: #ed9e08;
-  --color-light-blue:rgba(237, 157, 8, 0.1); */
+  --color-primary: #4965cd;
+  --color-secondary: #e2eaff;
   --color-background: #f8f8f8;
   --color-border: #e8e8e8;
   --color-text-border: #e0e0e0;
