@@ -247,6 +247,8 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   gap: var(--gap-medium) !important;
 }
 
+[data-test-id='confirm-edit-summary-button'],
+[data-test-id='cancel-edit-summary-button'],
 .document-and-faq-assist__copy-faq-answer-button {
   position: absolute !important;
   bottom: var(--padding-xx-small) !important;
