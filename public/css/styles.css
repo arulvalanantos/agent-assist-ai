@@ -885,3 +885,36 @@ img {
   height: 100%;
   object-fit: contain;
 }
+
+.translation-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  border: 1px solid var(--color-text-border);
+  background: var(--color-white);
+  padding: var(--padding-xx-small);
+  width: 130px;
+  min-width: 130px;
+}
+
+.translation-status {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+@media (max-width: 700px) {
+  .translation-btn {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .translation-status {
+    display: none;
+  }
+}
+
+.translation-btn.active {
+  background: var(--color-blue);
+  color: var(--color-white);
+}

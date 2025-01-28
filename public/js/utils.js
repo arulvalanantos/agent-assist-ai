@@ -69,13 +69,6 @@ export function setupAndInitializeToggler(togglerId, targetId) {
 export function bottomHeightAdjuster(targetId) {
   const container = document.getElementById(targetId);
   const sections = document.querySelectorAll('.suggestions > section');
-  const summary = document.querySelector('.summary-text');
-  const smartReplies = document.querySelectorAll('.smart-reply-text');
-  const faqSuggestions = document.querySelectorAll('.faq-suggestion');
-  const knowledgeBaseSuggestions = document.querySelectorAll(
-    '.knowledge-assist-content-item'
-  );
-  const transcript = document.querySelector('.transcript-content');
 
   container.addEventListener('mousedown', e => {
     // Check if the click is near the bottom border
@@ -92,12 +85,6 @@ export function bottomHeightAdjuster(targetId) {
       sections.forEach(section => {
         section.setAttribute('draggable', false);
       });
-
-      // disablePointerEventsAndUserSelect(smartReplies);
-      // disablePointerEventsAndUserSelect(faqSuggestions);
-      // disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      // disablePointerEventsAndUserSelect([summary]);
-      // disablePointerEventsAndUserSelect([transcript]);
     }
   });
 
@@ -122,12 +109,6 @@ export function bottomHeightAdjuster(targetId) {
       sections.forEach(section => {
         section.setAttribute('draggable', true);
       });
-
-      // enablePointerEventsAndUserSelect(smartReplies);
-      // enablePointerEventsAndUserSelect(faqSuggestions);
-      // enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      // enablePointerEventsAndUserSelect([summary]);
-      // enablePointerEventsAndUserSelect([transcript]);
     }
   });
 }
@@ -139,12 +120,6 @@ export function bottomHeightAdjuster(targetId) {
 export function topHeightAdjuster(targetId) {
   const resizableContainer = document.getElementById(targetId);
   const sections = document.querySelectorAll('.suggestions > section');
-  const summary = document.querySelector('.summary-text');
-  const smartReplies = document.querySelectorAll('.smart-reply-text');
-  const faqSuggestions = document.querySelectorAll('.faq-suggestion');
-  const knowledgeBaseSuggestions = document.querySelectorAll(
-    '.knowledge-assist-content-item'
-  );
 
   let startY, startHeight;
 
@@ -164,12 +139,6 @@ export function topHeightAdjuster(targetId) {
       sections.forEach(section => {
         section.setAttribute('draggable', false);
       });
-
-      // disablePointerEventsAndUserSelect(smartReplies);
-      // disablePointerEventsAndUserSelect(faqSuggestions);
-      // disablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      // disablePointerEventsAndUserSelect([summary]);
-      // disablePointerEventsAndUserSelect([transcript]);
     }
   });
 
@@ -194,12 +163,6 @@ export function topHeightAdjuster(targetId) {
       sections.forEach(section => {
         section.setAttribute('draggable', true);
       });
-
-      // enablePointerEventsAndUserSelect(smartReplies);
-      // enablePointerEventsAndUserSelect(faqSuggestions);
-      // enablePointerEventsAndUserSelect(knowledgeBaseSuggestions);
-      // enablePointerEventsAndUserSelect([summary]);
-      // enablePointerEventsAndUserSelect([transcript]);
     }
   });
 }
@@ -603,4 +566,97 @@ export function removeDuplicateElements(selector) {
       elements[i].remove();
     }
   }
+}
+
+export function showSentimentAnalysis() {
+  const shouldShow = document.body.getAttribute('data-sentiment-analysis');
+
+  if (shouldShow === 'true') {
+    const container = document.querySelector('.status-container');
+
+    const image = document.createElement('img');
+    image.src = '../public/assets/emotion/slightly_smiling_face.svg';
+    image.alt = 'Sentiment Analysis';
+    image.classList.add('sentiment-image');
+
+    container.appendChild(image);
+  }
+}
+
+export function showTranslation() {
+  const shouldShow = document.body.getAttribute('data-translation');
+
+  if (shouldShow === 'true') {
+    const container = document.querySelector('.translation-container');
+
+    // Create the button element
+    const button = document.createElement('button');
+    button.className = 'translation-btn';
+    button.title = 'Toggle Translation';
+
+    // Create the image element
+    const img = document.createElement('img');
+    img.src = '../public/assets/buttons/translation-black.svg';
+    img.alt = 'translate';
+
+    // Create the span elements
+    const span1 = document.createElement('span');
+    span1.className = 'translation-status';
+
+    const span2 = document.createElement('span');
+    span2.textContent = 'Translation:';
+
+    const span3 = document.createElement('span');
+    span3.textContent = 'OFF';
+
+    // Append spans to span1
+    span1.appendChild(span2);
+    span1.appendChild(span3);
+
+    // Append img and span1 to button
+    button.appendChild(img);
+    button.appendChild(span1);
+
+    // Append button to container
+    container.appendChild(button);
+
+    //on click on this translation button should add the active class and also change the text of one of spans from OFF to ON
+    button.addEventListener('click', function () {
+      button.classList.toggle('active');
+
+      const isActive = button.classList.contains('active');
+
+      img.src = `../public/assets/buttons/translation-${
+        isActive ? 'white' : 'black'
+      }.svg`;
+      span3.textContent = isActive ? 'ON' : 'OFF';
+    });
+  }
+}
+
+export function checkTranscriptVisibility() {
+  // show transcript only for voice channel
+  const channel = document.body.getAttribute('data-channel');
+  if (channel?.toLowerCase() === 'voice') {
+    document.getElementById('transcript').classList.add('show');
+  }
+}
+
+export function removeDuplicateToastMessage() {
+  const observer = new MutationObserver(() => {
+    removeDuplicateElements('.cdk-overlay-container');
+  });
+
+  // Start observing the body for child changes
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+}
+
+export function autoGenerateSummary() {
+  // Auto-regenerate summary every 60 seconds
+  setInterval(() => {
+    document.getElementById('regenerate-btn').click();
+  }, 60 * 1000);
 }

@@ -39,6 +39,8 @@ const {
   PROXY_SERVER,
   FEATURES,
   LOGO_URL,
+  SENTIMENT_ANALYSIS,
+  TRANSLATION,
 } = process.env;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -81,12 +83,14 @@ app.get('/', (req, res) => {
   const genesysCloudRegion = GENESYS_CLOUD_REGION;
   const channel = CHANNEL;
   const logoURL = LOGO_URL;
+  const sentimentAnalysis = SENTIMENT_ANALYSIS ?? false;
+  const translation = TRANSLATION ?? false;
 
+  const faq = ['ARTICLE_SEARCH', 'FAQ', 'ARTICLE_SUGGESTION'];
   const knowledgeAssistFeatures = features
     .split(',')
-    .filter(feature =>
-      ['ARTICLE_SEARCH', 'FAQ', 'ARTICLE_SUGGESTION'].includes(feature)
-    ).join(',');
+    .filter(feature => faq.includes(feature))
+    .join(',');
 
   const payload = {
     conversationProfile,
@@ -98,6 +102,8 @@ app.get('/', (req, res) => {
     channel,
     logoURL,
     knowledgeAssistFeatures,
+    sentimentAnalysis,
+    translation,
   };
 
   res.render('main', payload);

@@ -330,3 +330,27 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   background: var(--color-blue) !important;
   color: var(--color-white) !important;
 }
+
+agent-assist-transcript .conversation-container {
+  -webkit-user-select: none !important; /* Safari */
+  -ms-user-select: none !important; /* IE 10 and IE 11 */
+  user-select: none !important; /* Standard syntax */
+}
+
+agent-assist-transcript .end-user .bubble-content {
+  background-color: var(--color-background) !important;
+}
+
+agent-assist-transcript .agent .bubble-content {
+  background-color: var(--color-light-blue) !important;
+}
+
+.answer-card-header-query,
+.answer-card-knowledge,
+.document-and-faq-assist__suggestion-body,
+.document-and-faq-assist__suggestion-title,
+agent-assist-smart-reply .smart-reply__chip--empty {
+  -webkit-user-select: none !important; /* Safari */
+  -ms-user-select: none !important; /* IE 10 and IE 11 */
+  user-select: none !important; /* Standard syntax */
+}
