@@ -91,6 +91,7 @@ agent-assist-knowledge-assist-v2 .input-wrapper {
   border-radius: var(--border-radius-medium) !important;
   background: var(--color-white);
   gap: var(--gap-xx-medium) !important;
+  overflow: hidden !important;
 }
 
 .pending-suggested-queries {

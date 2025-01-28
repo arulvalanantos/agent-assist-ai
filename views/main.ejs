@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
+  <!-- CSS Styles -->
   <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
   <link rel="stylesheet" href="../public/css/ui-modules.css" type="text/css">
   <!-- WebComponents polyfill. Needed for rendering web components in older browsers. -->
@@ -64,7 +65,12 @@
     </section>
     <section id="suggestions" class="suggestions">
       <section id="transcript" class="transcript" draggable="true">
-        <h4 class="title">Conversation Transcript</h4>
+        <div class="title-container">
+          <h4 class="title">Conversation Transcript</h4>
+          <button id="transcript-close-btn" type="button" class="close-btn" title="Close">
+            <img src="../public/assets/close.svg" alt="close" />
+          </button>
+        </div>
         <div class="transcript-content"></div>
       </section>
       <section id="faq" class="faq" draggable="true">

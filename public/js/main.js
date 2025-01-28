@@ -3,6 +3,7 @@ import {
   enableSectionDragging,
   initializeToggleButtons,
   topHeightAdjuster,
+  setupButtonTriggers,
   setupCopyButtons,
   handleKnowledgeAssistContentView,
   handleSmartReplyContentView,
@@ -13,22 +14,8 @@ import {
 window.addEventListener('load', function () {
   addLogo();
 
-  // set up regenerate button to trigger generate summary button
-  document
-    .getElementById('regenerate-btn')
-    .addEventListener('click', function () {
-      document.querySelector('.generate-summary').click();
-    });
-
-  // set up copy button to trigger copy summary button
-  document.getElementById('copy-btn').addEventListener('click', function () {
-    document.querySelector('[data-test-id="copy-summary-button"]').click();
-  });
-
-  // set up edit button to trigger edit summary button
-  document.getElementById('edit-btn').addEventListener('click', function () {
-    document.querySelector('[data-test-id="edit-summary-button"]').click();
-  });
+  // Call the function to set up the button triggers
+  setupButtonTriggers();
 
   initializeToggleButtons();
 

@@ -487,13 +487,13 @@ export function initializeToggleButtons() {
     button.id = toggler.togglerId;
     button.type = 'button';
     button.className = 'toggle-btn';
-    button.title = toggler.targetId;
+    button.title = toggler.title;
 
     const img = document.createElement('img');
     img.id = `${toggler.togglerId}-image`;
     img.classList.add('toggle-btn-image');
     img.src = `../public/assets/buttons/${toggler.targetId}-black.svg`;
-    img.alt = toggler.targetId;
+    img.alt = toggler.title;
 
     button.appendChild(img);
     togglerContainer.appendChild(button);
@@ -515,4 +515,27 @@ export function addLogo() {
   img.classList.add('logo');
 
   logoContainer.appendChild(img);
+}
+
+export function setupButtonTriggers() {
+  const buttonMappings = [
+    { triggerId: 'regenerate-btn', targetSelector: '.generate-summary' },
+    {
+      triggerId: 'copy-btn',
+      targetSelector: '[data-test-id="copy-summary-button"]',
+    },
+    {
+      triggerId: 'edit-btn',
+      targetSelector: '[data-test-id="edit-summary-button"]',
+    },
+  ];
+
+  buttonMappings.forEach(mapping => {
+    document
+      .getElementById(mapping.triggerId)
+      .addEventListener('click', function () {
+        const button = document.querySelector(mapping.targetSelector);
+        if (button) button.click();
+      });
+  });
 }
