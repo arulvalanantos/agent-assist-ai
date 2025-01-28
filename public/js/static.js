@@ -47,10 +47,6 @@ export const summaryTriggerButtonMappings = [
     triggerId: 'copy-btn',
     targetSelector: '[data-test-id="copy-summary-button"]',
   },
-  {
-    triggerId: 'edit-btn',
-    targetSelector: '[data-test-id="edit-summary-button"]',
-  },
 ];
 
 export const summaryButtonListeners = [

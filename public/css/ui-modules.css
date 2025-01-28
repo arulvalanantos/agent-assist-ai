@@ -36,14 +36,6 @@ agent-assist-summarization .generate-summary {
   display: none !important;
 }
 
-[data-test-id='edit-summary-button'] {
-  position: absolute !important;
-  top: -85px !important;
-  left: 50% !important;
-  tranform: translateX(-50%) !important;
-  display: none !important;
-}
-
 agent-assist-summarization .summary__content-details {
   display: none;
 }
@@ -249,10 +241,8 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 
 [data-test-id='confirm-edit-summary-button'],
 [data-test-id='cancel-edit-summary-button'],
+[data-test-id='edit-summary-button'],
 .document-and-faq-assist__copy-faq-answer-button {
-  position: absolute !important;
-  bottom: var(--padding-xx-small) !important;
-  right: var(--padding-xx-small) !important;
   display: flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
@@ -263,6 +253,12 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   color: var(--color-blue) !important;
 }
 
+.document-and-faq-assist__copy-faq-answer-button {
+  position: absolute !important;
+  bottom: var(--padding-xx-small) !important;
+  right: var(--padding-xx-small) !important;
+}
+
 .document-and-faq-assist__suggestion-body {
   margin-bottom: var(--padding-xx-small) !important;
 }
@@ -271,4 +267,11 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   .mat-mdc-outlined-button
   .mat-mdc-button-touch-target {
   height: 0px !important;
+}
+
+.article-search__body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  overflow: auto !important;
 }
