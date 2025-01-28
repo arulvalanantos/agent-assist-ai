@@ -175,12 +175,17 @@ img {
   fill: currentColor;
 }
 
+.toggle-btn-image {
+  width: var(--font-size-x-large);
+  height: var(--font-size-x-large);
+}
+
 @media (max-width: 400px) {
   .toggle-btn {
     width: var(--button-medium-width);
     height: var(--button-medium-height);
-  }'
-  
+  }
+
   .toggle-btn-image {
     width: var(--font-size-small);
     height: var(--font-size-small);
@@ -873,7 +878,9 @@ img {
   height: var(--font-size-small);
 }
 
-.close-icon, .copy-icon {
+.close-icon,
+.copy-icon,
+.toggle-btn-image-icon {
   width: 100%;
   height: 100%;
   object-fit: contain;
