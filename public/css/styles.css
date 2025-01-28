@@ -862,3 +862,19 @@ img {
 .dislike-btn .icon {
   fill: currentColor;
 }
+
+.copy-btn-image {
+  width: var(--font-size-base);
+  height: var(--font-size-base);
+}
+
+.close-btn-image {
+  width: var(--font-size-small);
+  height: var(--font-size-small);
+}
+
+.close-icon, .copy-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
