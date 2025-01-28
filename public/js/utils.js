@@ -1,5 +1,10 @@
 import constants from './constants.js';
-import { modules, togglers } from './static.js';
+import {
+  modules,
+  summaryButtonListeners,
+  summaryTriggerButtonMappings,
+  togglers,
+} from './static.js';
 
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
@@ -18,6 +23,11 @@ let isSmartReplyResizing = false;
 //   });
 // }
 
+/**
+ * Setup hide/show toggler button feature for the UI modules
+ * @param {*} togglerId
+ * @param {*} targetId
+ */
 export function setupAndInitializeToggler(togglerId, targetId) {
   const toggler = document.getElementById(togglerId);
   const closeBtn = document.getElementById(`${targetId}-close-btn`);
@@ -52,6 +62,10 @@ export function setupAndInitializeToggler(togglerId, targetId) {
   }
 }
 
+/**
+ * Implement height adjustment feature for the target id element
+ * @param {*} targetId
+ */
 export function bottomHeightAdjuster(targetId) {
   const container = document.getElementById(targetId);
   const sections = document.querySelectorAll('.suggestions > section');
@@ -118,6 +132,10 @@ export function bottomHeightAdjuster(targetId) {
   });
 }
 
+/**
+ * Implement height adjustment feature for target id element
+ * @param {*} targetId
+ */
 export function topHeightAdjuster(targetId) {
   const resizableContainer = document.getElementById(targetId);
   const sections = document.querySelectorAll('.suggestions > section');
@@ -186,6 +204,9 @@ export function topHeightAdjuster(targetId) {
   });
 }
 
+/**
+ * Add Draggable feature for suggestion sections
+ */
 export function enableSectionDragging() {
   // Select all draggable sections
   const sections = document.querySelectorAll('.suggestions > section');
@@ -473,16 +494,22 @@ export function authenticateGenesysCloud(accessToken) {
   });
 }
 
+/**
+ * Initialize Toggler Buttons for each UI modules
+ */
 export function initializeToggleButtons() {
-  // const features = document.body.getAttribute('data-features');
-  // const featureList = features.split(',');
-  // const filteredFeatures = featureList.filter(feature => modules[feature]);
-  // const filteredTogglers = togglers.filter(({ moduleName }) =>
-  //   filteredFeatures.includes(moduleName)
-  // );
+  const features = document.body.getAttribute('data-features');
+  const featureList = features.split(',');
+  const filteredFeatures = featureList.filter(feature => modules[feature]);
+  const filteredTogglers = togglers.filter(({ moduleName }) =>
+    filteredFeatures.includes(moduleName)
+  );
+
+  // include transcript toggler
+  const updatedTogglers = [filteredTogglers[0], togglers[1], ...filteredTogglers.slice(1)]
 
   const togglerContainer = document.getElementById('toggle-btn-container');
-  togglers.forEach(toggler => {
+  updatedTogglers.forEach(toggler => {
     const button = document.createElement('button');
     button.id = toggler.togglerId;
     button.type = 'button';
@@ -504,7 +531,10 @@ export function initializeToggleButtons() {
   });
 }
 
-export function addLogo() {
+/**
+ * To import customize logo which pass it as environment variable
+ */
+export function importLogo() {
   const logoURL = document.body.getAttribute('data-logo-url');
   const logoContainer = document.getElementById('logo-container');
   const img = document.createElement('img');
@@ -517,38 +547,44 @@ export function addLogo() {
   logoContainer.appendChild(img);
 }
 
-export function setupSummaryButtonTriggers() {
-  const buttonMappings = [
-    { triggerId: 'regenerate-btn', targetSelector: '.generate-summary' },
-    {
-      triggerId: 'copy-btn',
-      targetSelector: '[data-test-id="copy-summary-button"]',
-    },
-    {
-      triggerId: 'edit-btn',
-      targetSelector: '[data-test-id="edit-summary-button"]',
-    },
-  ];
+/**
+ * Setting up summary button triggers and listener to do certain actions
+ */
+export function setupSummaryButtonTriggersAndListeners() {
+  summaryTriggerButtonMappings.forEach(mapping => {
+    const triggerButton = document.getElementById(mapping.triggerId);
 
-  buttonMappings.forEach(mapping => {
-    document
-      .getElementById(mapping.triggerId)
-      .addEventListener('click', function () {
-        const button = document.querySelector(mapping.targetSelector);
-        if (button) {
-          button.click();
+    triggerButton.addEventListener('click', function () {
+      const button = document.querySelector(mapping.targetSelector);
+      if (button) {
+        button.click();
 
-          if (mapping.triggerId === 'edit-btn') {
-            const summary = document.querySelector('.summary');
-            const summaryHeight = summary.getBoundingClientRect().height;
-            sessionStorage.setItem(
-              constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
-              summaryHeight
-            );
+        if (mapping.triggerId === 'edit-btn') {
+          const summary = document.querySelector('.summary');
+          const summaryHeight = summary.getBoundingClientRect().height;
+          sessionStorage.setItem(
+            constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
+            summaryHeight
+          );
 
-            summary.style.height = '250px';
-          }
+          summary.style.height = '250px';
         }
+      }
+    });
+  });
+
+  summaryButtonListeners.forEach(buttonListener => {
+    const button = document.querySelector(buttonListener.targetId);
+    const summary = document.querySelector('.summary');
+
+    if (button) {
+      button.addEventListener('click', function () {
+        const latestSummaryHeight = sessionStorage.getItem(
+          constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
+        );
+
+        summary.style.height = latestSummaryHeight ?? '120px';
       });
+    }
   });
 }

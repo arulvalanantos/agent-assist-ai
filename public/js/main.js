@@ -3,15 +3,14 @@ import {
   enableSectionDragging,
   initializeToggleButtons,
   topHeightAdjuster,
-  setupSummaryButtonTriggers,
-  addLogo,
+  setupSummaryButtonTriggersAndListeners,
+  importLogo,
 } from './utils.js';
 
 window.addEventListener('load', function () {
-  addLogo();
+  importLogo();
 
-  // Call the function to set up the button triggers
-  setupSummaryButtonTriggers();
+  setupSummaryButtonTriggersAndListeners();
 
   initializeToggleButtons();
 

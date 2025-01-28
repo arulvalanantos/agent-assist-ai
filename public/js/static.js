@@ -40,3 +40,20 @@ export const modules = {
   // ARTICLE_SEARCH: 'ARTICLE_SEARCH',
   // ARTICLE_SUGGESTION: 'ARTICLE_SUGGESTION',
 };
+
+export const summaryTriggerButtonMappings = [
+  { triggerId: 'regenerate-btn', targetSelector: '.generate-summary' },
+  {
+    triggerId: 'copy-btn',
+    targetSelector: '[data-test-id="copy-summary-button"]',
+  },
+  {
+    triggerId: 'edit-btn',
+    targetSelector: '[data-test-id="edit-summary-button"]',
+  },
+];
+
+export const summaryButtonListeners = [
+  { targetId: '[data-test-id="confirm-summary-button"]' },
+  { targetId: '[data-test-id="cancel-summary-button"]' },
+];
