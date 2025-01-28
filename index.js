@@ -82,6 +82,12 @@ app.get('/', (req, res) => {
   const channel = CHANNEL;
   const logoURL = LOGO_URL;
 
+  const knowledgeAssistFeatures = features
+    .split(',')
+    .filter(feature =>
+      ['ARTICLE_SEARCH', 'FAQ', 'ARTICLE_SUGGESTION'].includes(feature)
+    ).join(',');
+
   const payload = {
     conversationProfile,
     clientID,
@@ -91,6 +97,7 @@ app.get('/', (req, res) => {
     genesysCloudRegion,
     channel,
     logoURL,
+    knowledgeAssistFeatures,
   };
 
   res.render('main', payload);

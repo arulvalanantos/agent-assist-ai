@@ -874,8 +874,8 @@ img {
 }
 
 .close-btn-image {
-  width: var(--font-size-small);
-  height: var(--font-size-small);
+  width: var(--font-size-xx-small);
+  height: var(--font-size-xx-small);
 }
 
 .close-icon,

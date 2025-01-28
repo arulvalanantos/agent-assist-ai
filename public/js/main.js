@@ -3,11 +3,7 @@ import {
   enableSectionDragging,
   initializeToggleButtons,
   topHeightAdjuster,
-  setupButtonTriggers,
-  setupCopyButtons,
-  handleKnowledgeAssistContentView,
-  handleSmartReplyContentView,
-  handleFaqContentView,
+  setupSummaryButtonTriggers,
   addLogo,
 } from './utils.js';
 
@@ -15,7 +11,7 @@ window.addEventListener('load', function () {
   addLogo();
 
   // Call the function to set up the button triggers
-  setupButtonTriggers();
+  setupSummaryButtonTriggers();
 
   initializeToggleButtons();
 
@@ -23,19 +19,6 @@ window.addEventListener('load', function () {
   topHeightAdjuster('smart-reply');
 
   enableSectionDragging();
-
-  // Set up copy buttons for FAQ suggestions
-  // setupCopyButtons('.faq-suggestion', '.faq-suggestion-content');
-
-  // // Set up copy buttons for Knowledge Assist content items
-  // setupCopyButtons(
-  //   '.knowledge-assist-content-item',
-  //   '.knowledge-assist-suggestion'
-  // );
-
-  // handleKnowledgeAssistContentView();
-  // handleSmartReplyContentView();
-  // handleFaqContentView();
 
   // show transcript only for voice channel
   const channel = document.body.getAttribute('data-channel');

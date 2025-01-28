@@ -517,7 +517,7 @@ export function addLogo() {
   logoContainer.appendChild(img);
 }
 
-export function setupButtonTriggers() {
+export function setupSummaryButtonTriggers() {
   const buttonMappings = [
     { triggerId: 'regenerate-btn', targetSelector: '.generate-summary' },
     {

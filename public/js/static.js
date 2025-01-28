@@ -1,15 +1,15 @@
 export const togglers = [
   {
-    togglerId: 'transcript-toggler',
-    targetId: 'transcript',
-    moduleName: 'TRANSCRIPT',
-    title: 'Transcript',
-  },
-  {
     togglerId: 'summary-toggler',
     targetId: 'summary',
     moduleName: 'CONVERSATION_SUMMARIZATION',
     title: 'Summary',
+  },
+  {
+    togglerId: 'transcript-toggler',
+    targetId: 'transcript',
+    moduleName: 'TRANSCRIPT',
+    title: 'Transcript',
   },
   {
     togglerId: 'faq-toggler',
