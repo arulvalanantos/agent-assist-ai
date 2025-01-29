@@ -9,20 +9,6 @@ import {
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
 
-// export function disablePointerEventsAndUserSelect(elements) {
-//   elements.forEach(element => {
-//     element.style.pointerEvents = 'none';
-//     element.style.userSelect = 'none';
-//   });
-// }
-
-// export function enablePointerEventsAndUserSelect(elements) {
-//   elements.forEach(element => {
-//     element.style.pointerEvents = 'auto';
-//     element.style.userSelect = 'auto';
-//   });
-// }
-
 /**
  * Setup hide/show toggler button feature for the UI modules
  * @param {*} togglerId
