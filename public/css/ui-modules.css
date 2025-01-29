@@ -59,8 +59,9 @@ agent-assist-summarization .summary__content-details {
   display: none;
 }
 
-agent-assist-summarization .summary__content-summary {
+agent-assist-summarization .summary__content-summary > pre {
   margin: 0px !important;
+  max-height: 100% !important;
 }
 
 agent-assist-summarization .summary__title-bar-wrapper {
@@ -377,7 +378,8 @@ agent-assist-smart-reply .smart-reply__chip--empty,
 agent-assist-transcript .conversation-container,
 agent-assist-knowledge-assist .document-and-faq-assist__suggestions-empty,
 agent-assist-knowledge-assist .document-and-faq-assist__suggestion-type,
-agent-assist-knowledge-assist .document-and-faq-assist__suggestion-timestamp {
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-timestamp,
+agent-assist-summarization .summary__content-summary {
   -webkit-user-select: none !important; /* Safari */
   -ms-user-select: none !important; /* IE 10 and IE 11 */
   user-select: none !important; /* Standard syntax */
