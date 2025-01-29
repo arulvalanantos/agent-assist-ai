@@ -288,40 +288,6 @@ export function setupSummaryButtonTriggersAndListeners() {
       }
     });
   });
-
-  document.body.addEventListener('click', event => {
-    const editButton = event.target.closest(
-      '[data-test-id="edit-summary-button"]'
-    );
-    const confirmEditButton = event.target.closest(
-      '[data-test-id="confirm-edit-summary-button"]'
-    );
-    const cancelEditButton = event.target.closest(
-      '[data-test-id="cancel-edit-summary-button"]'
-    );
-
-    if (editButton) {
-      const summary = document.querySelector('.summary');
-      const summaryHeight = summary.getBoundingClientRect().height;
-      sessionStorage.setItem(
-        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
-        summaryHeight
-      );
-
-      summary.style.height = '250px';
-    }
-
-    if (confirmEditButton || cancelEditButton) {
-      const summary = document.querySelector('.summary');
-      const latestSummaryHeight = sessionStorage.getItem(
-        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
-      );
-
-      summary.style.height = latestSummaryHeight
-        ? `${latestSummaryHeight}px`
-        : '120px';
-    }
-  });
 }
 
 export function removeDuplicateElements(selector) {
@@ -447,4 +413,40 @@ export function autoGenerateSummary() {
 
     setInterval(action, interval * 1000);
   }
+}
+
+export function globalButtonListeners() {
+  document.body.addEventListener('click', event => {
+    const editButton = event.target.closest(
+      '[data-test-id="edit-summary-button"]'
+    );
+    const confirmEditButton = event.target.closest(
+      '[data-test-id="confirm-edit-summary-button"]'
+    );
+    const cancelEditButton = event.target.closest(
+      '[data-test-id="cancel-edit-summary-button"]'
+    );
+
+    if (editButton) {
+      const summary = document.querySelector('.summary');
+      const summaryHeight = summary.getBoundingClientRect().height;
+      sessionStorage.setItem(
+        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
+        summaryHeight
+      );
+
+      summary.style.height = '250px';
+    }
+
+    if (confirmEditButton || cancelEditButton) {
+      const summary = document.querySelector('.summary');
+      const latestSummaryHeight = sessionStorage.getItem(
+        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
+      );
+
+      summary.style.height = latestSummaryHeight
+        ? `${latestSummaryHeight}px`
+        : '120px';
+    }
+  });
 }

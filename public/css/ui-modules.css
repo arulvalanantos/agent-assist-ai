@@ -4,6 +4,25 @@ agent-assist-summarization {
   width: 100%;
 }
 
+agent-assist-summarization .mdc-line-ripple {
+  display: none !important;
+}
+
+agent-assist-summarization mat-form-field {
+  padding: 0px !important;
+}
+
+agent-assist-summarization .mat-mdc-text-field-wrapper {
+  border: 1px solid var(--color-text-border) !important;
+  padding: var(--padding-xxx-small) var(--padding-xx-small) !important;
+  border-radius: var(--border-radius-medium) !important;
+  background: var(--color-background) !important;
+}
+
+agent-assist-summarization .mat-mdc-text-field-wrapper:focus-within {
+  border-color: var(--color-primary) !important;
+}
+
 .mat-icon {
   display: flex !important;
   align-items: center;
@@ -171,6 +190,11 @@ knowledge-search-card .typing-indicator-bubble {
 knowledge-search-card .answer-card-knowledge {
   margin: 0px !important;
   margin-top: var(--padding-xx-small) !important;
+}
+
+knowledge-search-card button .mat-icon,
+knowledge-search-card button .mdc-button__label {
+  color: var(--color-primary) !important;
 }
 
 agent-assist-knowledge-assist .mat-mdc-form-field-infix {
@@ -363,6 +387,7 @@ mat-spinner circle {
   background: var(--color-primary) !important;
 }
 
-.document-and-faq-assist__suggestion-title-link {
+.document-and-faq-assist__suggestion-title-link,
+.knowledge-search-article-link {
   color: var(--color-primary) !important;
 }

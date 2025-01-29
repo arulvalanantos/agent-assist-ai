@@ -10,9 +10,12 @@ import {
   checkTranscriptVisibility,
   autoGenerateSummary,
   showTranslation,
+  globalButtonListeners,
 } from './utils.js';
 
 window.addEventListener('load', function () {
+  globalButtonListeners();
+
   importLogo();
   showSentimentAnalysis();
   showTranslation();
