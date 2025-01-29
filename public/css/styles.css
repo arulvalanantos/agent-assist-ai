@@ -444,12 +444,13 @@ img {
 }
 
 .dragging {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .receiver {
   outline: 3px dashed var(--color-primary);
   background-color: var(--color-secondary);
+  z-index: 999;
   transition: background-color 0.2s ease, outline 0.2s ease;
 }
 
