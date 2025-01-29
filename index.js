@@ -43,6 +43,8 @@ const {
   TRANSLATION,
   THEME_PRIMARY_COLOR,
   THEME_SECONDARY_COLOR,
+  AUTO_GENERATE_SUMMARY,
+  AUTO_GENERATE_SUMMARY_INTERVAL,
 } = process.env;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -89,6 +91,8 @@ app.get('/', (req, res) => {
   const translation = TRANSLATION ?? false;
   const themePrimary = THEME_PRIMARY_COLOR;
   const themeSecondary = THEME_SECONDARY_COLOR;
+  const autoGenerateSummary = AUTO_GENERATE_SUMMARY ?? false;
+  const autoGenerateSummaryInterval = AUTO_GENERATE_SUMMARY_INTERVAL ?? 60
 
   const faq = ['ARTICLE_SEARCH', 'FAQ', 'ARTICLE_SUGGESTION'];
   const knowledgeAssistFeatures = features
@@ -109,7 +113,9 @@ app.get('/', (req, res) => {
     sentimentAnalysis,
     translation,
     themePrimary,
-    themeSecondary
+    themeSecondary,
+    autoGenerateSummary,
+    autoGenerateSummaryInterval,
   };
 
   res.render('main', payload);

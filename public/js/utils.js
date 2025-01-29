@@ -1,10 +1,5 @@
 import constants from './constants.js';
-import {
-  modules,
-  summaryButtonListeners,
-  summaryTriggerButtonMappings,
-  togglers,
-} from './static.js';
+import { modules, summaryTriggerButtonMappings, togglers } from './static.js';
 
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
@@ -511,35 +506,42 @@ export function setupSummaryButtonTriggersAndListeners() {
       const button = document.querySelector(mapping.targetSelector);
       if (button) {
         button.click();
-
-        if (mapping.triggerId === 'edit-btn') {
-          const summary = document.querySelector('.summary');
-          const summaryHeight = summary.getBoundingClientRect().height;
-          sessionStorage.setItem(
-            constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
-            summaryHeight
-          );
-
-          summary.style.height = '250px';
-        }
       }
     });
   });
 
-  summaryButtonListeners.forEach(buttonListener => {
-    const button = document.querySelector(buttonListener.targetId);
-    const summary = document.querySelector('.summary');
+  document.body.addEventListener('click', event => {
+    const editButton = event.target.closest(
+      '[data-test-id="edit-summary-button"]'
+    );
+    const confirmEditButton = event.target.closest(
+      '[data-test-id="confirm-edit-summary-button"]'
+    );
+    const cancelEditButton = event.target.closest(
+      '[data-test-id="cancel-edit-summary-button"]'
+    );
 
-    if (!button) return;
+    if (editButton) {
+      const summary = document.querySelector('.summary');
+      const summaryHeight = summary.getBoundingClientRect().height;
+      sessionStorage.setItem(
+        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
+        summaryHeight
+      );
 
-    button.addEventListener('click', function () {
+      summary.style.height = '250px';
+    }
+
+    if (confirmEditButton || cancelEditButton) {
+      const summary = document.querySelector('.summary');
       const latestSummaryHeight = sessionStorage.getItem(
         constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
       );
-      console.log('latestSummaryHeight', latestSummaryHeight);
 
-      summary.style.height = latestSummaryHeight ?? '120px';
-    });
+      summary.style.height = latestSummaryHeight
+        ? `${latestSummaryHeight}px`
+        : '120px';
+    }
   });
 }
 
@@ -642,7 +644,28 @@ export function removeDuplicateToastMessage() {
 
 export function autoGenerateSummary() {
   // Auto-regenerate summary every 60 seconds
-  setInterval(() => {
-    document.getElementById('regenerate-btn').click();
-  }, 60 * 1000);
+  const shouldAutoGenerate = document.body.getAttribute(
+    'data-auto-generate-summary'
+  );
+
+  if (shouldAutoGenerate === 'true') {
+    const summaryInterval =
+      document.body.getAttribute('data-auto-generate-summary-interval') ?? 60;
+
+    let interval = parseInt(summaryInterval, 10);
+    if (isNaN(interval)) {
+      interval = 60; // Default value
+    }
+
+    const action = () => {
+      const textarea = document.querySelector(
+        'agent-assist-summarization textarea'
+      );
+      if (textarea) return;
+
+      document.getElementById('regenerate-btn').click();
+    };
+
+    setInterval(action, interval * 1000);
+  }
 }

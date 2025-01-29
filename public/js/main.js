@@ -10,7 +10,6 @@ import {
   checkTranscriptVisibility,
   autoGenerateSummary,
   showTranslation,
-  addCopyButtonsToChips,
 } from './utils.js';
 
 window.addEventListener('load', function () {

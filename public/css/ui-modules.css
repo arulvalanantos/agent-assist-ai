@@ -241,6 +241,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   display: flex !important;
   flex-direction: column !important;
   gap: var(--gap-medium) !important;
+  overflow-x: hidden !important;
 }
 
 .document-and-faq-assist__suggestions-header {
@@ -356,4 +357,12 @@ agent-assist-knowledge-assist .document-and-faq-assist__suggestion-timestamp {
 
 mat-spinner circle {
   stroke: var(--color-primary) !important;
+}
+
+.document-and-faq-assist__suggestion-type {
+  background: var(--color-primary) !important;
+}
+
+.document-and-faq-assist__suggestion-title-link {
+  color: var(--color-primary) !important;
 }

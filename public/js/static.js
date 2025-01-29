@@ -48,8 +48,3 @@ export const summaryTriggerButtonMappings = [
     targetSelector: '[data-test-id="copy-summary-button"]',
   },
 ];
-
-export const summaryButtonListeners = [
-  { targetId: '[data-test-id="confirm-edit-summary-button"]' },
-  { targetId: '[data-test-id="cancel-edit-summary-button"]' },
-];
