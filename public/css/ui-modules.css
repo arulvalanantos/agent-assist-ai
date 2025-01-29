@@ -55,6 +55,10 @@ agent-assist-summarization .generate-summary {
   display: none !important;
 }
 
+agent-assist-summarization .summary__content {
+  max-height: 100% !important;
+}
+
 agent-assist-summarization .summary__content-details {
   display: none;
 }
