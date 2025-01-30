@@ -455,7 +455,15 @@ export function globalButtonListeners() {
       textarea.value = text;
       document.body.appendChild(textarea);
       textarea.select();
-      document.execCommand('copy'); // Deprecated but still widely supported
+
+      // Try to use keyboard events for copying
+      try {
+        const successful = document.execCommand && document.execCommand('copy'); // Fallback if execCommand is still there
+        if (!successful) throw new Error('execCommand failed');
+      } catch (err) {
+        console.warn('execCommand is deprecated. Please use Clipboard API.');
+      }
+
       document.body.removeChild(textarea);
       console.log('Copied using fallback!');
     }
