@@ -57,10 +57,32 @@ export function getAttributes(accessToken) {
 export function authenticateGenesysCloud(accessToken) {
   const proxyServerEndPoint = window.proxyServerEndPoint;
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    controller.abort('Request took too long');
+  }, 60000); // Set timeout to 60 seconds
+
   return fetch(proxyServerEndPoint + '/register', {
     method: 'POST',
     headers: [['Authorization', accessToken]],
-  });
+    signal: controller.signal,
+  })
+    .then(response => {
+      clearTimeout(timeout);
+      return response;
+    })
+    .catch(() => {
+      clearTimeout(timeout);
+
+      const loader = document.getElementById('loader');
+      loader.style.display = 'none';
+
+      const errorMessageContainer = document.getElementById(
+        'error-message-container'
+      );
+
+      errorMessageContainer.style.display = 'flex';
+    });
 }
 
 export function renderUIModules() {

@@ -16,7 +16,7 @@ export function setupAndInitializeToggler(togglerId, targetId) {
   const toggleBtnImage = document.getElementById(`${togglerId}-image`);
 
   const channel = window.channel;
-  
+
   if (
     targetId !== 'transcript' ||
     (channel === 'voice' && targetId === 'transcript')
@@ -177,8 +177,16 @@ export function enableSectionDragging() {
   // Add event listeners to each section
   sections.forEach(section => {
     // Start dragging
-    section.addEventListener('dragstart', () => {
+    section.addEventListener('dragstart', event => {
       if (!isSmartReplyResizing && !isSummaryResizing) {
+        let img = new Image();
+        img.src = '';
+        event.dataTransfer.setDragImage(
+          img,
+          window.innerWidth / 2,
+          window.innerHeight / 2
+        );
+
         draggedSection = section;
         section.classList.add('dragging');
         suggestions.classList.add('draggable');

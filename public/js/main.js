@@ -33,4 +33,12 @@ window.addEventListener('load', function () {
   checkTranscriptVisibility();
   removeDuplicateToastMessage();
   autoGenerateSummary();
+
+  // Add reload button event listener
+  const reloadButton = document.getElementById('error-message-reload-btn');
+  if (reloadButton) {
+    reloadButton.onclick = function () {
+      location.reload();
+    };
+  }
 });
