@@ -577,3 +577,13 @@ export function loadSectionsHeight() {
     smartReply.style.height = savedSmartReplyHeight;
   }
 }
+
+export function reloadPage() {
+  const reloadButton = document.getElementById('error-message-reload-btn');
+
+  if (reloadButton) {
+    reloadButton.onclick = function () {
+      location.reload();
+    };
+  }
+}
