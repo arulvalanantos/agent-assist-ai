@@ -424,6 +424,9 @@ export function globalButtonListeners() {
     const cancelEditButton = event.target.closest(
       '[data-test-id="cancel-edit-summary-button"]'
     );
+    const smartReplyChip = event.target.closest(
+      '.smart-reply-content mat-chip-option'
+    );
 
     if (editButton) {
       const summary = document.querySelector('.summary');
@@ -445,6 +448,27 @@ export function globalButtonListeners() {
       summary.style.height = latestSummaryHeight
         ? `${latestSummaryHeight}px`
         : '120px';
+    }
+
+    function copyFallback(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy'); // Deprecated but still widely supported
+      document.body.removeChild(textarea);
+      console.log('Copied using fallback!');
+    }
+
+    if (smartReplyChip) {
+      const content = smartReplyChip.querySelector(
+        '.smart-reply-answer'
+      ).textContent;
+
+      navigator.clipboard
+        .writeText(content)
+        .then(() => console.log('copied'))
+        .catch(() => copyFallback(content));
     }
   });
 }
