@@ -443,13 +443,32 @@ img {
   border-top: 2px solid var(--color-primary);
 }
 
+.draggable knowledge-search,
+.draggable article-search,
+.draggable .faq-content,
+.draggable .knowledge-assist-content,
+.draggable .transcript-content {
+  display: none;
+}
+
+.draggable .faq {
+  background: var(--color-white);
+}
+
+.draggable .title-btn-container {
+  pointer-events: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 .dragging {
   opacity: 0.5;
 }
 
 .receiver {
   outline: 3px dashed var(--color-primary);
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary) !important;
   z-index: 999;
   transition: background-color 0.2s ease, outline 0.2s ease;
 }

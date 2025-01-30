@@ -153,6 +153,7 @@ export function topHeightAdjuster(targetId) {
  */
 export function enableSectionDragging() {
   // Select all draggable sections
+  const suggestions = document.querySelector('.suggestions');
   const sections = document.querySelectorAll('.suggestions > section');
 
   // Variable to track the currently dragged section
@@ -165,6 +166,7 @@ export function enableSectionDragging() {
       if (!isSmartReplyResizing && !isSummaryResizing) {
         draggedSection = section;
         section.classList.add('dragging');
+        suggestions.classList.add('draggable');
       }
     });
 
@@ -172,6 +174,7 @@ export function enableSectionDragging() {
     section.addEventListener('dragend', () => {
       draggedSection = null;
       section.classList.remove('dragging');
+      suggestions.classList.remove('draggable');
     });
 
     // Show receiver UI on dragover
