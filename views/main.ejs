@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
   <!-- CSS Styles -->
+  <link rel="stylesheet" href="../public/css/loader.css" type="text/css" />
   <link rel="stylesheet" href="../public/css/styles.css" type="text/css" />
   <link rel="stylesheet" href="../public/css/ui-modules.css" type="text/css" />
   <!-- WebComponents polyfill. Needed for rendering web components in older browsers. -->
@@ -40,7 +41,10 @@
       <div id="toggle-btn-container" class="toggle-btn-container"></div>
     </div>
   </header>
-  <main class="main">
+  <div id="loader" class="loader-container">
+    <div class="loader"></div>
+  </div>
+  <main id="main" class="main">
     <section id="summary" class="summary">
       <div class="title-container" draggable="false">
         <div class="title-icon-container">

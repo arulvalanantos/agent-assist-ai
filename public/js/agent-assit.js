@@ -11,6 +11,8 @@ window.addEventListener('load', function () {
 
   const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
 
+  const mainContainer = document.getElementById('main');
+  const loader = document.getElementById('loader');
   const uiModulesContainer = document.querySelector('.ui-modules-container');
   const transcriptContainer = document.querySelector('.transcript-content');
 
@@ -31,6 +33,11 @@ window.addEventListener('load', function () {
       uiModulesContainer.appendChild(uiModulesEl);
 
       renderUIModules();
+    }
+
+    if (accessToken) {
+      mainContainer.style.display = 'flex';
+      loader.style.display = 'none';
     }
   }
 

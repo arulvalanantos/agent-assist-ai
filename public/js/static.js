@@ -3,13 +3,13 @@ export const togglers = [
     togglerId: 'summary-toggler',
     targetId: 'summary',
     moduleName: 'CONVERSATION_SUMMARIZATION',
-    title: 'Summary',
+    title: 'Conversation Summary',
   },
   {
     togglerId: 'transcript-toggler',
     targetId: 'transcript',
     moduleName: 'TRANSCRIPT',
-    title: 'Transcript',
+    title: 'Conversation Transcript',
   },
   {
     togglerId: 'faq-toggler',
