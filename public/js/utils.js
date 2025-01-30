@@ -77,7 +77,11 @@ export function bottomHeightAdjuster(targetId) {
 
     // Ensure minimum height
     const minHeight = 50;
-    container.style.height = Math.max(newHeight, minHeight) + 'px';
+    const finalHeight = Math.max(newHeight, minHeight);
+    const actualHeight = Math.min(250, finalHeight) + 'px';
+
+    container.style.height = actualHeight;
+    saveSectionsHeight(targetId, actualHeight);
   });
 
   document.addEventListener('mouseup', () => {
@@ -131,7 +135,11 @@ export function topHeightAdjuster(targetId) {
 
     // Ensure minimum height
     const minHeight = 50;
-    resizableContainer.style.height = Math.max(newHeight, minHeight) + 'px';
+    const finalHeight = Math.max(newHeight, minHeight);
+    const actualHeight = Math.min(250, finalHeight) + 'px';
+
+    resizableContainer.style.height = actualHeight;
+    saveSectionsHeight(targetId, actualHeight);
   });
 
   document.addEventListener('mouseup', () => {
@@ -467,7 +475,7 @@ export function globalButtonListeners() {
       }
 
       document.body.removeChild(textarea);
-      console.log('Copied using fallback!');
+      console.info('Copied using fallback!');
     }
 
     if (smartReplyChip) {
@@ -477,7 +485,7 @@ export function globalButtonListeners() {
 
       navigator.clipboard
         .writeText(content)
-        .then(() => console.log('copied'))
+        .then(() => console.info('copied'))
         .catch(() => copyFallback(content));
     }
   });
@@ -492,7 +500,6 @@ export function saveSuggestionsOrder() {
   const order = Array.from(suggestionsContainer.children).map(
     section => section.id
   );
-  console.log(order);
   localStorage.setItem('suggestionsOrder', JSON.stringify(order));
 }
 
@@ -508,5 +515,32 @@ export function loadSuggestionsOrder() {
       const section = document.getElementById(sectionId);
       if (section) suggestionsContainer.appendChild(section);
     });
+  }
+}
+
+/**
+ * Save the height of the sections
+ * @param {*} targetId
+ * @param {*} height
+ */
+export function saveSectionsHeight(targetId, height) {
+  localStorage.setItem(`${targetId}-height`, height);
+}
+
+/**
+ * Load the height of the sections
+ */
+export function loadSectionsHeight() {
+  const summary = document.getElementById('summary');
+  const smartReply = document.getElementById('smart-reply');
+
+  const savedSummaryHeight = localStorage.getItem(`summary-height`);
+  if (savedSummaryHeight) {
+    summary.style.height = savedSummaryHeight;
+  }
+
+  const savedSmartReplyHeight = localStorage.getItem(`smart-reply-height`);
+  if (savedSmartReplyHeight) {
+    smartReply.style.height = savedSmartReplyHeight;
   }
 }

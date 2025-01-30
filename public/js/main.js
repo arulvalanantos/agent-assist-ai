@@ -12,11 +12,13 @@ import {
   showTranslation,
   globalButtonListeners,
   loadSuggestionsOrder,
+  loadSectionsHeight,
 } from './utils.js';
 
 window.addEventListener('load', function () {
   globalButtonListeners();
   loadSuggestionsOrder();
+  loadSectionsHeight();
 
   importLogo();
   showSentimentAnalysis();
