@@ -211,6 +211,8 @@ export function enableSectionDragging() {
           parent.insertBefore(draggedSection, targetSection.nextSibling);
         }
       }
+
+      saveSuggestionsOrder();
     });
   });
 }
@@ -479,4 +481,32 @@ export function globalButtonListeners() {
         .catch(() => copyFallback(content));
     }
   });
+}
+
+/**
+ * Save the order of the suggestion sections
+ */
+export function saveSuggestionsOrder() {
+  const suggestionsContainer = document.getElementById('suggestions');
+
+  const order = Array.from(suggestionsContainer.children).map(
+    section => section.id
+  );
+  console.log(order);
+  localStorage.setItem('suggestionsOrder', JSON.stringify(order));
+}
+
+/**
+ * Load the order of the suggestion sections
+ */
+export function loadSuggestionsOrder() {
+  const suggestionsContainer = document.getElementById('suggestions');
+  const savedOrder = JSON.parse(localStorage.getItem('suggestionsOrder'));
+
+  if (savedOrder) {
+    savedOrder.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) suggestionsContainer.appendChild(section);
+    });
+  }
 }

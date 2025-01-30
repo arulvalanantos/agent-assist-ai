@@ -11,10 +11,12 @@ import {
   autoGenerateSummary,
   showTranslation,
   globalButtonListeners,
+  loadSuggestionsOrder,
 } from './utils.js';
 
 window.addEventListener('load', function () {
   globalButtonListeners();
+  loadSuggestionsOrder();
 
   importLogo();
   showSentimentAnalysis();
