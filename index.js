@@ -39,6 +39,12 @@ const {
   PROXY_SERVER,
   FEATURES,
   LOGO_URL,
+  SENTIMENT_ANALYSIS,
+  TRANSLATION,
+  THEME_PRIMARY_COLOR,
+  THEME_SECONDARY_COLOR,
+  AUTO_GENERATE_SUMMARY,
+  AUTO_GENERATE_SUMMARY_INTERVAL,
 } = process.env;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -81,6 +87,18 @@ app.get('/', (req, res) => {
   const genesysCloudRegion = GENESYS_CLOUD_REGION;
   const channel = CHANNEL;
   const logoURL = LOGO_URL;
+  const sentimentAnalysis = SENTIMENT_ANALYSIS ?? false;
+  const translation = TRANSLATION ?? false;
+  const themePrimary = THEME_PRIMARY_COLOR;
+  const themeSecondary = THEME_SECONDARY_COLOR;
+  const autoGenerateSummary = AUTO_GENERATE_SUMMARY ?? false;
+  const autoGenerateSummaryInterval = AUTO_GENERATE_SUMMARY_INTERVAL ?? 60
+
+  const faq = ['ARTICLE_SEARCH', 'FAQ', 'ARTICLE_SUGGESTION'];
+  const knowledgeAssistFeatures = features
+    .split(',')
+    .filter(feature => faq.includes(feature))
+    .join(',');
 
   const payload = {
     conversationProfile,
@@ -91,6 +109,13 @@ app.get('/', (req, res) => {
     genesysCloudRegion,
     channel,
     logoURL,
+    knowledgeAssistFeatures,
+    sentimentAnalysis,
+    translation,
+    themePrimary,
+    themeSecondary,
+    autoGenerateSummary,
+    autoGenerateSummaryInterval,
   };
 
   res.render('main', payload);
