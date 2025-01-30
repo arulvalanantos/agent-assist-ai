@@ -172,6 +172,25 @@ img {
   justify-content: space-between;
 }
 
+.title-icon-container {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+}
+
+.title-icon {
+  width: var(--font-size-x-large);
+  height: var(--font-size-x-large);
+  object-fit: contain;
+  pointer-events: none;
+}
+
+@media (max-width: 850px) {
+  .title-icon {
+    display: none;
+  }
+}
+
 .title {
   font-family: var(--font-family-primary);
   font-size: var(--font-size-medium);
@@ -189,7 +208,7 @@ img {
 
 @media (max-width: 700px) {
   .title {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-small);
   }
 }
 
