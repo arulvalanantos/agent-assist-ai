@@ -283,6 +283,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 
 .document-and-faq-assist__suggestions-header {
   margin: 0px !important;
+  pointer-events: none !important;
 }
 
 .document-and-faq-assist__suggestion-feedback {
@@ -387,7 +388,9 @@ agent-assist-transcript .conversation-container,
 agent-assist-knowledge-assist .document-and-faq-assist__suggestions-empty,
 agent-assist-knowledge-assist .document-and-faq-assist__suggestion-type,
 agent-assist-knowledge-assist .document-and-faq-assist__suggestion-timestamp,
-agent-assist-summarization .summary__content-summary {
+agent-assist-summarization .summary__content-summary,
+agent-assist-knowledge-assist .document-and-faq-assist__suggestions-header,
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-title-link {
   -webkit-user-select: none !important; /* Safari */
   -ms-user-select: none !important; /* IE 10 and IE 11 */
   user-select: none !important; /* Standard syntax */
