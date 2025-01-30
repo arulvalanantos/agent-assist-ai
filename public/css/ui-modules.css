@@ -369,6 +369,9 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   background: var(--color-primary) !important;
   color: var(--color-white) !important;
 }
+agent-assist-transcript .agent .role-icon {
+  background: var(--color-primary) !important;
+}
 
 agent-assist-transcript .end-user .bubble-content {
   background-color: var(--color-background) !important;
