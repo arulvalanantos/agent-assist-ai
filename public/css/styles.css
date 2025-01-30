@@ -62,6 +62,10 @@ img {
   user-select: none; /* Standard syntax */
 }
 
+.logo {
+  pointer-events: none;
+}
+
 @media (max-width: 400px) {
   .logo-container {
     width: 75px;
@@ -145,6 +149,7 @@ img {
 .toggle-btn-image {
   width: var(--font-size-x-large);
   height: var(--font-size-x-large);
+  pointer-events: none;
 }
 
 @media (max-width: 400px) {
@@ -363,6 +368,7 @@ img {
 
 .close-btn img {
   transition: transform 0.3s ease-in-out;
+  pointer-events: none;
 }
 
 .close-btn:hover img {
@@ -378,19 +384,15 @@ img {
   transition: transform 0.3s ease-in-out;
 }
 
-.regenerate-btn:hover {
-  scale: 0.9;
-}
-
 .regenerate-btn img {
   transition: transform 0.3s ease;
+  pointer-events: none;
 }
 
 .regenerate-btn:hover img {
   transform: rotate(360deg);
 }
 
-.view-btn,
 .copy-btn {
   padding: var(--padding-xxx-small) var(--padding-xx-small);
   background: transparent;
@@ -405,19 +407,20 @@ img {
   transition: transform 0.1s ease-in-out;
 }
 
-.view-btn > span,
 .copy-btn > span {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
 
-.view-btn .icon,
+.copy-btn img {
+  pointer-events: none;
+}
+
 .copy-btn .icon {
   fill: currentColor;
 }
 
-.view-btn:hover,
 .copy-btn:hover {
   background: var(--color-background);
   transform: scale(1.01);
@@ -467,7 +470,7 @@ img {
 }
 
 .receiver {
-  outline: 3px dashed var(--color-primary);
+  border: 3px dashed var(--color-primary);
   background-color: var(--color-secondary) !important;
   z-index: 999;
   transition: background-color 0.2s ease, outline 0.2s ease;
