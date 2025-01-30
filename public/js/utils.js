@@ -171,6 +171,9 @@ export function enableSectionDragging() {
   const suggestions = document.querySelector('.suggestions');
   const sections = document.querySelectorAll('.suggestions > section');
 
+  let img = new Image();
+  img.src = '../public/assets/list.png';
+
   // Variable to track the currently dragged section
   let draggedSection = null;
 
@@ -178,15 +181,10 @@ export function enableSectionDragging() {
   sections.forEach(section => {
     // Start dragging
     section.addEventListener('dragstart', event => {
-      if (!isSmartReplyResizing && !isSummaryResizing) {
-        let img = new Image();
-        img.src = '';
-        event.dataTransfer.setDragImage(
-          img,
-          window.innerWidth / 2,
-          window.innerHeight / 2
-        );
+      event.dataTransfer.setData('text/plain', event.target.id);
+      event.dataTransfer.setDragImage(img, 10, 10);
 
+      if (!isSmartReplyResizing && !isSummaryResizing) {
         draggedSection = section;
         section.classList.add('dragging');
         suggestions.classList.add('draggable');
