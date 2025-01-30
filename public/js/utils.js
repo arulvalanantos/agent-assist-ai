@@ -15,11 +15,18 @@ export function setupAndInitializeToggler(togglerId, targetId) {
   const target = document.getElementById(targetId);
   const toggleBtnImage = document.getElementById(`${togglerId}-image`);
 
-  // Add initial active classes
-  toggler.classList.add('toggle-btn-active');
-  target.classList.add('show');
-  if (toggleBtnImage)
-    toggleBtnImage.src = toggleBtnImage.src.replace('black', 'white');
+  const channel = window.channel;
+  
+  if (
+    targetId !== 'transcript' ||
+    (channel === 'voice' && targetId === 'transcript')
+  ) {
+    // Add initial active classes
+    toggler.classList.add('toggle-btn-active');
+    target.classList.add('show');
+    if (toggleBtnImage)
+      toggleBtnImage.src = toggleBtnImage.src.replace('black', 'white');
+  }
 
   // Setup event listener
   toggler.addEventListener('click', function () {
@@ -309,6 +316,9 @@ export function removeDuplicateElements(selector) {
   }
 }
 
+/**
+ * Show sentiment analysis feature
+ */
 export function showSentimentAnalysis() {
   const shouldShow = document.body.getAttribute('data-sentiment-analysis');
 
@@ -324,6 +334,9 @@ export function showSentimentAnalysis() {
   }
 }
 
+/**
+ * Show translation feature
+ */
 export function showTranslation() {
   const shouldShow = document.body.getAttribute('data-translation');
 
@@ -375,14 +388,22 @@ export function showTranslation() {
   }
 }
 
+/**
+ * Check if the transcript is visible or not
+ */
 export function checkTranscriptVisibility() {
   // show transcript only for voice channel
   const channel = document.body.getAttribute('data-channel');
   if (channel?.toLowerCase() === 'voice') {
     document.getElementById('transcript').classList.add('show');
+  } else {
+    document.getElementById('transcript').classList.remove('show');
   }
 }
 
+/**
+ * Remove duplicate toast messages
+ */
 export function removeDuplicateToastMessage() {
   const observer = new MutationObserver(() => {
     removeDuplicateElements('.cdk-overlay-container');
@@ -395,6 +416,9 @@ export function removeDuplicateToastMessage() {
   });
 }
 
+/**
+ * Auto-generate summary feature
+ */
 export function autoGenerateSummary() {
   // Auto-regenerate summary every 60 seconds
   const shouldAutoGenerate = document.body.getAttribute(
@@ -423,6 +447,9 @@ export function autoGenerateSummary() {
   }
 }
 
+/**
+ * Global button listeners
+ */
 export function globalButtonListeners() {
   document.body.addEventListener('click', event => {
     const editButton = event.target.closest(

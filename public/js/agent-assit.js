@@ -14,7 +14,7 @@ window.addEventListener('load', function () {
   const mainContainer = document.getElementById('main');
   const loader = document.getElementById('loader');
   const uiModulesContainer = document.querySelector('.ui-modules-container');
-  const transcriptContainer = document.querySelector('.transcript-content');
+  // const transcriptContainer = document.querySelector('.transcript-content');
 
   let accessToken = '';
   let firstTimeLoad = false;
@@ -41,16 +41,16 @@ window.addEventListener('load', function () {
     }
   }
 
-  if (channel !== 'voice') {
-    transcriptContainer.style.display = 'none';
-  }
+  // if (channel !== 'voice') {
+  //   transcriptContainer.style.display = 'none';
+  // }
 
   /** When the first time UI module load, parse an empty token */
   if (!existingUiModulesEl && !accessToken) {
     createUIElement(accessToken);
-    if (channel === 'voice') {
-      createTranscriptUIElement();
-    }
+    // if (channel === 'voice') {
+    createTranscriptUIElement();
+    // }
   }
 
   // /** After the genesys OAuth, get the access token */
