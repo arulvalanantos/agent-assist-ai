@@ -63,6 +63,10 @@ agent-assist-summarization .summary__content-details {
   display: none;
 }
 
+agent-assist-summarization .summary__content-summary {
+  margin: 0px !important;
+}
+
 agent-assist-summarization .summary__content-summary > pre {
   margin: 0px !important;
   max-height: 100% !important;
