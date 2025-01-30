@@ -432,12 +432,6 @@ img {
   gap: var(--gap-medium);
 }
 
-@media (max-width: 700px) {
-  .show {
-    gap: var(--gap-small);
-  }
-}
-
 .resizing {
   border-bottom: 2px solid var(--color-primary);
 }

@@ -112,13 +112,6 @@ agent-assist-knowledge-assist .document-and-faq-assist__suggestions-empty {
   font-size: var(--font-size-small);
 }
 
-agent-assist-smart-reply .smart-reply__chip--empty {
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
-  margin-left: 10px !important;
-  font-size: var(--font-size-small);
-}
-
 agent-assist-knowledge-assist-v2 .input-wrapper {
   border: 1px solid var(--color-gray) !important;
   padding: var(--padding-xx-small);
@@ -411,4 +404,26 @@ mat-spinner circle {
 .document-and-faq-assist__suggestion-title-link,
 .knowledge-search-article-link {
   color: var(--color-primary) !important;
+}
+
+agent-assist-smart-reply .mdc-evolution-chip-set__chips {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin: 0px !important;
+}
+
+agent-assist-smart-reply .smart-reply__chip--empty {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  margin-left: 10px !important;
+  font-size: var(--font-size-small);
+}
+
+agent-assist-smart-reply mat-chip-option {
+  max-width: 100% !important;
+  margin: 0px !important;
+  background: var(--color-white) !important;
 }
