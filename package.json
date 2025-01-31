@@ -1,15 +1,14 @@
 {
-  "name": "genesyscloud-app",
+  "name": "gts-agent-assist-ai",
   "version": "1.0.0",
-  "description": "Example Conversational Cloud application for Genesys Cloud",
+  "description": "A GTS Agent Assist AI",
   "main": "index.js",
   "type": "module",
-  "author": "Carina",
+  "author": "GTS",
   "license": "ISC",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "connect-timeout": "^1.9.0",
