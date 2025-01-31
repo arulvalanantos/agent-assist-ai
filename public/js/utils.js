@@ -280,14 +280,31 @@ export function initializeToggleButtons() {
 }
 
 /**
+ * To check if the URL is a valid image URL
+ * @param {*} url
+ * @returns
+ */
+export function isValidImageUrl(url) {
+  const absoluteUrlPattern =
+    /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
+  const relativeUrlPattern = /^(\.\.\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i;
+  return absoluteUrlPattern.test(url) || relativeUrlPattern.test(url);
+}
+
+/**
  * To import customize logo which pass it as environment variable
  */
 export function importLogo() {
+  const fallbackURL = '../public/assets/logo.svg';
+
   const logoURL = document.body.getAttribute('data-logo-url');
   const logoContainer = document.getElementById('logo-container');
-  const img = document.createElement('img');
 
-  img.src = logoURL;
+  const isValidURL = isValidImageUrl(logoURL);
+  const src = !!logoURL && isValidURL ? logoURL : fallbackURL;
+
+  const img = document.createElement('img');
+  img.src = src;
   img.alt = 'Logo';
   img.height = 34;
   img.classList.add('logo');
