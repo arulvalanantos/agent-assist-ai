@@ -456,6 +456,7 @@ img {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  font-weight: 500;
 }
 
 .view-btn img,
@@ -524,7 +525,7 @@ img {
 
 .toast {
   background-color: var(--color-black);
-  color: var(--color-text-primary);
+  color: var(--color-white);
   font-size: var(--font-size-base);
   padding: var(--padding-small) var(--padding-medium);
   border-radius: 5px;
@@ -713,6 +714,7 @@ img {
   transition: transform 0.1s ease-in-out;
   height: 25px;
   max-height: 25px;
+  font-weight: 500;
 }
 
 .knowledge-assist-view-mode {
@@ -750,4 +752,10 @@ img {
 
 .knowledge-assist-view-suggestion {
   font-size: var(--font-size-base);
+}
+
+.knowledge-assist-view-btn {
+  padding: var(--padding-xxx-small);
+  width: var(--button-medium-width);
+  height: var(--button-medium-height);
 }

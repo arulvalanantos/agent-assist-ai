@@ -475,24 +475,21 @@ export function autoGenerateSummary() {
  * @param {*} text
  */
 export function copyFallback(text) {
-  console.log(text);
   const textarea = document.createElement('textarea');
   textarea.value = text;
   document.body.appendChild(textarea);
   textarea.select();
 
   // Try to use keyboard events for copying
-  console.log(document.execCommand('copy'));
   try {
     const successful = document.execCommand && document.execCommand('copy'); // Fallback if execCommand is still there
-    console.log(successful);
     if (!successful) throw new Error('execCommand failed');
+    showToast(constants.MESSAGE.COPIED);
   } catch (err) {
     console.warn('execCommand is deprecated. Please use Clipboard API.');
   }
 
   document.body.removeChild(textarea);
-  console.info('Copied using fallback!');
 }
 
 /**
@@ -542,7 +539,7 @@ export function globalButtonListeners() {
 
       navigator.clipboard
         .writeText(content)
-        .then(() => console.info('copied'))
+        .then(() => showToast(constants.MESSAGE.COPIED))
         .catch(() => copyFallback(content));
     }
   });
@@ -620,22 +617,22 @@ export function addViewButtonsToFAQs() {
       const button = document.createElement('button');
       button.className = 'view-btn faq-view-btn';
       button.innerHTML = `
-  <span class="view-btn-image">
-    <svg 
-      class="view-icon" 
-      viewBox="0 0 10 10" 
-      xmlns="http://www.w3.org/2000/svg" 
-      style="width: 1em; height: 1em; color: var(--color-primary);" 
-      fill="currentColor">
-      <path 
-        d="M8.22581 0.483887H1.77419C0.795161 0.483887 0 1.27905 0 2.25808V2.90324C0 3.16937 0.217742 3.38711 0.483871 3.38711C0.75 3.38711 0.967742 3.16937 0.967742 2.90324V2.25808C0.967742 1.81292 1.32903 1.45163 1.77419 1.45163H8.22581C8.67097 1.45163 9.03226 1.81292 9.03226 2.25808V7.74195C9.03226 8.18711 8.67097 8.5484 8.22581 8.5484H6.6129C6.34677 8.5484 6.12903 8.76614 6.12903 9.03227C6.12903 9.2984 6.34677 9.51614 6.6129 9.51614H8.22581C9.20484 9.51614 10 8.72098 10 7.74195V2.25808C10 1.27905 9.20484 0.483887 8.22581 0.483887Z"
-      />
-      <path 
-        d="M0 9.03226C0 9.16129 0.0499999 9.28226 0.141935 9.37419C0.324193 9.55645 0.643548 9.55645 0.825807 9.37419L3.54839 6.65161V8.70968C3.54839 8.97581 3.76613 9.19355 4.03226 9.19355C4.29839 9.19355 4.51613 8.97581 4.51613 8.70968V6.45161C4.51613 5.65161 3.86452 5 3.06452 5H0.806452C0.540323 5 0.322581 5.21774 0.322581 5.48387C0.322581 5.75 0.540323 5.96774 0.806452 5.96774H2.86452L0.141935 8.69032C0.0499999 8.78226 0 8.90323 0 9.03226Z"
-      />
-    </svg>
-  </span>
-  <span class="view-btn-title">View</span>`;
+        <span class="view-btn-image">
+          <svg 
+            class="view-icon" 
+            viewBox="0 0 10 10" 
+            xmlns="http://www.w3.org/2000/svg" 
+            style="width: 1em; height: 1em; color: var(--color-primary);" 
+            fill="currentColor">
+            <path 
+              d="M8.22581 0.483887H1.77419C0.795161 0.483887 0 1.27905 0 2.25808V2.90324C0 3.16937 0.217742 3.38711 0.483871 3.38711C0.75 3.38711 0.967742 3.16937 0.967742 2.90324V2.25808C0.967742 1.81292 1.32903 1.45163 1.77419 1.45163H8.22581C8.67097 1.45163 9.03226 1.81292 9.03226 2.25808V7.74195C9.03226 8.18711 8.67097 8.5484 8.22581 8.5484H6.6129C6.34677 8.5484 6.12903 8.76614 6.12903 9.03227C6.12903 9.2984 6.34677 9.51614 6.6129 9.51614H8.22581C9.20484 9.51614 10 8.72098 10 7.74195V2.25808C10 1.27905 9.20484 0.483887 8.22581 0.483887Z"
+            />
+            <path 
+              d="M0 9.03226C0 9.16129 0.0499999 9.28226 0.141935 9.37419C0.324193 9.55645 0.643548 9.55645 0.825807 9.37419L3.54839 6.65161V8.70968C3.54839 8.97581 3.76613 9.19355 4.03226 9.19355C4.29839 9.19355 4.51613 8.97581 4.51613 8.70968V6.45161C4.51613 5.65161 3.86452 5 3.06452 5H0.806452C0.540323 5 0.322581 5.21774 0.322581 5.48387C0.322581 5.75 0.540323 5.96774 0.806452 5.96774H2.86452L0.141935 8.69032C0.0499999 8.78226 0 8.90323 0 9.03226Z"
+            />
+          </svg>
+        </span>
+        <span class="view-btn-title">View</span>`;
       faqContainer.appendChild(button);
       button.addEventListener('click', handleFaqContentView);
     }
@@ -678,11 +675,10 @@ export function handleFaqContentView() {
   copyButton.addEventListener('click', function () {
     const faqSuggestion = viewMode.querySelector('.faq-view-suggestion');
     const faqSuggestionContent = faqSuggestion.textContent;
-    console.log(faqSuggestionContent, faqSuggestion);
 
     navigator.clipboard
       .writeText(faqSuggestionContent)
-      .then(() => console.info('copied'))
+      .then(() => showToast(constants.MESSAGE.COPIED))
       .catch(() => copyFallback(faqSuggestionContent));
   });
 }
@@ -694,4 +690,135 @@ export function faqObserver() {
 
   const faqContainer = document.getElementById('faq-container');
   observer.observe(faqContainer, { childList: true, subtree: true });
+}
+
+export function handleKnowledgeAssistContentView() {
+  const faq = document.getElementById('knowledge-assist');
+  const titleContainer = faq.querySelector('.title-container');
+  const content = faq.querySelector('.knowledge-assist-content');
+  const viewMode = faq.querySelector('.knowledge-assist-view-mode');
+
+  const contentItem = this.closest('.answer-card-container');
+
+  const title = contentItem.querySelector(
+    '.answer-card-header-query-title'
+  )?.innerText;
+
+  const suggestion = contentItem.querySelector(
+    '.answer-card-knowledge-answer'
+  )?.innerText;
+
+  if (!title || !suggestion) return;
+
+  content.style.display = 'none';
+  titleContainer.style.display = 'none';
+  faq.style.padding = '0px';
+  viewMode.style.display = 'flex';
+
+  viewMode.querySelector('.knowledge-assist-view-title').innerText = title;
+  viewMode.querySelector('.knowledge-assist-view-suggestion').innerText =
+    suggestion;
+
+  const closeViewButton = viewMode.querySelector('.close-view-btn');
+  closeViewButton.addEventListener('click', function () {
+    viewMode.style.display = 'none';
+    content.style.display = 'flex';
+    titleContainer.style.display = 'flex';
+    faq.style.padding = '8px';
+  });
+
+  const copyButton = viewMode.querySelector('.copy-btn');
+  copyButton.addEventListener('click', function () {
+    const faqSuggestion = viewMode.querySelector(
+      '.knowledge-assist-view-suggestion'
+    );
+    const faqSuggestionContent = faqSuggestion.textContent;
+
+    navigator.clipboard
+      .writeText(faqSuggestionContent)
+      .then(() => showToast(constants.MESSAGE.COPIED))
+      .catch(() => copyFallback(faqSuggestionContent));
+  });
+}
+
+export function addViewButtonsToKnowledgeAssist() {
+  const assistSearches = document.querySelectorAll(
+    '.knowledge-assist-content knowledge-search-card'
+  );
+
+  assistSearches?.forEach(assistSearch => {
+    const actionButtons = assistSearch.querySelector('.action-buttons');
+
+    if (
+      actionButtons &&
+      !actionButtons.querySelector('.knowledge-assist-view-btn')
+    ) {
+      const button = document.createElement('button');
+      button.className = 'knowledge-assist-view-btn';
+      button.title = "View the knowledge assist's content";
+      button.innerHTML = `
+        <span class="view-btn-image">
+          <svg 
+            class="view-icon" 
+            viewBox="0 0 10 10" 
+            xmlns="http://www.w3.org/2000/svg" 
+            style="width: 1em; height: 1em; color: var(--color-primary);" 
+            fill="currentColor">
+            <path 
+              d="M8.22581 0.483887H1.77419C0.795161 0.483887 0 1.27905 0 2.25808V2.90324C0 3.16937 0.217742 3.38711 0.483871 3.38711C0.75 3.38711 0.967742 3.16937 0.967742 2.90324V2.25808C0.967742 1.81292 1.32903 1.45163 1.77419 1.45163H8.22581C8.67097 1.45163 9.03226 1.81292 9.03226 2.25808V7.74195C9.03226 8.18711 8.67097 8.5484 8.22581 8.5484H6.6129C6.34677 8.5484 6.12903 8.76614 6.12903 9.03227C6.12903 9.2984 6.34677 9.51614 6.6129 9.51614H8.22581C9.20484 9.51614 10 8.72098 10 7.74195V2.25808C10 1.27905 9.20484 0.483887 8.22581 0.483887Z"
+            />
+            <path 
+              d="M0 9.03226C0 9.16129 0.0499999 9.28226 0.141935 9.37419C0.324193 9.55645 0.643548 9.55645 0.825807 9.37419L3.54839 6.65161V8.70968C3.54839 8.97581 3.76613 9.19355 4.03226 9.19355C4.29839 9.19355 4.51613 8.97581 4.51613 8.70968V6.45161C4.51613 5.65161 3.86452 5 3.06452 5H0.806452C0.540323 5 0.322581 5.21774 0.322581 5.48387C0.322581 5.75 0.540323 5.96774 0.806452 5.96774H2.86452L0.141935 8.69032C0.0499999 8.78226 0 8.90323 0 9.03226Z"
+            />
+          </svg>
+        </span>`;
+
+      actionButtons.appendChild(button);
+      button.addEventListener('click', handleKnowledgeAssistContentView);
+    }
+  });
+}
+
+export function knowledgeAssistObserver() {
+  const observer = new MutationObserver(mutations => {
+    for (let mutation of mutations) {
+      if (
+        mutation.target.classList &&
+        mutation.target.classList.contains('answer-card-header-container')
+      ) {
+        addViewButtonsToKnowledgeAssist();
+      }
+    }
+  });
+
+  const knowledgeAssistContainer = document.getElementById(
+    'knowledge-assist-container'
+  );
+  observer.observe(knowledgeAssistContainer, {
+    childList: true,
+    subtree: true,
+  });
+}
+
+export function showToast(message, duration = 3000) {
+  const toastContainer = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+
+  toast.appendChild(document.createTextNode(message));
+
+  toastContainer.appendChild(toast);
+
+  // Show the toast
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 100);
+
+  // Hide the toast after the specified duration
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => {
+      toastContainer.removeChild(toast);
+    }, 300);
+  }, duration);
 }

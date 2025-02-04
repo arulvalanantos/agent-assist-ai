@@ -15,6 +15,7 @@ import {
   loadSectionsHeight,
   reloadPage,
   faqObserver,
+  knowledgeAssistObserver,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -38,4 +39,5 @@ window.addEventListener('load', function () {
   reloadPage();
 
   faqObserver();
+  knowledgeAssistObserver();
 });
