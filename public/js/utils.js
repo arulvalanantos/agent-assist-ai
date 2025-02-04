@@ -471,6 +471,28 @@ export function autoGenerateSummary() {
 }
 
 /**
+ * Copy text to clipboard using Clipboard API
+ * @param {*} text
+ */
+export function copyFallback(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  // Try to use keyboard events for copying
+  try {
+    const successful = document.execCommand && document.execCommand('copy'); // Fallback if execCommand is still there
+    if (!successful) throw new Error('execCommand failed');
+  } catch (err) {
+    console.warn('execCommand is deprecated. Please use Clipboard API.');
+  }
+
+  document.body.removeChild(textarea);
+  console.info('Copied using fallback!');
+}
+
+/**
  * Global button listeners
  */
 export function globalButtonListeners() {
@@ -508,24 +530,6 @@ export function globalButtonListeners() {
       summary.style.height = latestSummaryHeight
         ? `${latestSummaryHeight}px`
         : '120px';
-    }
-
-    function copyFallback(text) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-
-      // Try to use keyboard events for copying
-      try {
-        const successful = document.execCommand && document.execCommand('copy'); // Fallback if execCommand is still there
-        if (!successful) throw new Error('execCommand failed');
-      } catch (err) {
-        console.warn('execCommand is deprecated. Please use Clipboard API.');
-      }
-
-      document.body.removeChild(textarea);
-      console.info('Copied using fallback!');
     }
 
     if (smartReplyChip) {
@@ -603,4 +607,59 @@ export function reloadPage() {
       location.reload();
     };
   }
+}
+
+export function addViewButtonsToFAQs() {
+  const suggestions = document.querySelectorAll('.faq .faq-assist__suggestion');
+
+  suggestions?.forEach(faqContainer => {
+    if (!faqContainer.querySelector('.view-btn')) {
+      const button = document.createElement('button');
+      button.className = 'view-btn faq-view-btn';
+      button.innerHTML = `<img src="../public/assets/view.svg" class="view-btn-image" alt="view" /><span>View</span>`;
+      faqContainer.appendChild(button);
+      button.addEventListener('click', handleFaqContentView);
+    }
+  });
+}
+
+export function handleFaqContentView() {
+  const faq = document.getElementById('faq');
+  const titleContainer = faq.querySelector('.title-container');
+  const content = faq.querySelector('.faq-content');
+  const viewMode = faq.querySelector('.faq-view-mode');
+
+  const contentItem = this.closest('.faq-assist__suggestion');
+
+  const title = contentItem.querySelector(
+    '.document-and-faq-assist__suggestion-title'
+  ).innerText;
+
+  const suggestion = contentItem.querySelector(
+    '.document-and-faq-assist__suggestion-body span'
+  ).innerText;
+
+  content.style.display = 'none';
+  titleContainer.style.display = 'none';
+  faq.style.padding = '0px';
+  viewMode.style.display = 'flex';
+
+  viewMode.querySelector('.faq-view-title').innerText = title;
+  viewMode.querySelector('.faq-view-suggestion').innerText = suggestion;
+
+  const closeViewButton = viewMode.querySelector('.close-view-btn');
+  closeViewButton.addEventListener('click', function () {
+    viewMode.style.display = 'none';
+    content.style.display = 'flex';
+    titleContainer.style.display = 'flex';
+    faq.style.padding = '8px';
+  });
+
+  const copyButton = viewMode.querySelector('.copy-btn');
+  copyButton.addEventListener('click', function () {
+    navigator.clipboard
+      .writeText(suggestion)
+      .then(() => console.info('copied'))
+      .catch(() => copyFallback(content));
+  });
 }

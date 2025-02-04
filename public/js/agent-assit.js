@@ -7,14 +7,19 @@ import {
 } from './agent-assist-utils.js';
 
 window.addEventListener('load', function () {
-  const channel = window.channel;
-
   const UI_MODULES_EL_SELECTOR = 'agent-assist-ui-modules';
 
   const mainContainer = document.getElementById('main');
   const loader = document.getElementById('loader');
+  const translationContainer = this.document.getElementById(
+    'translation-container'
+  );
+  const sentimentAnalysisContainer =
+    this.document.getElementById('status-container');
+  const toggleButtonContainer = this.document.getElementById(
+    'toggle-btn-container'
+  );
   const uiModulesContainer = document.querySelector('.ui-modules-container');
-  // const transcriptContainer = document.querySelector('.transcript-content');
 
   let accessToken = '';
   let firstTimeLoad = false;
@@ -38,6 +43,10 @@ window.addEventListener('load', function () {
     if (accessToken) {
       mainContainer.style.display = 'flex';
       loader.style.display = 'none';
+
+      translationContainer.style.visibility = 'visible';
+      sentimentAnalysisContainer.style.visibility = 'visible';
+      toggleButtonContainer.style.visibility = 'visible';
     }
   }
 

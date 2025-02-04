@@ -197,6 +197,14 @@ knowledge-search-card .answer-card-knowledge {
 knowledge-search-card button .mat-icon,
 knowledge-search-card button .mdc-button__label {
   color: var(--color-primary) !important;
+  font-weight: 400 !important;
+}
+
+knowledge-search-card .answer-card-header-error-quick_reference_all,
+knowledge-search-card button .mat-mdc-button-touch-target,
+knowledge-search-card button .mat-focus-indicator,
+knowledge-search-card button .mat-ripple {
+  display: none !important;
 }
 
 knowledge-search-card .mat-mdc-button-persistent-ripple {
@@ -314,7 +322,8 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   position: absolute !important;
   bottom: var(--padding-xx-small) !important;
   right: var(--padding-xx-small) !important;
-  height: 26px !important;
+  height: 25px !important;
+  max-height: 25px !important;
 }
 
 .document-and-faq-assist__copy-faq-answer-button mat-icon {
@@ -426,4 +435,8 @@ agent-assist-smart-reply mat-chip-option {
   max-width: 100% !important;
   margin: 0px !important;
   background: var(--color-white) !important;
+}
+
+.faq-assist__suggestion {
+  position: relative;
 }
