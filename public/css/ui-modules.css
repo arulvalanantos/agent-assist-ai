@@ -181,6 +181,8 @@ knowledge-search-card .answer-card-container {
 
 knowledge-search-card .answer-card-header-container {
   margin: 0px !important;
+  justify-content: space-between !important;
+  gap: var(--gap-small) !important;
 }
 
 knowledge-search-card .typing-indicator-bubble {
@@ -210,6 +212,29 @@ knowledge-search-card button .mat-mdc-button-persistent-ripple {
 
 knowledge-search-card .mat-mdc-button-persistent-ripple {
   display: none !important;
+}
+
+knowledge-search-card .action-buttons {
+  margin: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--gap-small) !important;
+}
+
+knowledge-search-card .action-buttons button {
+  border: 1px solid var(--color-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0px !important;
+  border-radius: 3px !important;
+  background: var(--color-white) !important;
+}
+
+agent-assist-knowledge-assist-v2 .mat-mdc-icon-button img,
+agent-assist-knowledge-assist-v2 .mat-mdc-icon-button svg {
+  width: 12px !important;
+  height: 12px !important;
 }
 
 agent-assist-knowledge-assist .mat-mdc-form-field-infix {
