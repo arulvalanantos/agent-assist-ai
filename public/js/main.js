@@ -14,7 +14,7 @@ import {
   loadSuggestionsOrder,
   loadSectionsHeight,
   reloadPage,
-  addViewButtonsToFAQs,
+  faqObserver,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -37,11 +37,5 @@ window.addEventListener('load', function () {
   autoGenerateSummary();
   reloadPage();
 
-  // Observe for dynamically added FAQ sections
-  const observer = new MutationObserver(() => {
-    addViewButtonsToFAQs();
-  });
-
-  const faq = this.document.getElementById('faq');
-  observer.observe(faq, { childList: true, subtree: true });
+  faqObserver();
 });
