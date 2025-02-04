@@ -36,8 +36,8 @@
     <div id="logo-container" class="logo-container"></div>
     <div id="ui-modules-container" class="ui-modules-container"></div>
     <div class="header-right">
-      <div class="translation-container"></div>
-      <div class="status-container"></div>
+      <div id="translation-container" class="translation-container"></div>
+      <div id="status-container" class="status-container"></div>
       <div id="toggle-btn-container" class="toggle-btn-container"></div>
     </div>
   </header>
@@ -97,7 +97,41 @@
             <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
           </button>
         </div>
-        <div class="faq-content"></div>
+        <div id="faq-container" class="faq-content"></div>
+        <div id="faq-view-mode" class="faq-view-mode">
+          <div class="faq-view-mode-actions">
+            <div class="faq-size-adjuster">
+              <button type="button" id="faq-decreaser" class="faq-small-version">
+                A
+              </button>
+              <button type="button" id="faq-increaser" class="faq-medium-version">
+                A
+              </button>
+            </div>
+            <div class="faq-view-mode-buttons">
+              <button id="faq-view-copy-btn" type="button" class="copy-btn view-copy-btn" title="Copy FAQ Suggestion">
+                <span class="view-copy-btn-image">
+                  <svg class="copy-icon" viewBox="0 0 8 10" xmlns="http://www.w3.org/2000/svg"
+                    style="width: 12px; height: 12px; color: var(--color-primary);" fill="currentColor">
+                    <path
+                      d="M0.705882 9.57157C0.517647 9.57157 0.352941 9.503 0.211765 9.36585C0.0705882 9.22871 0 9.06871 0 8.88585V1.99443H0.705882V8.88585H6.28235V9.57157H0.705882ZM2.11765 8.20014C1.92941 8.20014 1.76471 8.13157 1.62353 7.99443C1.48235 7.85728 1.41176 7.69728 1.41176 7.51443V1.11443C1.41176 0.931568 1.48235 0.771568 1.62353 0.634425C1.76471 0.497282 1.92941 0.428711 2.11765 0.428711H7.29412C7.48235 0.428711 7.64706 0.497282 7.78824 0.634425C7.92941 0.771568 8 0.931568 8 1.11443V7.51443C8 7.69728 7.92941 7.85728 7.78824 7.99443C7.64706 8.13157 7.48235 8.20014 7.29412 8.20014H2.11765ZM2.11765 7.51443H7.29412V1.11443H2.11765V7.51443Z"
+                      fill="currentColor" />
+                  </svg>
+                </span>
+                <span>Copy</span>
+              </button>
+              <button id="faq-close-view-btn" type="button" class="close-view-btn" title="Close FAQ Suggestion View">
+                <img src="../public/assets/close-view.svg" alt="close-view" class="close-view-btn-image" width="12px"
+                  height="12px" />
+                <span>Close</span>
+              </button>
+            </div>
+          </div>
+          <div class="faq-view-content">
+            <h3 class="faq-view-title"></h3>
+            <p class="faq-view-suggestion"></p>
+          </div>
+        </div>
       </section>
       <section id="knowledge-assist" class="knowledge-assist" draggable="true">
         <div class="title-container">
@@ -109,7 +143,43 @@
             <img src="../public/assets/close.svg" class="close-btn-image" alt="close" />
           </button>
         </div>
-        <div class="knowledge-assist-content"></div>
+        <div id="knowledge-assist-container" class="knowledge-assist-content"></div>
+        <div id="knowledge-assist-view-mode" class="knowledge-assist-view-mode">
+          <div class="knowledge-assist-view-mode-actions">
+            <div class="knowledge-assist-size-adjuster">
+              <button type="button" id="knowledge-assist-decreaser" class="knowledge-assist-small-version">
+                A
+              </button>
+              <button type="button" id="knowledge-assist-increaser" class="knowledge-assist-medium-version">
+                A
+              </button>
+            </div>
+            <div class="knowledge-assist-view-mode-buttons">
+              <button id="knowledge-assist-view-copy-btn" type="button" class="copy-btn view-copy-btn"
+                title="Copy Knowledge Assist Content">
+                <span class="view-copy-btn-image">
+                  <svg class="copy-icon" viewBox="0 0 8 10" xmlns="http://www.w3.org/2000/svg"
+                    style="width: 12px; height: 12px; color: var(--color-primary);" fill="currentColor">
+                    <path
+                      d="M0.705882 9.57157C0.517647 9.57157 0.352941 9.503 0.211765 9.36585C0.0705882 9.22871 0 9.06871 0 8.88585V1.99443H0.705882V8.88585H6.28235V9.57157H0.705882ZM2.11765 8.20014C1.92941 8.20014 1.76471 8.13157 1.62353 7.99443C1.48235 7.85728 1.41176 7.69728 1.41176 7.51443V1.11443C1.41176 0.931568 1.48235 0.771568 1.62353 0.634425C1.76471 0.497282 1.92941 0.428711 2.11765 0.428711H7.29412C7.48235 0.428711 7.64706 0.497282 7.78824 0.634425C7.92941 0.771568 8 0.931568 8 1.11443V7.51443C8 7.69728 7.92941 7.85728 7.78824 7.99443C7.64706 8.13157 7.48235 8.20014 7.29412 8.20014H2.11765ZM2.11765 7.51443H7.29412V1.11443H2.11765V7.51443Z"
+                      fill="currentColor" />
+                  </svg>
+                </span>
+                <span>Copy</span>
+              </button>
+              <button id="knowledge-assist-close-view-btn" type="button" class="close-view-btn"
+                title="Close Knowledge Assist View">
+                <img src="../public/assets/close-view.svg" alt="close-view" class="close-view-btn-image" width="12px"
+                  height="12px" />
+                <span>Close</span>
+              </button>
+            </div>
+          </div>
+          <div class="knowledge-assist-view-content">
+            <h3 class="knowledge-assist-view-title"></h3>
+            <p class="knowledge-assist-view-suggestion"></p>
+          </div>
+        </div>
       </section>
     </section>
     <section id="smart-reply" class="smart-reply" draggable="false">
@@ -125,6 +195,7 @@
       <div class="smart-reply-content"></div>
     </section>
   </main>
+  <div id="toast-container" class="toast-container"></div>
   <script src="../public/js/theme.js" defer></script>
   <script>
     window.addEventListener('load', function () {

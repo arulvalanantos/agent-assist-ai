@@ -14,6 +14,10 @@ import {
   loadSuggestionsOrder,
   loadSectionsHeight,
   reloadPage,
+  faqObserver,
+  knowledgeAssistObserver,
+  adjustFAQViewModeTitleAndDescription,
+  adjustKnowledgeAssistViewModeTitleAndDescription,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -35,4 +39,10 @@ window.addEventListener('load', function () {
   removeDuplicateToastMessage();
   autoGenerateSummary();
   reloadPage();
+
+  faqObserver();
+  knowledgeAssistObserver();
+
+  adjustFAQViewModeTitleAndDescription();
+  adjustKnowledgeAssistViewModeTitleAndDescription();
 });

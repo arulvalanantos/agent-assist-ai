@@ -98,6 +98,7 @@ img {
 }
 
 .status-container {
+  visibility: hidden;
   width: var(--width-base);
   height: var(--width-base);
 }
@@ -110,6 +111,10 @@ img {
 
 @media (max-width: 400px) {
   .status-container {
+    order: -1;
+  }
+
+  .status-container {
     width: var(--width-small);
     height: var(--height-small);
   }
@@ -118,10 +123,17 @@ img {
 .header-right {
   display: flex;
   align-items: center;
-  gap: var(--padding-medium);
+  gap: var(--gap-medium);
+}
+
+@media (max-width: 400px) {
+  .header-right {
+    gap: var(--gap-small);
+  }
 }
 
 .toggle-btn-container {
+  visibility: hidden;
   display: flex;
   flex-direction: row;
   gap: var(--gap-medium);
@@ -153,6 +165,10 @@ img {
 }
 
 @media (max-width: 400px) {
+  .toggle-btn-container {
+    gap: var(--gap-small);
+  }
+
   .toggle-btn {
     width: var(--button-medium-width);
     height: var(--button-medium-height);
@@ -183,12 +199,6 @@ img {
   height: var(--font-size-x-large);
   object-fit: contain;
   pointer-events: none;
-}
-
-@media (max-width: 850px) {
-  .title-icon {
-    display: none;
-  }
 }
 
 .title {
@@ -421,7 +431,8 @@ img {
   transform: rotate(360deg);
 }
 
-.copy-btn {
+.copy-btn,
+.view-btn {
   padding: var(--padding-xxx-small) var(--padding-xx-small);
   background: transparent;
   border: 1px solid var(--color-primary);
@@ -429,29 +440,33 @@ img {
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
-  font-size: var(--font-size-base);
-  font-weight: 500;
+  font-size: var(--font-size-small);
   transition: border-width 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
+  height: 25px;
+  max-height: 25px;
 }
 
+.view-copy-btn {
+  background: var(--color-white);
+}
+
+.view-btn > span,
 .copy-btn > span {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  font-weight: 500;
 }
 
+.view-btn img,
 .copy-btn img {
   pointer-events: none;
 }
 
+.view-btn .icon,
 .copy-btn .icon {
   fill: currentColor;
-}
-
-.copy-btn:hover {
-  background: var(--color-background);
-  transform: scale(1.01);
 }
 
 .show {
@@ -468,12 +483,10 @@ img {
   border-top: 2px solid var(--color-primary);
 }
 
-.draggable knowledge-search,
-.draggable article-search,
-.draggable .faq-content,
-.draggable .knowledge-assist-content,
-.draggable .transcript-content {
-  display: none;
+.draggable .document-and-faq-assist__suggestions,
+.draggable .conversation-container,
+.draggable .knowledge-assist-content {
+  overflow: hidden !important;
 }
 
 .draggable .faq {
@@ -492,7 +505,7 @@ img {
 }
 
 .receiver {
-  border: 3px dashed var(--color-primary);
+  outline: 3px dashed var(--color-primary);
   background-color: var(--color-secondary) !important;
   z-index: 999;
   transition: background-color 0.2s ease, outline 0.2s ease;
@@ -509,14 +522,14 @@ img {
 }
 
 .toast {
-  background-color: var(--color-white);
-  color: var(--color-text-primary);
+  background-color: var(--color-black);
+  color: var(--color-white);
   font-size: var(--font-size-base);
   padding: var(--padding-small) var(--padding-medium);
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateY(-50%);
   transition: opacity 0.3s, transform 0.3s;
   display: flex;
   flex-direction: row;
@@ -545,6 +558,13 @@ img {
   height: var(--font-size-base);
 }
 
+.close-view-btn-image,
+.view-btn-image,
+.view-copy-btn-image {
+  width: var(--font-size-small);
+  height: var(--font-size-small);
+}
+
 .close-btn-image {
   width: var(--font-size-xx-small);
   height: var(--font-size-xx-small);
@@ -552,17 +572,27 @@ img {
 
 .close-icon,
 .copy-icon,
+.view-icon,
 .toggle-btn-image-icon {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
+.view-icon {
+  color: var(--color-primary);
+  fill: currentColor;
+}
+
+.translation-container {
+  visibility: hidden;
+}
+
 .translation-btn {
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
-  border: 1px solid var(--color-text-border);
+  border: 1px solid var(--color-gray);
   background: var(--color-white);
   padding: var(--padding-xx-small);
   width: 130px;
@@ -575,9 +605,10 @@ img {
   gap: var(--gap-small);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 400px) {
   .translation-btn {
-    width: 100%;
+    width: var(--button-medium-width);
+    height: var(--button-medium-height);
     min-width: 100%;
   }
 
@@ -625,4 +656,144 @@ img {
   font-size: var(--font-size-small);
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+}
+
+.faq-view-mode {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-large);
+  background: var(--color-secondary);
+  display: none;
+  padding: var(--padding-medium);
+  height: 100%;
+}
+
+.faq-view-mode-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-view-title {
+  font-size: var(--font-size-large);
+  color: var(--color-text-primary);
+}
+
+.faq-view-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-base);
+  height: 100%;
+  overflow: auto;
+}
+
+.faq-view-suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+}
+
+.faq-view-suggestion {
+  font-size: var(--font-size-base);
+}
+
+.faq-view-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 80px;
+}
+
+.close-view-btn {
+  padding: 5px var(--padding-xx-small);
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  font-size: var(--font-size-small);
+  transition: transform 0.1s ease-in-out;
+  height: 25px;
+  max-height: 25px;
+  font-weight: 500;
+}
+
+.knowledge-assist-view-mode {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-large);
+  background: var(--color-light-blue);
+  display: none;
+  padding: var(--padding-medium);
+  height: 100%;
+}
+
+.knowledge-assist-view-mode-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-view-mode-buttons,
+.knowledge-assist-view-mode-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xx-medium);
+}
+
+.faq-size-adjuster,
+.knowledge-assist-size-adjuster {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--gap-xx-medium);
+}
+
+.faq-small-version,
+.faq-medium-version,
+.knowledge-assist-small-version,
+.knowledge-assist-medium-version {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-small);
+  font-weight: bold;
+}
+
+.faq-small-version,
+.knowledge-assist-small-version {
+  width: var(--button-small-width);
+  height: var(--button-small-height);
+}
+
+.faq-medium-version,
+.knowledge-assist-medium-version {
+  width: var(--button-medium-width);
+  height: var(--button-medium-height);
+}
+
+.knowledge-assist-title {
+  font-size: var(--font-size-large);
+  color: var(--color-text-primary);
+}
+
+.knowledge-assist-view-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-base);
+  height: 100%;
+  overflow: auto;
+}
+
+.knowledge-assist-view-suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+}
+
+.knowledge-assist-view-suggestion {
+  font-size: var(--font-size-base);
+}
+
+.knowledge-assist-view-btn {
+  padding: var(--padding-xxx-small);
+  width: var(--button-medium-width);
+  height: var(--button-medium-height);
 }

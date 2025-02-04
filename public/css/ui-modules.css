@@ -70,6 +70,7 @@ agent-assist-summarization .summary__content-summary {
 agent-assist-summarization .summary__content-summary > pre {
   margin: 0px !important;
   max-height: 100% !important;
+  font-size: var(--font-size-base) !important;
 }
 
 agent-assist-summarization .summary__title-bar-wrapper {
@@ -164,6 +165,7 @@ agent-assist-knowledge-assist-v2 .bottom-container {
 knowledge-search-card {
   border-radius: 8px;
   margin-bottom: 0px !important;
+  position: relative !important;
 }
 
 knowledge-search-card:nth-child(odd) {
@@ -181,6 +183,8 @@ knowledge-search-card .answer-card-container {
 
 knowledge-search-card .answer-card-header-container {
   margin: 0px !important;
+  justify-content: space-between !important;
+  gap: var(--gap-small) !important;
 }
 
 knowledge-search-card .typing-indicator-bubble {
@@ -194,13 +198,51 @@ knowledge-search-card .answer-card-knowledge {
   margin-top: var(--padding-xx-small) !important;
 }
 
+knowledge-search-card .answer-card-knowledge-answer {
+  letter-spacing: normal !important;
+  color: var(--color-text-primary) !important;
+  line-height: normal !important;
+  font-size: var(--font-size-base) !important;
+}
+
 knowledge-search-card button .mat-icon,
 knowledge-search-card button .mdc-button__label {
   color: var(--color-primary) !important;
+  font-weight: 400 !important;
+}
+
+knowledge-search-card .answer-card-header-error-quick_reference_all,
+knowledge-search-card button .mat-mdc-button-touch-target,
+knowledge-search-card button .mat-focus-indicator,
+knowledge-search-card button .mat-ripple,
+knowledge-search-card button .mat-mdc-button-persistent-ripple {
+  display: none !important;
 }
 
 knowledge-search-card .mat-mdc-button-persistent-ripple {
   display: none !important;
+}
+
+knowledge-search-card .action-buttons {
+  margin: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--gap-small) !important;
+}
+
+knowledge-search-card .action-buttons button {
+  border: 1px solid var(--color-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0px !important;
+  border-radius: 3px !important;
+  background: var(--color-white) !important;
+}
+
+knowledge-search-card .action-buttons button svg {
+  width: 12px !important;
+  height: 12px !important;
 }
 
 agent-assist-knowledge-assist .mat-mdc-form-field-infix {
@@ -257,7 +299,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   display: none !important;
 }
 
-.document-and-faq-assist__suggestion {
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion {
   background: var(--color-white) !important;
   border-radius: 8px !important;
   border: 1px solid var(--color-primary) !important;
@@ -265,21 +307,42 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   position: relative !important;
   padding: var(--padding-xx-small) !important;
   display: block !important;
+  container-type: inline-size !important;
 }
 
-.document-and-faq-assist__suggestions {
+@container (width < 250px) {
+  .view-btn,
+  .document-and-faq-assist__copy-faq-answer-button {
+    min-width: 30px !important;
+    width: 30px !important;
+  }
+
+  .faq-view-btn {
+    right: 42px;
+  }
+
+  .view-btn-title {
+    display: none !important;
+  }
+
+  .document-and-faq-assist__copy-faq-answer-button .mdc-button__label {
+    display: none !important;
+  }
+}
+
+agent-assist-knowledge-assist .document-and-faq-assist__suggestions {
   display: flex !important;
   flex-direction: column !important;
   gap: var(--gap-medium) !important;
   overflow-x: hidden !important;
 }
 
-.document-and-faq-assist__suggestions-header {
+agent-assist-knowledge-assist .document-and-faq-assist__suggestions-header {
   margin: 0px !important;
   pointer-events: none !important;
 }
 
-.document-and-faq-assist__suggestion-feedback {
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-feedback {
   display: flex !important;
   flex-direction: row !important;
   gap: var(--gap-medium) !important;
@@ -288,7 +351,7 @@ agent-assist-knowledge-assist .mdc-line-ripple {
 [data-test-id='confirm-edit-summary-button'],
 [data-test-id='cancel-edit-summary-button'],
 [data-test-id='edit-summary-button'],
-.document-and-faq-assist__copy-faq-answer-button {
+agent-assist-knowledge-assist .document-and-faq-assist__copy-faq-answer-button {
   display: flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
@@ -310,20 +373,34 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   height: 100% !important;
 }
 
-.document-and-faq-assist__copy-faq-answer-button {
+agent-assist-knowledge-assist .document-and-faq-assist__copy-faq-answer-button {
   position: absolute !important;
   bottom: var(--padding-xx-small) !important;
   right: var(--padding-xx-small) !important;
-  height: 26px !important;
+  height: 25px !important;
+  max-height: 25px !important;
 }
 
-.document-and-faq-assist__copy-faq-answer-button mat-icon {
+agent-assist-knowledge-assist
+  .document-and-faq-assist__copy-faq-answer-button
+  mat-icon {
   width: 14px !important;
   height: 14px !important;
 }
 
-.document-and-faq-assist__suggestion-body {
+knowledge-search-card .answer-card-knowledge-answer,
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-body {
+  font-size: var(--font-size-base) !important;
   margin-bottom: var(--padding-xx-small) !important;
+  display: -webkit-box !important; /* Enables the flexbox model needed for line clamping */
+  -webkit-line-clamp: 4 !important; /* Limits text to 4 lines */
+  -webkit-box-orient: vertical !important; /* Sets the box's orientation to vertical */
+  overflow: hidden !important; /* Hides the extra content */
+  text-overflow: ellipsis !important; /* Adds ellipsis if the content overflows */
+}
+
+.document-and-faq-assist__suggestion-body br {
+  display: none !important;
 }
 
 .document-and-faq-assist__copy-faq-answer-button
@@ -357,6 +434,10 @@ agent-assist-knowledge-assist .mdc-line-ripple {
   margin: 0px !important;
 }
 
+.answer-card-header-query-title {
+  font-size: var(--font-size-medium) !important;
+}
+
 .mat-mdc-chip-selected,
 .mdc-evolution-chip--selected {
   background: var(--color-primary) !important;
@@ -368,6 +449,10 @@ agent-assist-transcript .agent .role-icon {
 
 agent-assist-transcript .end-user .bubble-content {
   background-color: var(--color-background) !important;
+}
+
+agent-assist-transcript .bubble-text {
+  font-size: var(--font-size-base) !important;
 }
 
 agent-assist-transcript .agent .bubble-content {
@@ -396,13 +481,22 @@ mat-spinner circle {
   stroke: var(--color-primary) !important;
 }
 
-.document-and-faq-assist__suggestion-type,
-.document-and-faq-assist__new-suggestions-chip {
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-type,
+agent-assist-knowledge-assist .document-and-faq-assist__new-suggestions-chip {
   background: var(--color-primary) !important;
 }
 
-.document-and-faq-assist__suggestion-title-link,
-.knowledge-search-article-link {
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-title-link {
+  font-size: var(--font-size-medium) !important;
+}
+
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-title {
+  font-size: var(--font-size-medium) !important;
+  color: var(--color-text-primary) !important;
+}
+
+agent-assist-knowledge-assist .document-and-faq-assist__suggestion-title-link,
+agent-assist-knowledge-assist .knowledge-search-article-link {
   color: var(--color-primary) !important;
 }
 
@@ -426,4 +520,20 @@ agent-assist-smart-reply mat-chip-option {
   max-width: 100% !important;
   margin: 0px !important;
   background: var(--color-white) !important;
+}
+
+agent-assist-smart-reply .smart-reply-answer {
+  font-size: var(--font-size-base) !important;
+}
+
+.faq-assist__suggestion {
+  position: relative;
+}
+
+.cdk-overlay-container .mat-mdc-snackbar-surface {
+  background: var(--color-black) !important;
+}
+
+agent-assist-transcript .conversation-container {
+  overflow: auto !important;
 }
