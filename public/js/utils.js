@@ -188,6 +188,9 @@ export function enableSectionDragging() {
         draggedSection = section;
         section.classList.add('dragging');
         suggestions.classList.add('draggable');
+
+        document.getElementById('faq-close-view-btn')?.click();
+        document.getElementById('knowledge-assist-close-view-btn')?.click();
       }
     });
 
@@ -684,8 +687,18 @@ export function handleFaqContentView() {
 }
 
 export function faqObserver() {
-  const observer = new MutationObserver(() => {
-    addViewButtonsToFAQs();
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        console.log(node, node.nodeType);
+        if (
+          node.nodeType === 1 &&
+          node.classList.contains('document-and-faq-assist__suggestion')
+        ) {
+          addViewButtonsToFAQs();
+        }
+      });
+    });
   });
 
   const faqContainer = document.getElementById('faq-container');

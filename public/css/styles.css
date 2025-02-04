@@ -487,8 +487,16 @@ img {
 .draggable article-search,
 .draggable .faq-content,
 .draggable .knowledge-assist-content,
-.draggable .transcript-content {
+.draggable .transcript-content,
+.draggable .faq-view-mode,
+.draggable .knowledge-assist-view-mode {
   display: none;
+}
+
+.draggable .document-and-faq-assist__suggestions,
+.draggable .conversation-container,
+.draggable .knowledge-assist-container {
+  overflow: hidden !important;
 }
 
 .draggable .faq {

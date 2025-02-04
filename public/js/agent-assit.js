@@ -50,16 +50,10 @@ window.addEventListener('load', function () {
     }
   }
 
-  // if (channel !== 'voice') {
-  //   transcriptContainer.style.display = 'none';
-  // }
-
   /** When the first time UI module load, parse an empty token */
   if (!existingUiModulesEl && !accessToken) {
     createUIElement(accessToken);
-    // if (channel === 'voice') {
     createTranscriptUIElement();
-    // }
   }
 
   // /** After the genesys OAuth, get the access token */
