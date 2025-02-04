@@ -188,9 +188,6 @@ export function enableSectionDragging() {
         draggedSection = section;
         section.classList.add('dragging');
         suggestions.classList.add('draggable');
-
-        document.getElementById('faq-close-view-btn')?.click();
-        document.getElementById('knowledge-assist-close-view-btn')?.click();
       }
     });
 
@@ -218,21 +215,20 @@ export function enableSectionDragging() {
     section.addEventListener('drop', e => {
       e.preventDefault();
       section.classList.remove('receiver'); // Remove receiver UI
-      const targetSection = e.target.closest('section');
 
       // Swap the dragged section with the target section
-      if (draggedSection && targetSection && draggedSection !== targetSection) {
+      if (draggedSection && section && draggedSection !== section) {
         const parent = draggedSection.parentNode;
         const draggedIndex = Array.from(parent.children).indexOf(
           draggedSection
         );
-        const targetIndex = Array.from(parent.children).indexOf(targetSection);
+        const targetIndex = Array.from(parent.children).indexOf(section);
 
         // Perform the swap
         if (draggedIndex > targetIndex) {
-          parent.insertBefore(draggedSection, targetSection);
+          parent.insertBefore(draggedSection, section);
         } else {
-          parent.insertBefore(draggedSection, targetSection.nextSibling);
+          parent.insertBefore(draggedSection, section.nextSibling);
         }
       }
 
@@ -690,7 +686,6 @@ export function faqObserver() {
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(node => {
-        console.log(node, node.nodeType);
         if (
           node.nodeType === 1 &&
           node.classList.contains('document-and-faq-assist__suggestion')

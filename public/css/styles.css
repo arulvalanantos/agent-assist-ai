@@ -483,16 +483,6 @@ img {
   border-top: 2px solid var(--color-primary);
 }
 
-.draggable knowledge-search,
-.draggable article-search,
-.draggable .faq-content,
-.draggable .knowledge-assist-content,
-.draggable .transcript-content,
-.draggable .faq-view-mode,
-.draggable .knowledge-assist-view-mode {
-  display: none;
-}
-
 .draggable .document-and-faq-assist__suggestions,
 .draggable .conversation-container,
 .draggable .knowledge-assist-container {
@@ -515,7 +505,7 @@ img {
 }
 
 .receiver {
-  border: 3px dashed var(--color-primary);
+  outline: 3px dashed var(--color-primary);
   background-color: var(--color-secondary) !important;
   z-index: 999;
   transition: background-color 0.2s ease, outline 0.2s ease;
