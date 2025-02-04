@@ -735,18 +735,25 @@ export function handleKnowledgeAssistContentView() {
     faq.style.padding = '8px';
   });
 
+  // Attach the copy event only once
   const copyButton = viewMode.querySelector('.copy-btn');
-  copyButton.addEventListener('click', function () {
-    const faqSuggestion = viewMode.querySelector(
-      '.knowledge-assist-view-suggestion'
-    );
-    const faqSuggestionContent = faqSuggestion.textContent;
+  if (!copyButton.dataset.listenerAdded) {
+    // Check if the listener has already been added
+    copyButton.addEventListener('click', function () {
+      const faqSuggestion = viewMode.querySelector(
+        '.knowledge-assist-view-suggestion'
+      );
+      const faqSuggestionContent = faqSuggestion.textContent;
 
-    navigator.clipboard
-      .writeText(faqSuggestionContent)
-      .then(() => showToast(constants.MESSAGE.COPIED))
-      .catch(() => copyFallback(faqSuggestionContent));
-  });
+      navigator.clipboard
+        .writeText(faqSuggestionContent)
+        .then(() => showToast(constants.MESSAGE.COPIED))
+        .catch(() => copyFallback(faqSuggestionContent));
+    });
+
+    // Mark that the listener has been added
+    copyButton.dataset.listenerAdded = 'true';
+  }
 }
 
 export function addViewButtonsToKnowledgeAssist() {
@@ -810,26 +817,50 @@ export function knowledgeAssistObserver() {
   });
 }
 
-export function showToast(message, duration = 3000) {
+/**
+ * Show a toast message
+ * @param {*} message
+ * @param {*} duration
+ */
+export function showToast(message, duration = 300000) {
   const toastContainer = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = 'toast';
 
-  toast.appendChild(document.createTextNode(message));
+  // Remove any existing toast before showing a new one
+  toastContainer.innerHTML = '';
+
+  // Create a new toast
+  const toast = document.createElement('div');
+  toast.className = 'toast show';
+  toast.innerHTML = `
+    <span>${message}</span>
+    <button class="clear-btn">
+    <span class="clear-btn-image">
+    <svg 
+        class="close-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        style="width: 14px; height: 14px;"
+        fill="currentColor"
+        viewBox="0 0 8 8"
+      >
+      <path d="M7.81243 0.185955C7.56454 -0.0619849 7.16298 -0.0619849 6.91592 0.185955L3.99917 3.1033L1.08243 0.185955C0.834542 -0.0619849 0.43298 -0.0619849 0.185916 0.185955C-0.0619721 0.433894 -0.0619721 0.83554 0.185916 1.08265L3.10266 4L0.185916 6.91735C-0.0619721 7.16529 -0.0619721 7.56693 0.185916 7.81405C0.310683 7.93884 0.471816 8 0.634586 8C0.797362 8 0.960147 7.93884 1.08326 7.81405L4 4.8967L6.91674 7.81405C7.04151 7.93884 7.20264 8 7.36541 8C7.52818 8 7.69098 7.93884 7.81408 7.81405C8.06197 7.56611 8.06197 7.16446 7.81408 6.91735L4.89734 4L7.81408 1.08265C8.06197 0.834714 8.06197 0.433069 7.81408 0.185955H7.81243Z" fill="#ffffffde"/>
+    </svg>
+    </span>
+    </button>
+  `;
 
   toastContainer.appendChild(toast);
 
-  // Show the toast
-  setTimeout(() => {
-    toast.classList.add('show');
-  }, 100);
+  // Clear toast on button click
+  const clearButton = toast.querySelector('.clear-btn');
+  clearButton.addEventListener('click', () => {
+    toastContainer.innerHTML = ''; // Remove toast
+  });
 
-  // Hide the toast after the specified duration
+  // Auto-hide the toast after the specified duration
   setTimeout(() => {
-    toast.classList.remove('show');
-    setTimeout(() => {
-      toastContainer.removeChild(toast);
-    }, 300);
+    if (toastContainer.contains(toast)) {
+      toastContainer.innerHTML = ''; // Remove toast
+    }
   }, duration);
 }
 
