@@ -17,6 +17,7 @@ import {
   faqObserver,
   knowledgeAssistObserver,
   adjustFAQViewModeTitleAndDescription,
+  adjustKnowledgeAssistViewModeTitleAndDescription,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -43,4 +44,5 @@ window.addEventListener('load', function () {
   knowledgeAssistObserver();
 
   adjustFAQViewModeTitleAndDescription();
+  adjustKnowledgeAssistViewModeTitleAndDescription();
 });

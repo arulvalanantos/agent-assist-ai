@@ -831,6 +831,10 @@ export function showToast(message, duration = 3000) {
   }, duration);
 }
 
+/**
+ * Adjust the title and description font size for the FAQ view mode
+ * @returns
+ */
 export function adjustFAQViewModeTitleAndDescription() {
   const faqViewMode = document.getElementById('faq-view-mode');
   const title = faqViewMode.querySelector('.faq-view-title');
@@ -843,24 +847,78 @@ export function adjustFAQViewModeTitleAndDescription() {
   const descriptionMin = 14;
   const descriptionMax = 20;
 
-  const faqIncreaser = document.getElementById('.faq-increaser');
-  const faqDecreaser = document.getElementById('.faq-decreaser');
+  const faqIncreaser = document.getElementById('faq-increaser');
+  const faqDecreaser = document.getElementById('faq-decreaser');
+
+  const titleFontSize = parseInt(window.getComputedStyle(title).fontSize);
+  const descriptionFontSize = parseInt(
+    window.getComputedStyle(description).fontSize
+  );
 
   faqIncreaser?.addEventListener('click', () => {
-    const titleFontSize = parseInt(window.getComputedStyle(title).fontSize);
-    const descriptionFontSize = parseInt(
-      window.getComputedStyle(description).fontSize
-    );
-
     console.log(titleFontSize, descriptionFontSize);
+
+    if (titleFontSize <= titleMax && descriptionFontSize <= descriptionMax) {
+      title.style.fontSize = `${titleFontSize + 2}px`;
+      description.style.fontSize = `${descriptionFontSize + 2}px`;
+    }
   });
 
   faqDecreaser?.addEventListener('click', () => {
-    const titleFontSize = parseInt(window.getComputedStyle(title).fontSize);
-    const descriptionFontSize = parseInt(
-      window.getComputedStyle(description).fontSize
-    );
+    if (titleFontSize >= titleMin && descriptionFontSize >= descriptionMin) {
+      title.style.fontSize = `${titleFontSize - 2}px`;
+      description.style.fontSize = `${descriptionFontSize - 2}px`;
+    }
+  });
+}
 
+/**
+ * Adjust the title and description font size for the KnowledgeAssist view mode
+ * @returns
+ */
+export function adjustKnowledgeAssistViewModeTitleAndDescription() {
+  const knowledgeAssistViewMode = document.getElementById(
+    'knowledge-assist-view-mode'
+  );
+  const title = knowledgeAssistViewMode.querySelector(
+    '.knowledge-assist-view-title'
+  );
+  const description = knowledgeAssistViewMode.querySelector(
+    '.knowledge-assist-view-suggestion'
+  );
+
+  if (!title || !description) return;
+
+  const titleMin = 18;
+  const titleMax = 24;
+  const descriptionMin = 14;
+  const descriptionMax = 20;
+
+  const knowledgeAssistIncreaser = document.getElementById(
+    'knowledge-assist-increaser'
+  );
+  const knowledgeAssistDecreaser = document.getElementById(
+    'knowledge-assist-decreaser'
+  );
+
+  const titleFontSize = parseInt(window.getComputedStyle(title).fontSize);
+  const descriptionFontSize = parseInt(
+    window.getComputedStyle(description).fontSize
+  );
+
+  knowledgeAssistIncreaser?.addEventListener('click', () => {
     console.log(titleFontSize, descriptionFontSize);
+
+    if (titleFontSize <= titleMax && descriptionFontSize <= descriptionMax) {
+      title.style.fontSize = `${titleFontSize + 2}px`;
+      description.style.fontSize = `${descriptionFontSize + 2}px`;
+    }
+  });
+
+  knowledgeAssistDecreaser?.addEventListener('click', () => {
+    if (titleFontSize >= titleMin && descriptionFontSize >= descriptionMin) {
+      title.style.fontSize = `${titleFontSize - 2}px`;
+      description.style.fontSize = `${descriptionFontSize - 2}px`;
+    }
   });
 }
