@@ -683,7 +683,7 @@ export function handleFaqContentView() {
     navigator.clipboard
       .writeText(faqSuggestionContent)
       .then(() => console.info('copied'))
-      .catch(() => copyFallback(content));
+      .catch(() => copyFallback(faqSuggestionContent));
   });
 }
 
