@@ -756,10 +756,12 @@ export function addViewButtonsToKnowledgeAssist() {
 
   assistSearches?.forEach(assistSearch => {
     const actionButtons = assistSearch.querySelector('.action-buttons');
+    const typeBubble = assistSearch.querySelector('typing-indicator-bubble');
 
     if (
       actionButtons &&
-      !actionButtons.querySelector('.knowledge-assist-view-btn')
+      !actionButtons.querySelector('.knowledge-assist-view-btn') &&
+      !typeBubble
     ) {
       const button = document.createElement('button');
       button.className = 'knowledge-assist-view-btn';
