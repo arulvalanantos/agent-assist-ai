@@ -16,6 +16,7 @@ import {
   reloadPage,
   faqObserver,
   knowledgeAssistObserver,
+  adjustFAQViewModeTitleAndDescription,
 } from './utils.js';
 
 window.addEventListener('load', function () {
@@ -40,4 +41,6 @@ window.addEventListener('load', function () {
 
   faqObserver();
   knowledgeAssistObserver();
+
+  adjustFAQViewModeTitleAndDescription();
 });

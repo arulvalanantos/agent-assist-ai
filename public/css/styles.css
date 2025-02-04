@@ -731,6 +731,42 @@ img {
   justify-content: space-between;
 }
 
+.faq-view-mode-buttons,
+.knowledge-assist-view-mode-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xx-medium);
+}
+
+.faq-size-adjuster,
+.knowledge-assist-size-adjuster {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--gap-xx-medium);
+}
+
+.faq-small-version,
+.faq-medium-version,
+.knowledge-assist-small-version,
+.knowledge-assist-medium-version {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-small);
+  font-weight: bold;
+}
+
+.faq-small-version,
+.knowledge-assist-small-version {
+  width: var(--button-small-width);
+  height: var(--button-small-height);
+}
+
+.faq-medium-version,
+.knowledge-assist-medium-version {
+  width: var(--button-medium-width);
+  height: var(--button-medium-height);
+}
+
 .knowledge-assist-title {
   font-size: var(--font-size-large);
   color: var(--color-text-primary);

@@ -830,3 +830,37 @@ export function showToast(message, duration = 3000) {
     }, 300);
   }, duration);
 }
+
+export function adjustFAQViewModeTitleAndDescription() {
+  const faqViewMode = document.getElementById('faq-view-mode');
+  const title = faqViewMode.querySelector('.faq-view-title');
+  const description = faqViewMode.querySelector('.faq-view-suggestion');
+
+  if (!title || !description) return;
+
+  const titleMin = 18;
+  const titleMax = 24;
+  const descriptionMin = 14;
+  const descriptionMax = 20;
+
+  const faqIncreaser = document.getElementById('.faq-increaser');
+  const faqDecreaser = document.getElementById('.faq-decreaser');
+
+  faqIncreaser?.addEventListener('click', () => {
+    const titleFontSize = parseInt(window.getComputedStyle(title).fontSize);
+    const descriptionFontSize = parseInt(
+      window.getComputedStyle(description).fontSize
+    );
+
+    console.log(titleFontSize, descriptionFontSize);
+  });
+
+  faqDecreaser?.addEventListener('click', () => {
+    const titleFontSize = parseInt(window.getComputedStyle(title).fontSize);
+    const descriptionFontSize = parseInt(
+      window.getComputedStyle(description).fontSize
+    );
+
+    console.log(titleFontSize, descriptionFontSize);
+  });
+}
