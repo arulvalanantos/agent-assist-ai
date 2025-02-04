@@ -822,7 +822,7 @@ export function knowledgeAssistObserver() {
  * @param {*} message
  * @param {*} duration
  */
-export function showToast(message, duration = 300000) {
+export function showToast(message, duration = 6000) {
   const toastContainer = document.getElementById('toast-container');
 
   // Remove any existing toast before showing a new one
