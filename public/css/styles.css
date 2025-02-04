@@ -485,7 +485,7 @@ img {
 
 .draggable .document-and-faq-assist__suggestions,
 .draggable .conversation-container,
-.draggable .knowledge-assist-container {
+.draggable .knowledge-assist-content {
   overflow: hidden !important;
 }
 
