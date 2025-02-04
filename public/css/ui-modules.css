@@ -533,3 +533,7 @@ agent-assist-smart-reply .smart-reply-answer {
 .cdk-overlay-container .mat-mdc-snackbar-surface {
   background: var(--color-black) !important;
 }
+
+agent-assist-transcript .conversation-container {
+  overflow: auto !important;
+}
