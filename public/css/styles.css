@@ -661,7 +661,7 @@ img {
 .faq-view-mode {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-base);
+  gap: var(--gap-large);
   background: var(--color-secondary);
   display: none;
   padding: var(--padding-medium);
@@ -720,7 +720,7 @@ img {
 .knowledge-assist-view-mode {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-base);
+  gap: var(--gap-large);
   background: var(--color-light-blue);
   display: none;
   padding: var(--padding-medium);
