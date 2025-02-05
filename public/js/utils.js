@@ -488,7 +488,7 @@ export function autoGenerateSummary() {
  * Copy text to clipboard using Clipboard API
  * @param {*} text
  */
-export function copyFallback(text) {
+export function copyFallback(text, show = true) {
   const textarea = document.createElement('textarea');
   textarea.value = text;
   document.body.appendChild(textarea);
@@ -498,7 +498,7 @@ export function copyFallback(text) {
   try {
     const successful = document.execCommand && document.execCommand('copy'); // Fallback if execCommand is still there
     if (!successful) throw new Error('execCommand failed');
-    showToast(toastMessage);
+    if (show) showToast(toastMessage);
   } catch (err) {
     console.warn('execCommand is deprecated. Please use Clipboard API.');
   }
@@ -546,10 +546,16 @@ export function globalButtonListeners() {
         '.smart-reply-answer'
       ).textContent;
 
+      const isSelected =
+        smartReplyChip.classList.contains('mat-mdc-chip-selected') ||
+        smartReplyChip.classList.contains('mdc-evolution-chip--selected');
+
       navigator.clipboard
         .writeText(content)
-        .then(() => showToast(toastMessage))
-        .catch(() => copyFallback(content));
+        .then(() => {
+          if (isSelected) showToast(toastMessage);
+        })
+        .catch(() => copyFallback(content, isSelected));
     }
   });
 }
@@ -833,7 +839,7 @@ export function knowledgeAssistObserver() {
  * @param {*} message
  * @param {*} duration
  */
-export function showToast(message, duration = 6000) {
+export function showToast(message, duration = constants.TOAST_DURATION) {
   const toastContainer = document.getElementById('toast-container');
 
   // Remove any existing toast before showing a new one

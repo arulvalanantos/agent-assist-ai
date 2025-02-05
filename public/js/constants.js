@@ -1,4 +1,5 @@
 const constants = {
+  TOAST_DURATION: 4000, // 4 seconds
   VIEW_MODE: {
     TITLE_MIN: 18,
     TITLE_MAX: 24,
