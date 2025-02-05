@@ -4,10 +4,20 @@ import { modules, summaryTriggerButtonMappings, togglers } from './static.js';
 let isSummaryResizing = false;
 let isSmartReplyResizing = false;
 
+const toastMessage = constants.MESSAGE.COPIED;
+const summaryCurrentHeight = constants.LOCAL_STORAGE.SUMMARY_CURRENT_HEIGHT;
+
 const titleMin = constants.VIEW_MODE.TITLE_MIN;
 const titleMax = constants.VIEW_MODE.TITLE_MAX;
 const descriptionMin = constants.VIEW_MODE.DESCRIPTION_MIN;
 const descriptionMax = constants.VIEW_MODE.DESCRIPTION_MAX;
+const faqTitleFontSizeKey = constants.LOCAL_STORAGE.FAQ_TITLE_FONT_SIZE;
+const faqDescriptionFontSizeKey =
+  constants.LOCAL_STORAGE.FAQ_DESCRIPTION_FONT_SIZE;
+const knowledgeAssistTitleFontSizeKey =
+  constants.LOCAL_STORAGE.KNOW_ASSIST_TITLE_FONT_SIZE;
+const knowledgeAssistDescriptionFontSizeKey =
+  constants.LOCAL_STORAGE.KNOW_ASSIST_DESCRIPTION_FONT_SIZE;
 
 /**
  * Setup hide/show toggler button feature for the UI modules
@@ -488,7 +498,7 @@ export function copyFallback(text) {
   try {
     const successful = document.execCommand && document.execCommand('copy'); // Fallback if execCommand is still there
     if (!successful) throw new Error('execCommand failed');
-    showToast(constants.MESSAGE.COPIED);
+    showToast(toastMessage);
   } catch (err) {
     console.warn('execCommand is deprecated. Please use Clipboard API.');
   }
@@ -517,19 +527,14 @@ export function globalButtonListeners() {
     if (editButton) {
       const summary = document.querySelector('.summary');
       const summaryHeight = summary.getBoundingClientRect().height;
-      sessionStorage.setItem(
-        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT,
-        summaryHeight
-      );
+      sessionStorage.setItem(summaryCurrentHeight, summaryHeight);
 
       summary.style.height = '250px';
     }
 
     if (confirmEditButton || cancelEditButton) {
       const summary = document.querySelector('.summary');
-      const latestSummaryHeight = sessionStorage.getItem(
-        constants.SESSION_STORAGE.SUMMARY_CURRENT_HEIGHT
-      );
+      const latestSummaryHeight = sessionStorage.getItem(summaryCurrentHeight);
 
       summary.style.height = latestSummaryHeight
         ? `${latestSummaryHeight}px`
@@ -543,7 +548,7 @@ export function globalButtonListeners() {
 
       navigator.clipboard
         .writeText(content)
-        .then(() => showToast(constants.MESSAGE.COPIED))
+        .then(() => showToast(toastMessage))
         .catch(() => copyFallback(content));
     }
   });
@@ -582,7 +587,7 @@ export function loadSuggestionsOrder() {
  * @param {*} height
  */
 export function saveSectionsHeight(targetId, height) {
-  localStorage.setItem(`${targetId}-height`, height);
+  localStorage.setItem(`preferred-${targetId}-height`, height);
 }
 
 /**
@@ -592,15 +597,16 @@ export function loadSectionsHeight() {
   const summary = document.getElementById('summary');
   const smartReply = document.getElementById('smart-reply');
 
-  const savedSummaryHeight = localStorage.getItem(`summary-height`);
-  if (savedSummaryHeight) {
-    summary.style.height = savedSummaryHeight;
-  }
+  const preferredSummaryHeight =
+    constants.LOCAL_STORAGE.PREFERRED_SUMMARY_HEIGHT;
+  const preferredSmartReplyHeight =
+    constants.LOCAL_STORAGE.PREFERRED_SMART_REPLY_HEIGHT;
 
-  const savedSmartReplyHeight = localStorage.getItem(`smart-reply-height`);
-  if (savedSmartReplyHeight) {
-    smartReply.style.height = savedSmartReplyHeight;
-  }
+  const savedSummaryHeight = localStorage.getItem(preferredSummaryHeight);
+  if (savedSummaryHeight) summary.style.height = savedSummaryHeight;
+
+  const savedSmartReplyHeight = localStorage.getItem(preferredSmartReplyHeight);
+  if (savedSmartReplyHeight) smartReply.style.height = savedSmartReplyHeight;
 }
 
 export function reloadPage() {
@@ -682,7 +688,7 @@ export function handleFaqContentView() {
 
     navigator.clipboard
       .writeText(faqSuggestionContent)
-      .then(() => showToast(constants.MESSAGE.COPIED))
+      .then(() => showToast(toastMessage))
       .catch(() => copyFallback(faqSuggestionContent));
   });
 }
@@ -752,7 +758,7 @@ export function handleKnowledgeAssistContentView() {
 
       navigator.clipboard
         .writeText(faqSuggestionContent)
-        .then(() => showToast(constants.MESSAGE.COPIED))
+        .then(() => showToast(toastMessage))
         .catch(() => copyFallback(faqSuggestionContent));
     });
 
@@ -890,6 +896,37 @@ export function updateButtonState(title, description, increaser, decreaser) {
 }
 
 /**
+ * Setting the view mode preferences
+ * @param {*} titleFontSize
+ * @param {*} descriptionFontSize
+ * @param {*} titleKey
+ * @param {*} descriptionKey
+ */
+export function setViewModePreferences(
+  titleFontSize,
+  descriptionFontSize,
+  titleKey,
+  descriptionKey
+) {
+  localStorage.setItem(titleKey, titleFontSize);
+  localStorage.setItem(descriptionKey, descriptionFontSize);
+}
+
+/**
+ * Getting the view mode preferences
+ * @param {*} titleKey
+ * @param {*} descriptionKey
+ * @returns
+ */
+export function getViewModePreferences(titleKey, descriptionKey) {
+  return {
+    titleFontSize: localStorage.getItem(titleKey) || titleMin + 'px',
+    descriptionFontSize:
+      localStorage.getItem(descriptionKey) || descriptionMin + 'px',
+  };
+}
+
+/**
  * Adjust the title and description font size for the FAQ view mode
  * @returns
  */
@@ -902,6 +939,14 @@ export function adjustFAQViewModeTitleAndDescription() {
 
   const increaser = document.getElementById('faq-increaser');
   const decreaser = document.getElementById('faq-decreaser');
+
+  // Apply stored preferences on page load
+  const { titleFontSize, descriptionFontSize } = getViewModePreferences(
+    faqTitleFontSizeKey,
+    faqDescriptionFontSizeKey
+  );
+  title.style.fontSize = titleFontSize;
+  description.style.fontSize = descriptionFontSize;
 
   // Initialize button states
   updateButtonState(title, description, increaser, decreaser);
@@ -918,6 +963,14 @@ export function adjustFAQViewModeTitleAndDescription() {
 
       title.style.fontSize = newTitleFontSize;
       description.style.fontSize = newDescriptionFontSize;
+
+      // Store updated preferences
+      setViewModePreferences(
+        newTitleFontSize,
+        newDescriptionFontSize,
+        faqTitleFontSizeKey,
+        faqDescriptionFontSizeKey
+      );
     }
 
     updateButtonState(title, description, increaser, decreaser); // Update button states after the click
@@ -935,6 +988,14 @@ export function adjustFAQViewModeTitleAndDescription() {
 
       title.style.fontSize = newTitleFontSize;
       description.style.fontSize = newDescriptionFontSize;
+
+      // Store updated preferences
+      setViewModePreferences(
+        newTitleFontSize,
+        newDescriptionFontSize,
+        faqTitleFontSizeKey,
+        faqDescriptionFontSizeKey
+      );
     }
 
     updateButtonState(title, description, increaser, decreaser); // Update button states after the click
@@ -959,6 +1020,14 @@ export function adjustKnowledgeAssistViewModeTitleAndDescription() {
   const increaser = document.getElementById('knowledge-assist-increaser');
   const decreaser = document.getElementById('knowledge-assist-decreaser');
 
+  // Apply stored preferences on page load
+  const { titleFontSize, descriptionFontSize } = getViewModePreferences(
+    knowledgeAssistTitleFontSizeKey,
+    knowledgeAssistDescriptionFontSizeKey
+  );
+  title.style.fontSize = titleFontSize;
+  description.style.fontSize = descriptionFontSize;
+
   // Initialize button states
   updateButtonState(title, description, increaser, decreaser);
 
@@ -975,6 +1044,14 @@ export function adjustKnowledgeAssistViewModeTitleAndDescription() {
 
       title.style.fontSize = newTitleFontSize;
       description.style.fontSize = newDescriptionFontSize;
+
+      // Store updated preferences
+      setViewModePreferences(
+        newTitleFontSize,
+        newDescriptionFontSize,
+        knowledgeAssistTitleFontSizeKey,
+        knowledgeAssistDescriptionFontSizeKey
+      );
     }
 
     updateButtonState(title, description, increaser, decreaser); // Update button states after the click
@@ -993,6 +1070,14 @@ export function adjustKnowledgeAssistViewModeTitleAndDescription() {
 
       title.style.fontSize = newTitleFontSize;
       description.style.fontSize = newDescriptionFontSize;
+
+      // Store updated preferences
+      setViewModePreferences(
+        newTitleFontSize,
+        newDescriptionFontSize,
+        knowledgeAssistTitleFontSizeKey,
+        knowledgeAssistDescriptionFontSizeKey
+      );
     }
 
     updateButtonState(title, description, increaser, decreaser); // Update button states after the click
