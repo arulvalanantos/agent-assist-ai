@@ -62,6 +62,12 @@ img {
   user-select: none; /* Standard syntax */
 }
 
+button:disabled {
+  background: var(--color-dark-gray);
+  color: var(--color-white);
+  cursor: not-allowed;
+}
+
 .logo {
   pointer-events: none;
 }
