@@ -495,7 +495,9 @@ button:disabled {
   overflow: hidden !important;
 }
 
-.draggable .faq {
+.draggable .faq,
+.knowledge-assist,
+.transcript {
   background: var(--color-white);
 }
 
@@ -507,7 +509,7 @@ button:disabled {
 }
 
 .dragging {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .receiver {
