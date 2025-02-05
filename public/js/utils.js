@@ -186,7 +186,6 @@ export function enableSectionDragging() {
   const suggestions = document.querySelector('.suggestions');
   const sections = document.querySelectorAll('.suggestions > section');
 
-
   // Variable to track the currently dragged section
   let draggedSection = null;
 
