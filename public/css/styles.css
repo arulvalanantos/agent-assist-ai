@@ -63,7 +63,7 @@ img {
 }
 
 button:disabled {
-  background: var(--color-dark-gray);
+  background: var(--color-gray);
   color: var(--color-white);
   cursor: not-allowed;
 }
@@ -769,24 +769,24 @@ button:disabled {
   gap: var(--gap-xx-medium);
 }
 
-.faq-small-version,
-.faq-medium-version,
-.knowledge-assist-small-version,
-.knowledge-assist-medium-version {
+.faq-increaser,
+.faq-decreaser,
+.knowledge-assist-increaser,
+.knowledge-assist-decreaser {
   background: var(--color-primary);
   color: var(--color-white);
   font-size: var(--font-size-small);
   font-weight: bold;
 }
 
-.faq-small-version,
-.knowledge-assist-small-version {
+.faq-decreaser,
+.knowledge-assist-decreaser {
   width: var(--button-small-width);
   height: var(--button-small-height);
 }
 
-.faq-medium-version,
-.knowledge-assist-medium-version {
+.faq-increaser,
+.knowledge-assist-increaser {
   width: var(--button-medium-width);
   height: var(--button-medium-height);
 }
